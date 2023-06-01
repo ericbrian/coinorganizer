@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
+import appconfig from "./appconfig"
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: appconfig.siteName,
   description: 'Welcome to Coin Organizer site.'
 }
 
