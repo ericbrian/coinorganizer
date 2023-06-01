@@ -17,6 +17,7 @@ export async function GET(request: Request) {
             }
         })
     }
+
     return new Response('hello from next.js', {
         headers: {
             'Access-Control-Allow-Origin': origin ?? '*',
