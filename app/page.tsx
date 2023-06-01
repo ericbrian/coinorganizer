@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className='m-12 p-4 rounded-md bg-slate-100'>
+    <main className='m-4 p-4 rounded-md'>
       Home
     </main>
   )
