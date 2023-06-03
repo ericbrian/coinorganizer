@@ -5,12 +5,13 @@ export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
   pages: {
     signIn: '/signin'
-  }
+  },
+  secret: process.env.JWT_SECRET
 }
 
 const handler = NextAuth(authOptions)
