@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 import appconfig from "../appconfig"
+import HomePageCoinDetail from "./components/coin-view/HomePageCoinDetail";
+import { Coins } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: appconfig.siteName,
@@ -28,8 +30,7 @@ async function getCoins() {
 }
 
 export default async function Home() {
-  const coins = await getCoins();
-  console.log(coins)
+  const coins: Coins[] = await getCoins();
   return (
     <main className='m-4 p-4 rounded-md'>
       <h1 className="text-xl">Latest Coins Added to Database</h1>
@@ -37,7 +38,7 @@ export default async function Home() {
         Array.isArray(coins) &&
         coins.length > 0 &&
         coins.map(
-          (coin: any) => <div className="mt-4" key={coin.id}>{coin.id}</div>
+          (coin: Coins) => <HomePageCoinDetail key={coin.id} coin={coin} />
         )
       }
     </main>
