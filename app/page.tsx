@@ -16,21 +16,30 @@ type Api = {
   Category: string;
 }
 
-const getApis = async (): Promise<Api[]> => {
-  const res = await fetch(`http://127.0.0.1:8080/api-list.json`);
+const MAX_COINS = 5;
+
+async function getCoins() {
+  const endpoint = `${process.env.BASE_URL}/api/getLatestCoins?max=${MAX_COINS}`;
+  const res = await fetch(endpoint);
   if (!res.ok) {
-    throw new Error('failed to fetch');
+    console.log(res);
   }
-  const data = await res.json();
-  return data.entries;
+  return res.json();
 }
 
 export default async function Home() {
-  const apis = await getApis();
-  console.log(apis)
+  const coins = await getCoins();
+  console.log(coins)
   return (
     <main className='m-4 p-4 rounded-md'>
-      Home
+      <h1 className="text-xl">Latest Coins Added to Database</h1>
+      {
+        Array.isArray(coins) &&
+        coins.length > 0 &&
+        coins.map(
+          (coin: any) => <div className="mt-4" key={coin.id}>{coin.id}</div>
+        )
+      }
     </main>
   )
 }

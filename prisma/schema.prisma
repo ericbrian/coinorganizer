@@ -1,0 +1,301 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_LOCAL_COINDB")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model BanknoteMint {
+  banknoteId Int
+  mintId     Int
+  Banknotes  Banknotes @relation(fields: [banknoteId], references: [id], onDelete: Cascade)
+  Mints      Mints     @relation(fields: [mintId], references: [id], onDelete: Cascade)
+  createdAt  DateTime  @db.Timestamptz(6)
+  updatedAt  DateTime  @db.Timestamptz(6)
+
+  @@id([banknoteId, mintId])
+}
+
+model Banknotes {
+  id                   Int            @id @default(autoincrement())
+  faceValue            Decimal        @db.Decimal(8, 3)
+  prettyFaceValue      String         @db.VarChar(30)
+  commonName           String?        @db.VarChar(60)
+  obverse              String
+  reverse              String
+  yearStart            String?        @db.VarChar(255)
+  yearEnd              String?        @db.VarChar(255)
+  composition          String?        @db.VarChar(255)
+  dimensionsMilimeters String?        @db.VarChar(40)
+  comments             String?
+  periodId             Int?
+  countryId            Int?
+  currencyId           Int?
+  BanknoteMint         BanknoteMint[]
+  Countries            Countries?     @relation(fields: [countryId], references: [id])
+  Currencies           Currencies?    @relation(fields: [currencyId], references: [id])
+  Periods              Periods?       @relation(fields: [periodId], references: [id])
+  Collections          Collections[]
+  Images               Images[]
+  createdAt            DateTime       @db.Timestamptz(6)
+  updatedAt            DateTime       @db.Timestamptz(6)
+  deletedAt            DateTime?      @db.Timestamptz(6)
+}
+
+model CoinEngravers {
+  id         Int                    @id @default(autoincrement())
+  side       enumCoinEngraversSide? @default(obverse)
+  coinId     Int?
+  engraverid Int?
+}
+
+model CoinMint {
+  coinId    Int
+  mintId    Int
+  Coins     Coins    @relation(fields: [coinId], references: [id], onDelete: Cascade)
+  Mints     Mints    @relation(fields: [mintId], references: [id], onDelete: Cascade)
+  createdAt DateTime @db.Timestamptz(6)
+  updatedAt DateTime @db.Timestamptz(6)
+
+  @@id([coinId, mintId])
+}
+
+model Coins {
+  id                 Int           @id @default(autoincrement())
+  faceValue          Decimal       @db.Decimal(8, 3)
+  prettyFaceValue    String?       @db.VarChar(30)
+  seriesOrThemeName  String?       @db.VarChar(200)
+  commonName         String?       @db.VarChar(200)
+  obverse            String
+  reverse            String
+  edge               String        @db.VarChar(255)
+  edgeInscription    String?       @db.VarChar(255)
+  yearStart          String?       @db.VarChar(255)
+  yearEnd            String?       @db.VarChar(255)
+  composition        String?       @db.VarChar(255)
+  isNonCirculating   Boolean?      @default(false)
+  weightGrams        Decimal?      @db.Decimal(7, 3)
+  diameterMilimeters Decimal?      @db.Decimal(7, 3)
+  comments           String?
+  periodId           Int?
+  rulerId            Int?
+  countryId          Int?
+  currencyId         Int?
+  shapeId            Int?
+  numistaNumber      String?       @unique(map: "unq_coin_numistaNumber") @db.VarChar(8)
+  isBullion          Boolean?      @default(false)
+  CoinMint           CoinMint[]
+  Countries          Countries?    @relation(fields: [countryId], references: [id])
+  Currencies         Currencies?   @relation(fields: [currencyId], references: [id])
+  Periods            Periods?      @relation(fields: [periodId], references: [id])
+  Rulers             Rulers?       @relation(fields: [rulerId], references: [id])
+  Shapes             Shapes?       @relation(fields: [shapeId], references: [id])
+  Collections        Collections[]
+  Images             Images[]
+  createdAt          DateTime      @default(now()) @db.Timestamptz(6)
+  updatedAt          DateTime      @default(now()) @db.Timestamptz(6)
+  deletedAt          DateTime?     @db.Timestamptz(6)
+}
+
+model Coinsets {
+  id          Int           @id @default(autoincrement())
+  name        String        @db.VarChar(60)
+  userId      Int?
+  Collections Collections[]
+  createdAt   DateTime      @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime      @default(now()) @db.Timestamptz(6)
+}
+
+model Collections {
+  id                      Int                             @id @default(autoincrement())
+  collectableType         enumCollectionsCollectableType? @default(coin)
+  year                    String                          @db.VarChar(10)
+  serialNumber            String?                         @db.VarChar(16)
+  condition               String?
+  paidAmount              Decimal?                        @db.Decimal(7, 2)
+  sourcedFrom             String?                         @db.VarChar(255)
+  sourcedWhen             DateTime?                       @db.Timestamptz(6)
+  isCleaned               Boolean?                        @default(false)
+  storage                 String?                         @db.VarChar(255)
+  isProof                 Boolean?                        @default(false)
+  banknoteId              Int?
+  coinId                  Int?
+  coinsetId               Int?
+  mintId                  Int?
+  purchasedWithCurrencyId Int?
+  ownerId                 Int?
+  comments                String?
+  Banknotes               Banknotes?                      @relation(fields: [banknoteId], references: [id])
+  Coins                   Coins?                          @relation(fields: [coinId], references: [id])
+  Coinsets                Coinsets?                       @relation(fields: [coinsetId], references: [id], onDelete: Cascade)
+  Mints                   Mints?                          @relation(fields: [mintId], references: [id], onDelete: Cascade)
+  Users                   Users?                          @relation(fields: [ownerId], references: [id])
+  Currencies              Currencies?                     @relation(fields: [purchasedWithCurrencyId], references: [id], onDelete: Cascade)
+  createdAt               DateTime                        @default(now()) @db.Timestamptz(6)
+  updatedAt               DateTime                        @default(now()) @db.Timestamptz(6)
+}
+
+model Countries {
+  id                   Int               @id @default(autoincrement())
+  name                 String            @unique @db.VarChar(60)
+  shortName            String            @unique @db.VarChar(40)
+  isActive             Boolean           @default(true)
+  territoryOfCountryId Int?
+  Banknotes            Banknotes[]
+  Coins                Coins[]
+  Countries            Countries?        @relation("CountriesToCountries", fields: [territoryOfCountryId], references: [id])
+  other_Countries      Countries[]       @relation("CountriesToCountries")
+  CountryCurrency      CountryCurrency[]
+  Mints                Mints[]
+  Periods              Periods[]
+  RulerCountry         RulerCountry[]
+  createdAt            DateTime          @default(now()) @db.Timestamptz(6)
+  updatedAt            DateTime          @default(now()) @db.Timestamptz(6)
+}
+
+model CountryCurrency {
+  countryId  Int
+  currencyId Int
+  Countries  Countries  @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  Currencies Currencies @relation(fields: [currencyId], references: [id], onDelete: Cascade)
+  createdAt  DateTime   @default(now()) @db.Timestamptz(6)
+  updatedAt  DateTime   @default(now()) @db.Timestamptz(6)
+
+  @@id([countryId, currencyId])
+}
+
+model Currencies {
+  id                     Int               @id @default(autoincrement())
+  name                   String            @db.VarChar(30)
+  shortName              String            @db.VarChar(10)
+  years                  String?           @db.VarChar(100)
+  demonitizedDate        String?           @db.VarChar(100)
+  comments               String?
+  displayShortNameAtLeft Boolean           @default(true)
+  Banknotes              Banknotes[]
+  Coins                  Coins[]
+  Collections            Collections[]
+  CountryCurrency        CountryCurrency[]
+  createdAt              DateTime          @default(now()) @db.Timestamptz(6)
+  updatedAt              DateTime          @default(now()) @db.Timestamptz(6)
+}
+
+model Engravers {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(100)
+  comments  String?
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model Images {
+  id           Int        @id @default(autoincrement())
+  url          String?
+  copyright    String?    @db.VarChar(100)
+  description  String?    @db.VarChar(100)
+  banknoteId   Int?
+  coinId       Int?
+  isPreferred  Boolean?   @default(false)
+  rawHtml      String?
+  collectionId Int?
+  Banknotes    Banknotes? @relation(fields: [banknoteId], references: [id])
+  Coins        Coins?     @relation(fields: [coinId], references: [id])
+  createdAt    DateTime   @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime   @default(now()) @db.Timestamptz(6)
+}
+
+model Mints {
+  id              Int            @id @default(autoincrement())
+  mint            String         @db.VarChar(255)
+  years           String?        @db.VarChar(255)
+  mark            String?        @db.VarChar(10)
+  markDescription String?        @db.VarChar(255)
+  countryId       Int?
+  BanknoteMint    BanknoteMint[]
+  CoinMint        CoinMint[]
+  Collections     Collections[]
+  Countries       Countries?     @relation(fields: [countryId], references: [id])
+  createdAt       DateTime       @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime       @default(now()) @db.Timestamptz(6)
+}
+
+model Periods {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(60)
+  years     String      @db.VarChar(60)
+  countryId Int?
+  Banknotes Banknotes[]
+  Coins     Coins[]
+  Countries Countries?  @relation(fields: [countryId], references: [id])
+  createdAt DateTime    @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime    @default(now()) @db.Timestamptz(6)
+}
+
+model Roles {
+  id                        Int      @id @default(autoincrement())
+  role                      String   @db.VarChar(255)
+  userId                    Int?
+  roleid                    Int?
+  Users_Roles_roleidToUsers Users?   @relation("Roles_roleidToUsers", fields: [roleid], references: [id], onDelete: Cascade, map: "Roles_roleId_fkey")
+  Users_Roles_userIdToUsers Users?   @relation("Roles_userIdToUsers", fields: [userId], references: [id])
+  createdAt                 DateTime @db.Timestamptz(6)
+  updatedAt                 DateTime @db.Timestamptz(6)
+}
+
+model RulerCountry {
+  id        Int       @id @default(autoincrement())
+  rulerId   Int
+  countryId Int
+  Countries Countries @relation(fields: [countryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Rulers    Rulers    @relation(fields: [rulerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdAt DateTime  @default(now()) @db.Date
+  updatedAt DateTime  @default(now()) @db.Date
+
+  @@index([rulerId, countryId])
+}
+
+model Rulers {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(60)
+  house        String?
+  years        String         @db.VarChar(60)
+  Coins        Coins[]
+  RulerCountry RulerCountry[]
+  createdAt    DateTime       @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime       @default(now()) @db.Timestamptz(6)
+}
+
+model Shapes {
+  id        Int      @id @default(autoincrement())
+  name      String?  @unique @db.VarChar(20)
+  Coins     Coins[]
+  createdAt DateTime @db.Timestamptz(6)
+  updatedAt DateTime @db.Timestamptz(6)
+}
+
+model Users {
+  id                        Int           @id @default(autoincrement())
+  email                     String        @unique @db.VarChar(100)
+  username                  String?       @unique @db.VarChar(50)
+  firstName                 String?       @db.VarChar(50)
+  lastName                  String?       @db.VarChar(50)
+  provider                  String?       @db.VarChar(50)
+  audience                  String?       @db.VarChar(50)
+  Collections               Collections[]
+  Roles_Roles_roleidToUsers Roles[]       @relation("Roles_roleidToUsers")
+  Roles_Roles_userIdToUsers Roles[]       @relation("Roles_userIdToUsers")
+  createdAt                 DateTime      @db.Timestamptz(6)
+  updatedAt                 DateTime      @db.Timestamptz(6)
+}
+
+enum enumCoinEngraversSide {
+  obverse
+  reverse
+}
+
+enum enumCollectionsCollectableType {
+  coin
+  note
+}
