@@ -8,16 +8,6 @@ export const metadata: Metadata = {
   description: 'Welcome to Coin Organizer site.'
 }
 
-type Api = {
-  API: string;
-  Description: string;
-  Auth: string;
-  HTTPS: string;
-  Cors: boolean;
-  Link: string;
-  Category: string;
-}
-
 const MAX_COINS = 5;
 
 async function getCoins() {
