@@ -16,7 +16,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 {
                     createdAt: 'desc'
                 }
-            ]
+            ],
+            include: {
+                Images: true
+            }
         });
         return res.status(200).json(data);
     }
