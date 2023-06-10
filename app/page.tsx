@@ -22,7 +22,7 @@ async function getCoins() {
 export default async function Home() {
   const coins: Coins[] = await getCoins();
   return (
-    <main className='m-4 p-4 rounded-md'>
+    <>
       <h1 className="text-2xl font-bold">Latest Coins Added to Database</h1>
       {
         Array.isArray(coins) &&
@@ -31,6 +31,6 @@ export default async function Home() {
           (coin: Coins) => <HomePageCoinDetail key={coin.id} coin={coin} />
         )
       }
-    </main>
+    </>
   )
 }
