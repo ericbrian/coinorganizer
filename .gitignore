@@ -36,6 +36,6 @@ next-env.d.ts
 
 #http-server files
 /things
-/db
+/db/users.sql
 
 /public/images2
