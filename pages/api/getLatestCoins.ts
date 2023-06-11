@@ -9,16 +9,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (maxResults > 10) maxResults = 10;
 
     try {
-        const data = await prisma.coins.findMany({
+        const data = await prisma.coin.findMany({
             take: maxResults,
             skip: 0,
             orderBy: [
                 {
-                    createdAt: 'desc'
+                    created_at: 'desc'
                 }
             ],
             include: {
-                Images: true
+                image: true
             }
         });
         return res.status(200).json(data);

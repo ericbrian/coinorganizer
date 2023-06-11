@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Coins, Images } from "@prisma/client";
+import { coin as Coins, image as Images } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -29,46 +29,46 @@ export default async function CoinDetails(props: {
           <p>
             <span className="font-bold">Country:</span>
             <br />
-            {coin.Countries?.name}
+            {coin.country?.name}
           </p>
-          {coin.Rulers && (
+          {coin.ruler && (
             <p className="mt-2">
               <span className="font-bold">Ruler:</span>
               <br />
-              {coin.Rulers.name}
+              {coin.ruler.name}
             </p>
           )}
-          {coin.Periods && (
+          {coin.period && (
             <p className="mt-2">
               <span className="font-bold">Period:</span>
               <br />
-              {coin.Periods.name} ({coin.Periods.years})
+              {coin.period.name} ({coin.period.years})
             </p>
           )}
           <p className="mt-2">
             <span className="font-bold">Year(s):</span>
             <br />
-            {coin.yearStart}
-            {coin.yearEnd && ` - ${coin.yearEnd}`}
+            {coin.year_start}
+            {coin.year_end && ` - ${coin.year_end}`}
           </p>
           <p className="mt-2">
             <span className="font-bold">Diameter:</span>
             <br />
-            {coin.diameterMilimeters?.toString()} mm
+            {coin.diameter_milimeters?.toString()} mm
           </p>
           <p className="mt-2">
             <span className="font-bold">Weight:</span>
             <br />
-            {coin.weightGrams?.toString()} g
+            {coin.weight_grams?.toString()} g
           </p>
-          {coin.numistaNumber && (
+          {coin.numista_number && (
             <p className="mt-2">
               <span className="font-bold">Numista Number:</span>
               <br />
               <Link
-                href={`https://en.numista.com/catalogue/pieces${coin.numistaNumber}.html`}
+                href={`https://en.numista.com/catalogue/pieces${coin.numista_number}.html`}
               >
-                {coin.numistaNumber}
+                {coin.numista_number}
               </Link>
             </p>
           )}
@@ -77,11 +77,11 @@ export default async function CoinDetails(props: {
       </div>
       <div className="col-span-3">
         <h1 className="mt-4 text-2xl">
-          {coin.commonName} ({coin.prettyFaceValue})
+          {coin.common_name} ({coin.pretty_face_value})
         </h1>
-        {coin.seriesOrThemeName && (
+        {coin.series_or_theme_name && (
           <div className="text-xs uppercase">
-            Series: {coin.seriesOrThemeName}
+            Series: {coin.series_or_theme_name}
           </div>
         )}
         <p className="mt-2">
@@ -95,23 +95,23 @@ export default async function CoinDetails(props: {
         <p className="mt-2">
           <span className="font-bold">Edge: </span>
           {coin.edge}
-          {coin.edgeInscription && (
-            <span> with inscription: {coin.edgeInscription}</span>
+          {coin.edge_inscription && (
+            <span> with inscription: {coin.edge_inscription}</span>
           )}
         </p>
       </div>
       <div>
-        {Array.isArray(coin.Images) &&
-          coin.Images.length > 0 &&
-          coin.Images.map((image: Images) => (
+        {Array.isArray(coin.image) &&
+          coin.image.length > 0 &&
+          coin.image.map((image: Images) => (
             <Image
               className="mb-2 rounded-3xl"
               key={image.id}
               width={240}
               height={0}
               src={`/images/${image.url}`}
-              alt={coin.commonName ?? "Coin image"}
-              title={coin.commonName ?? "Coin image"}
+              alt={coin.common_name ?? "Coin image"}
+              title={coin.common_name ?? "Coin image"}
             />
           ))}{" "}
       </div>

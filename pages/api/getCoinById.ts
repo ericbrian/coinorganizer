@@ -7,15 +7,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let { id: coinId } = query;
 
         if (coinId) {
-            const data = await prisma.coins.findFirst({
+            const data = await prisma.coin.findFirst({
                 where: {
                     id: +coinId
                 },
                 include: {
-                    Images: true,
-                    Countries: true,
-                    Rulers: true,
-                    Periods: true
+                    image: true,
+                    country: true,
+                    ruler: true,
+                    period: true
                 }
             });
             return res.status(200).json(data);

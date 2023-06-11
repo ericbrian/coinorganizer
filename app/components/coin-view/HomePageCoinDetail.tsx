@@ -1,4 +1,4 @@
-import { Coins } from "@prisma/client";
+import { coin as Coins } from "@prisma/client";
 import React from "react";
 import CoinImage from "./CoinImage";
 import Link from "next/link";
@@ -9,17 +9,17 @@ export default function HomePageCoinDetail(props: { coin: Coins }) {
   return (
     <div className="mt-4 flex">
       <div className="w-36 flex-none">
-        <CoinImage images={coin.Images} />
+        <CoinImage images={coin.image} />
       </div>
       <div className="grow">
         <Link href={`/coindetails?id=${coin.id}`}>
           <p className="text-xl">
-            {coin.commonName} ({coin.prettyFaceValue})
+            {coin.common_name} ({coin.pretty_face_value})
           </p>
-          {coin.seriesOrThemeName && (
+          {coin.series_or_theme_name && (
             <p className="text-xs">
               <span className="font-bold">Series:</span>{" "}
-              <span className="uppercase">{coin.seriesOrThemeName}</span>
+              <span className="uppercase">{coin.series_or_theme_name}</span>
             </p>
           )}
           <p className="mt-2 line-clamp-2">
