@@ -1,12 +1,12 @@
-import type { Metadata } from "next"
-import appconfig from "../appconfig"
+import type { Metadata } from "next";
+import appconfig from "../appconfig";
 import HomePageCoinDetail from "./components/coin-view/HomePageCoinDetail";
-import { Coins } from "@prisma/client";
+import { coin as dbCoin } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: appconfig.siteName,
-  description: 'Welcome to Coin Organizer site.'
-}
+  description: "Welcome to Coin Organizer site.",
+};
 
 const MAX_COINS = 5;
 
@@ -20,17 +20,15 @@ async function getCoins() {
 }
 
 export default async function Home() {
-  const coins: Coins[] = await getCoins();
+  const coins: dbCoin[] = await getCoins();
   return (
     <>
       <h1 className="text-2xl font-bold">Latest Coins Added to Database</h1>
-      {
-        Array.isArray(coins) &&
+      {Array.isArray(coins) &&
         coins.length > 0 &&
-        coins.map(
-          (coin: Coins) => <HomePageCoinDetail key={coin.id} coin={coin} />
-        )
-      }
+        coins.map((coin: dbCoin) => (
+          <HomePageCoinDetail key={coin.id} coin={coin} />
+        ))}
     </>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import { coin as Coins } from "@prisma/client";
+import { coin as dbCoin } from "@prisma/client";
 import React from "react";
 import CoinImage from "./CoinImage";
 import Link from "next/link";
 
-export default function HomePageCoinDetail(props: { coin: Coins }) {
+export default function HomePageCoinDetail(props: { coin: dbCoin }) {
   const coin = props.coin;
 
   return (

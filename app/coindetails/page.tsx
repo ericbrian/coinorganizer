@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { coin as Coins, image as Images } from "@prisma/client";
+import { coin as dbCoin, image as dbImage } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,7 +20,7 @@ export default async function CoinDetails(props: {
   searchParams: { id: number };
 }) {
   const coinId = props.searchParams.id;
-  const coin: Coins = await getCoinById(coinId);
+  const coin: dbCoin = await getCoinById(coinId);
 
   return (
     <div className="mt-4 grid grid-cols-5 gap-6">
@@ -103,7 +103,7 @@ export default async function CoinDetails(props: {
       <div>
         {Array.isArray(coin.image) &&
           coin.image.length > 0 &&
-          coin.image.map((image: Images) => (
+          coin.image.map((image: dbImage) => (
             <Image
               className="mb-2 rounded-3xl"
               key={image.id}
