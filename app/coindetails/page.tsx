@@ -38,19 +38,20 @@ export default async function CoinDetails(props: {
               {coin.ruler.name}
             </p>
           )}
-          {coin.period && (
-            <p className="mt-2">
-              <span className="font-bold">Period:</span>
-              <br />
-              {coin.period.name} ({coin.period.years})
-            </p>
-          )}
           <p className="mt-2">
             <span className="font-bold">Year(s):</span>
             <br />
             {coin.year_start}
             {coin.year_end && ` - ${coin.year_end}`}
           </p>
+          {coin.period && (
+            <p className="mt-2">
+              <span className="font-bold">Period:</span>
+              <br />
+              {coin.period.name}{" "}
+              <span className="whitespace-nowrap">({coin.period.years})</span>
+            </p>
+          )}
           <p className="mt-2">
             <span className="font-bold">Diameter:</span>
             <br />
@@ -66,6 +67,7 @@ export default async function CoinDetails(props: {
               <span className="font-bold">Numista Number:</span>
               <br />
               <Link
+                className="font-bold text-blue-500 underline"
                 href={`https://en.numista.com/catalogue/pieces${coin.numista_number}.html`}
               >
                 {coin.numista_number}
@@ -76,7 +78,7 @@ export default async function CoinDetails(props: {
         <p className="mt-3 text-xs">Ref# {coin.id}</p>
       </div>
       <div className="col-span-3">
-        <h1 className="mt-4 text-2xl">
+        <h1 className="mt-4 text-2xl underline">
           {coin.common_name} ({coin.pretty_face_value})
         </h1>
         {coin.series_or_theme_name && (
