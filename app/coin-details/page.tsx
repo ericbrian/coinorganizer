@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 async function getCoinById(coinId: number) {
-  const endpoint = `${process.env.BASE_URL}/api/getCoinById?id=${coinId}`;
+  const endpoint = `${process.env.BASE_URL}/api/coins/${coinId}`;
   const res = await fetch(endpoint);
   if (!res.ok) {
     console.log(res);
@@ -16,11 +16,13 @@ async function getCoinById(coinId: number) {
   return res.json();
 }
 
-export default async function CoinDetails(props: {
+export default async function CoinDetails({
+  searchParams,
+}: {
   searchParams: { id: number };
 }) {
-  const coinId = props.searchParams.id;
-  const coin: dbCoin = await getCoinById(coinId);
+  const coinId = searchParams.id;
+  const coin: dbCoin = await getCoinById(+coinId);
 
   return (
     <div className="mt-4 grid grid-cols-5 gap-6">

@@ -12,7 +12,7 @@ export default function HomePageCoinDetail(props: { coin: dbCoin }) {
         <CoinImage images={coin.image} />
       </div>
       <div className="grow">
-        <Link href={`/coindetails?id=${coin.id}`}>
+        <Link href={`/coin-details?id=${coin.id}`}>
           <p className="text-xl">
             {coin.common_name} ({coin.pretty_face_value})
           </p>

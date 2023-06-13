@@ -14,6 +14,9 @@ export default async function CoinDetails() {
         <h1 className="text-2xl">Coin Related</h1>
         <ol className="list-disc">
           <li>
+            <Link href="/admin/add-coin">Add a Coin</Link>
+          </li>
+          <li>
             <Link href="/admin/add-images">Add Images to Coins</Link>
           </li>
         </ol>

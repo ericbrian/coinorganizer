@@ -11,12 +11,13 @@ export const metadata: Metadata = {
 const MAX_COINS = 5;
 
 async function getCoins() {
-  const endpoint = `${process.env.BASE_URL}/api/getLatestCoins?max=${MAX_COINS}`;
-  const res = await fetch(endpoint);
+  const endpoint = `${process.env.BASE_URL}/api/coins/latest?max=${MAX_COINS}`;
+  const res = await fetch(endpoint, { next: { revalidate: 600 } });
+
   if (!res.ok) {
     console.log(res);
   }
-  return res.json();
+  return await res.json();
 }
 
 export default async function Home() {
