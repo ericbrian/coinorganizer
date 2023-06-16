@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { coin as dbCoin, image as dbImage } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { ExternalLinkIcon } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Coin Details",
@@ -71,9 +72,11 @@ export default async function CoinDetails({
               <Link
                 className="font-bold text-blue-500 underline"
                 href={`https://en.numista.com/catalogue/pieces${coin.numista_number}.html`}
+                target="numista"
               >
                 {coin.numista_number}
-              </Link>
+              </Link>{" "}
+              <ExternalLinkIcon className="inline" width={12} />
             </p>
           )}
         </div>
@@ -114,8 +117,8 @@ export default async function CoinDetails({
               width={240}
               height={0}
               src={`/images/${image.url}`}
-              alt={coin.common_name ?? "Coin image"}
-              title={coin.common_name ?? "Coin image"}
+              alt={`${coin.common_name} Image` ?? "Coin image"}
+              title={`${coin.common_name} Image` ?? "Coin image"}
             />
           ))}{" "}
       </div>

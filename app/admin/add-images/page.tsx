@@ -24,7 +24,7 @@ async function getCoinsWithoutImages() {
   }
 }
 
-export default async function CoinDetails() {
+export default async function AddImagesToCoins() {
   const coins: AddImageCoins[] = await getCoinsWithoutImages();
 
   const allowDrop = (e: any) => e.preventDefault();

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SignInButton from "./SignInButton";
+import SignInButton from "../context-component/SignInButton";
 
 const Header = () => {
   return (

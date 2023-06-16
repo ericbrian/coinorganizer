@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import appconfig from "../appconfig";
-import HomePageCoinDetail from "./components/coin-view/HomePageCoinDetail";
+import HomePageCoinDetail from "./coin-view/HomePageCoinDetail";
 import { coin as dbCoin } from "@prisma/client";
 
 export const metadata: Metadata = {
