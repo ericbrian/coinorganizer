@@ -1,19 +1,18 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    try {
-        const data = await prisma.$queryRaw`
+export async function GET(req: NextRequest) {
+  try {
+    const coins = await prisma.$queryRaw`
             SELECT c.common_name,c.pretty_face_value,c.id,c.year_start,c.year_end,co.name AS country_name
             FROM public.coin as c
                 LEFT JOIN public.image AS i ON c.id = i.coin_id
                 LEFT JOIN public.country AS co ON c.country_id = co.id
             WHERE i.url IS NULL
+            ORDER BY co.short_name ASC, c.year_start ASC, c.year_end ASC
             `;
-
-        return res.status(200).json(data);
-    }
-    catch (error) {
-        return res.status(500).json(error);
-    }
+    return NextResponse.json(coins);
+  } catch (error) {
+    return NextResponse.json({ error });
+  }
 }

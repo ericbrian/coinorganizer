@@ -14,10 +14,10 @@ export default async function CoinDetails() {
         <h1 className="mb-4 text-2xl">Coin Related</h1>
         <ol className="list-disc">
           <li>
-            <Link href="/admin/add-coin">Add a Coin</Link>
+            <Link href="/add-coin">Add a Coin</Link>
           </li>
           <li>
-            <Link href="/admin/add-images">Add Images to Coins</Link>
+            <Link href="/add-images">Add Images to Coins</Link>
           </li>
         </ol>
       </div>

@@ -1,4 +1,6 @@
-import { Metadata } from "next";
+"use client";
+
+import Image from "next/image";
 import React from "react";
 
 type AddImageCoins = {
@@ -10,12 +12,8 @@ type AddImageCoins = {
   country_name: string;
 };
 
-export const metadata: Metadata = {
-  title: "Coin Details",
-};
-
 async function getCoinsWithoutImages() {
-  const endpoint = `${process.env.BASE_URL}/api/getCoinsWithoutImages`;
+  const endpoint = `${process.env.BASE_URL}/api/coins/withoutimages`;
   try {
     const res = await fetch(endpoint);
     return res.json();
@@ -48,8 +46,8 @@ export default async function AddImagesToCoins() {
     <div className="mt-4 grid grid-cols-2 gap-6">
       <div>
         {" "}
-        {[].map((name, i) => (
-          <img
+        {[""].map((name, i) => (
+          <Image
             style={{ display: "inline-block" }}
             id={name}
             src={"/images/" + name}
