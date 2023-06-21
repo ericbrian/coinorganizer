@@ -12,24 +12,24 @@ export default function HomePageCoinDetail(props: { coin: dbCoin }) {
         <CoinImage images={coin.image} />
       </div>
       <div className="grow">
-        <Link href={`/coin-details?id=${coin.id}`}>
-          <p className="text-xl">
-            {coin.common_name} ({coin.pretty_face_value})
+        <p className="text-xl font-bold text-blue-700 underline">
+          <Link href={`/coin-details?id=${coin.id}`}>
+            {coin.common_name} ({coin.pretty_face_value}){" "}
+          </Link>
+        </p>
+        {coin.series_or_theme_name && (
+          <p className="text-xs">
+            <span className="font-bold">Series:</span>{" "}
+            <span className="uppercase">{coin.series_or_theme_name}</span>
           </p>
-          {coin.series_or_theme_name && (
-            <p className="text-xs">
-              <span className="font-bold">Series:</span>{" "}
-              <span className="uppercase">{coin.series_or_theme_name}</span>
-            </p>
-          )}
-          <p className="mt-2 line-clamp-2">
-            <span className="font-bold">Obversee:</span> {coin.obverse}
-          </p>
-          <p className="line-clamp-2">
-            <span className="font-bold">Reverse:</span> {coin.reverse}
-          </p>
-          <p className="pt-2 text-xs">Ref#: {coin.id}</p>
-        </Link>
+        )}
+        <p className="mt-2 line-clamp-2">
+          <span className="font-bold">Obversee:</span> {coin.obverse}
+        </p>
+        <p className="line-clamp-2">
+          <span className="font-bold">Reverse:</span> {coin.reverse}
+        </p>
+        <p className="pt-2 text-xs">Ref#: {coin.id}</p>
       </div>
     </div>
   );
