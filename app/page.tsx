@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const MAX_COINS = 5;
 
 async function getCoins() {
-  const endpoint = `${process.env.BASE_URL}/api/coins/latest?max=${MAX_COINS}`;
+  const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/latest?max=${MAX_COINS}`;
   const res = await fetch(endpoint, { next: { revalidate: 600 } });
 
   if (!res.ok) {

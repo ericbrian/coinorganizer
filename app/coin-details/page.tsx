@@ -3,13 +3,14 @@ import { coin as dbCoin, image as dbImage } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
+import appconfig from "@/appconfig";
 
 export const metadata: Metadata = {
   title: "Coin Details",
 };
 
 async function getCoinById(coinId: number) {
-  const endpoint = `${process.env.BASE_URL}/api/coins/${coinId}`;
+  const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/${coinId}`;
   const res = await fetch(endpoint);
   if (!res.ok) {
     console.log(res);
