@@ -46,7 +46,7 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@prisma/client": "^4.15.0",
-    "prisma": "^4.15.0"
+    "@prisma/client": "^4.16.1",
+    "prisma": "^4.16.1"
   }
 }
