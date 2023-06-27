@@ -1,29 +1,31 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../prisma/client";
-import { coin as dbCoin, image as dbImage } from '@prisma/client';
+import { coin as dbCoin, image as dbImage } from "@prisma/client";
 
-type LatestCoins = (dbCoin & { image: dbImage[]; })[]
+type LatestCoins = (dbCoin & { image: dbImage[] })[];
 
-export async function GET(req: NextRequest, { params }: { params: { id: number } }) {
-    try {
-        const coinId = params.id
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: number } }
+) {
+  try {
+    const coinId = params.id;
 
-        if (coinId) {
-            const coin = await prisma.coin.findFirst({
-                where: {
-                    id: +coinId
-                },
-                include: {
-                    image: true,
-                    country: true,
-                    ruler: true,
-                    period: true
-                }
-            });
-            return NextResponse.json(coin)
-        }
+    if (coinId) {
+      const coin = await prisma.coin.findFirst({
+        where: {
+          id: +coinId,
+        },
+        include: {
+          image: true,
+          country: true,
+          ruler: true,
+          period: true,
+        },
+      });
+      return NextResponse.json(coin);
     }
-    catch (error) {
-        return NextResponse.json({ error })
-    }
+  } catch (error) {
+    return NextResponse.json({ error });
+  }
 }
