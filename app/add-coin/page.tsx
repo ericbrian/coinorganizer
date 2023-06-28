@@ -5,6 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import FormControl from "@mui/material/FormControl";
+import SaveIcon from "@mui/icons-material/Save";
 
 import {
   country as countryDb,
@@ -598,12 +599,9 @@ export default function AddCoin() {
                         <tr>
                           <td className="pr-4 text-right">Image(s):</td>
                           <td>
-                            <TextField
-                              id="outlined-basic"
-                              label="Image File Name"
-                              variant="outlined"
-                            />
-                            <AddBoxIcon className="ml-2 mt-3" />
+                            This functionality hasn&apos;t been implemented yet.
+                            To add images already uploaded, use the `add-images`
+                            page.
                           </td>
                         </tr>
                         <tr>
@@ -635,9 +633,12 @@ export default function AddCoin() {
             {selectedCountryId &&
               !isNaN(selectedCountryId) &&
               filteredCurrencies.length > 0 && (
-                <Button variant="outlined" sx={{ width: 700 }}>
-                  Save
-                </Button>
+                <div className="flex basis-1/4 flex-col items-center justify-center">
+                  <Button variant="contained" sx={{ width: 700 }}>
+                    <SaveIcon className="pr-2" />
+                    Save
+                  </Button>
+                </div>
               )}
           </FormControl>
         )}
