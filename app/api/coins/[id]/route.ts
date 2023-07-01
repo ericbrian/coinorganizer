@@ -11,10 +11,10 @@ export async function GET(
   try {
     const coinId = params.id;
 
-    if (coinId) {
+    if (coinId > 0) {
       const coin = await prisma.coin.findFirst({
         where: {
-          id: +coinId,
+          id: { equals: coinId },
         },
         include: {
           image: true,

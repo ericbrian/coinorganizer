@@ -6,10 +6,12 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import FormControl from "@mui/material/FormControl";
 import SaveIcon from "@mui/icons-material/Save";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import Link from "next/link";
 
 import {
   country as countryDb,
-  country_currency as countryCurrencyDb,
   currency as currencyDb,
   engraver as engraverDb,
   mint as mintDb,
@@ -18,7 +20,6 @@ import {
   shape as shapeDb,
 } from "@prisma/client";
 
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useEffect, useState } from "react";
 
 import { getCountryList } from "@/http/country";
@@ -34,13 +35,19 @@ import {
   getFilteredPeriodList,
   getFilteredMintList,
 } from "@/lib/filters";
+import { CoinInput } from "@/global";
+import { engraversSort } from "@/lib/utils";
+import { saveNewCoin } from "@/http/coin";
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export default function AddCoin() {
   const [isCountryListLoading, setIsCountryListLoading] =
     useState<boolean>(true);
+
   const [countryList, setCountryList] = useState<countryDb[] | null>([]);
-  const [selectedCountryId, setSelectedCountryId] = useState<number | "">("");
-  const [selectedCountryName, setSelectedCountryName] = useState<string>("");
+  const [country, setCountry] = useState<countryDb | null>(null);
 
   const [currencyList, setCurrencyList] = useState<currencyDb[]>([]);
   const [filteredCurrencies, setFilteredCurrencies] = useState<currencyDb[]>(
@@ -56,9 +63,27 @@ export default function AddCoin() {
   const [filteredPeriods, setFilteredPeriods] = useState<periodDb[]>([]);
   const [period, setPeriod] = useState<periodDb | null>(null);
 
+  const [faceValue, setFaceValue] = useState("");
+  const [obverse, setObverse] = useState("");
+  const [reverse, setReverse] = useState("");
+  const [edge, setEdge] = useState("");
+  const [edgeInscription, setEdgeInscription] = useState("");
+  const [yearStart, setYearStart] = useState("");
+  const [yearEnd, setYearEnd] = useState("");
+  const [prettyFaceValue, setPrettyFaceValue] = useState("");
+  const [seriesOrThemeName, setSeriesOrThemeName] = useState("");
+  const [commonName, setCommonName] = useState("");
+  const [composition, setComposition] = useState("");
+  const [weightG, setWeightG] = useState("");
+  const [diameterMm, setDiameterMm] = useState("");
+  const [isNifc, setIsNifc] = useState(false);
+  const [isBullion, setIsBullion] = useState(false);
+  const [numistaNumber, setNumistaNumber] = useState("");
+  const [comments, setComments] = useState("");
+
   const [mintList, setMintList] = useState<mintDb[]>([]);
   const [filteredMints, setFilteredMints] = useState<mintDb[]>([]);
-  const [mint, setMint] = useState<mintDb | null>(null);
+  const [mints, setMints] = useState<mintDb[] | null>(null);
 
   const [engraversList, setEngraversList] = useState<engraverDb[]>([]);
   const [obverseEngraver, setObverseEngraver] = useState<engraverDb | null>(
@@ -70,6 +95,41 @@ export default function AddCoin() {
 
   const [shapeList, setShapeList] = useState<shapeDb[]>([]);
   const [shape, setShape] = useState<shapeDb | null>(null);
+
+  const getFormValues = (): CoinInput => {
+    return {
+      faceValue: +faceValue,
+      obverse,
+      reverse,
+      edge,
+      edgeInscription,
+      yearStart,
+      yearEnd,
+      prettyFaceValue,
+      seriesOrThemeName,
+      commonName,
+      composition,
+      weightG: +weightG,
+      diameterMm: +diameterMm,
+      isNifc,
+      isBullion,
+      numistaNumber,
+      comments,
+      country,
+      currency,
+      shape,
+      ruler,
+      period,
+      obverseEngraver,
+      reverseEngraver,
+      mints,
+    };
+  };
+
+  const saveForm = async () => {
+    const payload = getFormValues();
+    await saveNewCoin(payload);
+  };
 
   useEffect(() => {
     const promises = [
@@ -86,15 +146,7 @@ export default function AddCoin() {
       .then((res) => {
         setCountryList(res[0]);
         setCurrencyList(res[1]);
-        const unsortedEngravers = res[2];
-        unsortedEngravers.sort((a: engraverDb, b: engraverDb) => {
-          const aParts = a.name.split(" ");
-          const bParts = b.name.split(" ");
-          return `${aParts.at(-1)} ${aParts.at(0)}`.localeCompare(
-            `${bParts.at(-1)} ${bParts.at(0)}`
-          );
-        });
-        setEngraversList(res[2]);
+        setEngraversList(res[2].sort(engraversSort));
         setMintList(res[3]);
         setPeriodList(res[4]);
         setRulerList(res[5]);
@@ -107,19 +159,23 @@ export default function AddCoin() {
 
   useEffect(() => {
     if (
-      selectedCountryId &&
+      country?.id &&
       currencyList &&
       rulerList &&
       periodList &&
       mintList &&
       shapeList
     ) {
-      setFilteredCurrencies(
-        getFilteredCurrencyList(currencyList, selectedCountryId)
-      );
+      const currenciesRes = getFilteredCurrencyList(currencyList, country?.id);
+      setFilteredCurrencies(currenciesRes);
+      if (currenciesRes.length === 1) {
+        setCurrency(currenciesRes[0]);
+      } else {
+        setCurrency(null);
+      }
 
       // Update Rulers Select Options and Widget
-      const rulersRes = getFilteredRulerList(rulerList, selectedCountryId);
+      const rulersRes = getFilteredRulerList(rulerList, country?.id);
       setFilteredRulers(rulersRes);
       if (rulersRes.length === 1) {
         setRuler(rulersRes[0]);
@@ -128,7 +184,7 @@ export default function AddCoin() {
       }
 
       // Update Periods Select Options and Widget
-      const periodsRes = getFilteredPeriodList(periodList, selectedCountryId);
+      const periodsRes = getFilteredPeriodList(periodList, country?.id);
       setFilteredPeriods(periodsRes);
       if (periodsRes.length === 1) {
         setPeriod(periodsRes[0]);
@@ -137,22 +193,15 @@ export default function AddCoin() {
       }
 
       // Update Mints Select Options and Widget
-      const mintsRes = getFilteredMintList(mintList, selectedCountryId);
+      const mintsRes = getFilteredMintList(mintList, country?.id);
       setFilteredMints(mintsRes);
       if (mintsRes.length === 1) {
-        setMint(mintsRes[0]);
+        setMints(mintsRes);
       } else {
-        setMint(null);
+        setMints(null);
       }
     }
-  }, [
-    selectedCountryId,
-    currencyList,
-    rulerList,
-    periodList,
-    mintList,
-    shapeList,
-  ]);
+  }, [country, currencyList, rulerList, periodList, mintList, shapeList]);
 
   return (
     <>
@@ -177,11 +226,9 @@ export default function AddCoin() {
                         options={countryList}
                         onChange={(_e, value) => {
                           if (value) {
-                            setSelectedCountryId(value.id);
-                            setSelectedCountryName(value.short_name);
+                            setCountry(value);
                           } else {
-                            setSelectedCountryId("");
-                            setSelectedCountryName("");
+                            setCountry(null);
                           }
                         }}
                         sx={{ width: 700 }}
@@ -202,14 +249,21 @@ export default function AddCoin() {
                     </td>
                   </tr>
                 )}
-                {selectedCountryId && !isNaN(selectedCountryId) && (
+                {country && !isNaN(country.id) && (
                   <>
                     {filteredCurrencies.length === 0 && (
                       <tr>
                         <td colSpan={2} className="text-center font-bold">
-                          There is no currency defined for {selectedCountryName}
-                          . To be able to add a coin from {selectedCountryName},
-                          you must first define a currency.
+                          There is no currency defined for {country.short_name}.
+                          To be able to add a coin from {country.short_name},
+                          you must first{" "}
+                          <Link
+                            href={`/add-currency/${country.id}/${country.short_name}`}
+                            className="text-blue-700 underline"
+                          >
+                            define a currency
+                          </Link>
+                          .
                         </td>
                       </tr>
                     )}
@@ -218,11 +272,12 @@ export default function AddCoin() {
                         <tr className="mt-6">
                           <td className="pr-4 text-right">Currency:</td>
                           <td>
-                            {/* Without renderOption, this will fail due to the way MUI handles options */}
                             <Autocomplete
                               disablePortal
                               id="currency-select"
                               options={filteredCurrencies}
+                              value={currency}
+                              defaultValue={currency}
                               onChange={(e, value) => {
                                 if (value) {
                                   setCurrency(value);
@@ -246,76 +301,80 @@ export default function AddCoin() {
                             />
                           </td>
                         </tr>
-                        <tr className="mt-6">
-                          <td className="pr-4 text-right">Ruler:</td>
-                          <td>
-                            {/* Without renderOption, this will fail due to the way MUI handles options */}
-                            <Autocomplete
-                              disablePortal
-                              id="ruler-select"
-                              options={filteredRulers}
-                              value={ruler}
-                              defaultValue={ruler}
-                              onChange={(e, value) => {
-                                if (value) {
-                                  setRuler(value);
-                                } else {
-                                  setRuler(null);
+                        {filteredRulers?.length > 0 && (
+                          <tr className="mt-6">
+                            <td className="pr-4 text-right">Ruler:</td>
+                            <td>
+                              {/* Without renderOption, this will fail due to the way MUI handles options */}
+                              <Autocomplete
+                                disablePortal
+                                id="ruler-select"
+                                options={filteredRulers}
+                                value={ruler}
+                                defaultValue={ruler}
+                                onChange={(e, value) => {
+                                  if (value) {
+                                    setRuler(value);
+                                  } else {
+                                    setRuler(null);
+                                  }
+                                }}
+                                sx={{ width: 700 }}
+                                renderOption={(
+                                  props: object,
+                                  option: rulerDb
+                                ) => (
+                                  <div {...props} key={option.id}>
+                                    {`${option.name} ${option.years}`}
+                                  </div>
+                                )}
+                                renderInput={(params) => (
+                                  <TextField {...params} label="Ruler" />
+                                )}
+                                getOptionLabel={(option) =>
+                                  `${option.name} (${option.years})`
                                 }
-                              }}
-                              sx={{ width: 700 }}
-                              renderOption={(
-                                props: object,
-                                option: rulerDb
-                              ) => (
-                                <div {...props} key={option.id}>
-                                  {`${option.name} ${option.years}`}
-                                </div>
-                              )}
-                              renderInput={(params) => (
-                                <TextField {...params} label="Ruler" />
-                              )}
-                              getOptionLabel={(option) =>
-                                `${option.name} (${option.years})`
-                              }
-                            />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="pr-4 text-right">Period:</td>
-                          <td>
-                            {/* Without renderOption, this will fail due to the way MUI handles options */}
-                            <Autocomplete
-                              disablePortal
-                              id="period-select"
-                              options={filteredPeriods}
-                              value={period}
-                              defaultValue={period}
-                              onChange={(e, value) => {
-                                if (value) {
-                                  setPeriod(value);
-                                } else {
-                                  setPeriod(null);
+                              />
+                            </td>
+                          </tr>
+                        )}
+                        {filteredPeriods?.length > 0 && (
+                          <tr>
+                            <td className="pr-4 text-right">Period:</td>
+                            <td>
+                              {/* Without renderOption, this will fail due to the way MUI handles options */}
+                              <Autocomplete
+                                disablePortal
+                                id="period-select"
+                                options={filteredPeriods}
+                                value={period}
+                                defaultValue={period}
+                                onChange={(e, value) => {
+                                  if (value) {
+                                    setPeriod(value);
+                                  } else {
+                                    setPeriod(null);
+                                  }
+                                }}
+                                sx={{ width: 700 }}
+                                renderInput={(params) => (
+                                  <TextField {...params} label="Period" />
+                                )}
+                                getOptionLabel={(option) =>
+                                  `${option.name} (${option.years})`
                                 }
-                              }}
-                              sx={{ width: 700 }}
-                              renderInput={(params) => (
-                                <TextField {...params} label="Period" />
-                              )}
-                              getOptionLabel={(option) =>
-                                `${option.name} (${option.years})`
-                              }
-                              renderOption={(
-                                props: object,
-                                option: periodDb
-                              ) => (
-                                <div {...props} key={option.id}>
-                                  {`${option.name} (${option.years})`}
-                                </div>
-                              )}
-                            />
-                          </td>
-                        </tr>
+                                renderOption={(
+                                  props: object,
+                                  option: periodDb
+                                ) => (
+                                  <div {...props} key={option.id}>
+                                    {`${option.name} (${option.years})`}
+                                  </div>
+                                )}
+                              />
+                            </td>
+                          </tr>
+                        )}
                         <tr>
                           <td className="pr-4 text-right">Nominal Value:</td>
                           <td>
@@ -323,6 +382,9 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) =>
+                                setPrettyFaceValue(e.target.value)
+                              }
                             />
                           </td>
                         </tr>
@@ -333,6 +395,7 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setFaceValue(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -345,6 +408,9 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) =>
+                                setSeriesOrThemeName(e.target.value)
+                              }
                             />
                           </td>
                         </tr>
@@ -355,6 +421,7 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setCommonName(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -365,6 +432,7 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setObverse(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -375,6 +443,7 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setReverse(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -385,6 +454,7 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setEdge(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -395,16 +465,31 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) =>
+                                setEdgeInscription(e.target.value)
+                              }
                             />
                           </td>
                         </tr>
                         <tr>
-                          <td className="pr-4 text-right">Year(s):</td>
+                          <td className="pr-4 text-right">Start Year:</td>
                           <td>
                             <TextField
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setYearStart(e.target.value)}
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="pr-4 text-right">End Year:</td>
+                          <td>
+                            <TextField
+                              id="outlined-basic"
+                              variant="outlined"
+                              sx={{ width: 700 }}
+                              onChange={(e) => setYearEnd(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -420,13 +505,19 @@ export default function AddCoin() {
                             ?
                           </td>
                           <td>
-                            <Checkbox />
+                            <Checkbox
+                              checked={isNifc}
+                              onChange={() => setIsNifc(!isNifc)}
+                            />
                           </td>
                         </tr>
                         <tr>
                           <td className="pr-4 text-right">Coin is Bullion?</td>
                           <td>
-                            <Checkbox />
+                            <Checkbox
+                              checked={isBullion}
+                              onChange={() => setIsBullion(!isBullion)}
+                            />
                           </td>
                         </tr>
                         <tr>
@@ -436,6 +527,7 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setComposition(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -445,8 +537,10 @@ export default function AddCoin() {
                             <TextField
                               id="outlined-basic"
                               variant="outlined"
-                              sx={{ width: 700 }}
+                              sx={{ width: 500 }}
+                              onChange={(e) => setDiameterMm(e.target.value)}
                             />
+                            milimeters
                           </td>
                         </tr>
                         <tr>
@@ -455,47 +549,57 @@ export default function AddCoin() {
                             <TextField
                               id="outlined-basic"
                               variant="outlined"
-                              sx={{ width: 700 }}
+                              sx={{ width: 500 }}
+                              onChange={(e) => setWeightG(e.target.value)}
                             />
+                            grams
                           </td>
                         </tr>
-                        <tr>
-                          <td className="pr-4 text-right">Mints:</td>
-                          <td>
-                            <Autocomplete
-                              disablePortal
-                              id="mint-select"
-                              options={filteredMints}
-                              sx={{ width: 700 }}
-                              value={mint}
-                              defaultValue={mint}
-                              onChange={(e, value) => {
-                                if (value) {
-                                  setMint(value);
-                                } else {
-                                  setMint(null);
-                                }
-                              }}
-                              renderOption={(props: object, option: mintDb) => {
-                                let mmark = "";
-                                if (option.mark) mmark = ` (${option.mark})`;
-                                return (
-                                  <div {...props} key={option.id}>
-                                    {option.mint} {mmark}
-                                  </div>
-                                );
-                              }}
-                              renderInput={(params) => (
-                                <TextField {...params} label="Mint" />
-                              )}
-                              getOptionLabel={(option) => {
-                                let mmark = "";
-                                if (option.mark) mmark = ` (${option.mark})`;
-                                return `${option.mint} ${mmark}`;
-                              }}
-                            />
-                          </td>
-                        </tr>
+                        {filteredMints?.length > 0 && (
+                          <tr>
+                            <td className="pr-4 text-right">Mints:</td>
+                            <td>
+                              <Autocomplete
+                                multiple
+                                id="checkboxes-tags-demo"
+                                options={filteredMints}
+                                disableCloseOnSelect
+                                sx={{ width: 700 }}
+                                getOptionLabel={(option) => {
+                                  let markLetter = "";
+                                  if (option.mark) markLetter = option.mark;
+                                  return `${option.mint} ${markLetter}`;
+                                }}
+                                onChange={(e, values) => {
+                                  if (values) {
+                                    setMints(values);
+                                  } else {
+                                    setMints(null);
+                                  }
+                                }}
+                                renderOption={(props, option, { selected }) => (
+                                  <li {...props}>
+                                    <Checkbox
+                                      icon={icon}
+                                      checkedIcon={checkedIcon}
+                                      style={{ marginRight: 8 }}
+                                      checked={selected}
+                                    />
+                                    {option.mint}
+                                    {option.mark && (
+                                      <span className="ml-2">
+                                        ({option.mark})
+                                      </span>
+                                    )}
+                                  </li>
+                                )}
+                                renderInput={(params) => (
+                                  <TextField {...params} label="Mints" />
+                                )}
+                              />
+                            </td>
+                          </tr>
+                        )}
                         <tr>
                           <td className="pr-4 text-right">Shape:</td>
                           <td>
@@ -611,6 +715,7 @@ export default function AddCoin() {
                               id="outlined-basic"
                               variant="outlined"
                               sx={{ width: 700 }}
+                              onChange={(e) => setNumistaNumber(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -621,6 +726,7 @@ export default function AddCoin() {
                               id="comments"
                               multiline
                               sx={{ width: 700 }}
+                              onChange={(e) => setComments(e.target.value)}
                             />
                           </td>
                         </tr>
@@ -630,11 +736,28 @@ export default function AddCoin() {
                 )}
               </tbody>
             </table>
-            {selectedCountryId &&
-              !isNaN(selectedCountryId) &&
+            {country?.id &&
+              !isNaN(country?.id) &&
               filteredCurrencies.length > 0 && (
                 <div className="flex basis-1/4 flex-col items-center justify-center">
-                  <Button variant="contained" sx={{ width: 700 }}>
+                  <Button
+                    variant="contained"
+                    sx={{ width: 700 }}
+                    onClick={saveForm}
+                    disabled={
+                      commonName === "" ||
+                      yearStart === "" ||
+                      prettyFaceValue === "" ||
+                      faceValue === "" ||
+                      obverse === "" ||
+                      reverse === "" ||
+                      edge === "" ||
+                      composition === "" ||
+                      diameterMm === "" ||
+                      weightG === "" ||
+                      numistaNumber === ""
+                    }
+                  >
                     <SaveIcon className="pr-2" />
                     Save
                   </Button>

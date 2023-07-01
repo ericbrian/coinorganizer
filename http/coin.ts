@@ -1,5 +1,8 @@
 //* Coin
 
+import appconfig from "@/appconfig";
+import { CoinInput } from "@/global";
+
 // export const getAllCoins = async () =>
 //   (await axios.get(`${httpConfig.baseUrl}/coins`)).data.data;
 // export const getCoinListData = async (limit = 5) =>
@@ -12,3 +15,11 @@
 //   (await axios.post(`${httpConfig.baseUrl}/coin`, coin)).data.data;
 // export const getCoinsWithoutImages = async () =>
 //   (await axios.get(`${httpConfig.baseUrl}/coinsWithoutImages`)).data.data;
+
+export const saveNewCoin = async (payload: CoinInput) => {
+    const coin = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/coin`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+    });
+    return coin;
+};

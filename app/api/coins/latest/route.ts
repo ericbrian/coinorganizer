@@ -6,10 +6,11 @@ type LatestCoins = (dbCoin & { image: dbImage[] })[];
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const max = searchParams.get("max");
+  const max = searchParams.get("max") ?? "10";
 
-  let maxResults = max ? +max : 10;
-  if (maxResults > 10) maxResults = 10;
+  const MAX_RESULTS_LIMIT = 10;
+  const parsedMax = parseInt(max, 10);
+  const maxResults = isNaN(parsedMax) ? 10 : Math.min(parsedMax, MAX_RESULTS_LIMIT);
 
   try {
     const coins: any = await prisma.coin.findMany({
@@ -24,6 +25,9 @@ export async function GET(req: NextRequest) {
         image: true,
       },
     });
+    if (coins.length === 0) {
+      return NextResponse.json({ message: "No coins found." });
+    }
     return NextResponse.json(coins);
   } catch (error) {
     return NextResponse.json({ error });
