@@ -28,7 +28,6 @@ export const saveNewCoin = async (payload: CoinInput) => {
 export const getCoinById = async (coinId: number) => {
     const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coin/${coinId}`;
     const res = await fetch(endpoint);
-    console.log({ res })
     if (!res.ok) {
         console.log(res);
     }
