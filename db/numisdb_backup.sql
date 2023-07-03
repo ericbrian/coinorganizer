@@ -1195,6 +1195,10 @@ INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (390, 1.000, 'One Pound', 'Heraldic Emblems', '1 Pound - Welsch Dragon', 'Fourth crowned portrait of HM Queen Elizabeth II right, wearing the Girls of Great Britain and Ireland tiara, legend around.', 'A Welsh dragon passant above denomination.', 'Milled', 'PLEIDIOL WYF I''M GWLAD', '2000', NULL, 'Nickel brass', false, 9.500, 22.500, NULL, '2023-07-03 01:09:56.761+00', '2023-07-03 01:09:56.761+00', NULL, 4, 6, 8, 7, 1, '1396', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (392, 0.200, 'Twenty Pence', '', '20 Pence', 'Third crowned portrait of HM Queen Elizabeth II right, wearing the George IV State Diadem, legend around.', 'Crowned Tudor rose dividing date and legend, denomination below.', 'Plain', '', '1985', '1997', 'Copper-nickel (84% Cu, 16% Ni)', false, 5.000, 21.400, NULL, '2023-07-03 15:08:24+00', '2023-07-03 15:08:24+00', NULL, 4, 6, 8, 7, 6, '1376', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (393, 50.000, '¥50', '', '50 Yen - Shōwa', 'Center hole flanked by chrysanthemum flowers, authority on top and value below', 'Value in large font above the center hole with the date below', 'Reeded', '', '1967', '1988', 'Copper-nickel (75% Copper, 25% Nickel)', false, 4.000, 21.000, 'The years on the code are from the year of the Emporer Shōwa 42-63.', '2023-07-03 15:49:29.74+00', '2023-07-03 15:49:29.74+00', NULL, 24, 15, 99, 40, 15, '1026', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (394, 0.500, '½ Balboa', '', '½ Balboa', 'Coat of arms with 9 stars above. Name of the country above, wreath and date below.', 'Armoured bust with helmet of Vasco Núñez de Balboa facing left surrounded by value in letters and wreath. The bust touches the rim below.', 'Reeded', '', '1973', '1993', 'Billon (.400 silver) (Copper .600)', false, 11.500, 30.600, NULL, '2023-07-03 22:31:28.53+00', '2023-07-03 22:31:28.53+00', NULL, 25, NULL, 3, 5, 1, '7526', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (395, 2.000, '£2', '', '2 Pounds - Olympic Handover', 'Fourth crowned portrait of HM Queen Elizabeth II right, wearing the Girls of Great Britain and Ireland tiara, legend around', 'A baton being passed between two hands above flags of the UK and Brazil and below the London 2012 logo.', 'Milled', 'I CALL UPON THE YOUTH OF THE WORLD', '2012', NULL, 'Bimetallic: copper-nickel centre in nickel brass ring', false, 12.000, 28.400, NULL, '2023-07-03 22:43:42.551+00', '2023-07-03 22:43:42.551+00', NULL, 4, 6, 8, 7, 1, '36876', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (396, 0.020, '2 Øre', '', '2 Øre', 'The crowned monogram of Olav V', 'Black grouse (Lyrurus or Tetrao tetrix) facing right, year above, country below, value on right', 'Smooth', '', '1959', '1972', 'Bronze (97% Cu, 2.5% Zn, 0.5% Sn)', false, 4.000, 21.000, NULL, '2023-07-03 23:07:26.08+00', '2023-07-03 23:07:26.08+00', NULL, NULL, 16, 138, 41, 1, '1425', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (397, 0.200, '20 Centavos', '', '20 Centavos', 'Bust of General Santander facing left, the country name above and year below.', 'Closed wreath with value in the center.', 'Reeded', '', '1967', '1969', 'Nickel clad steel', false, 4.500, 23.500, NULL, '2023-07-03 23:24:03.775+00', '2023-07-03 23:24:03.775+00', NULL, 26, NULL, 59, 42, 1, '6425', false);
 
 --
 -- Data for Name: coin_engravers; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1315,6 +1319,12 @@ INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES (
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 14:45:27.312+00', '2023-07-03 14:45:27.312+00', 391, 17);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 15:08:23.998+00', '2023-07-03 15:08:23.998+00', 392, 17);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 15:49:29.738+00', '2023-07-03 15:49:29.738+00', 393, 37);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 22:31:28.526+00', '2023-07-03 22:31:28.526+00', 394, 19);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 22:31:28.526+00', '2023-07-03 22:31:28.526+00', 394, 13);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 22:31:28.526+00', '2023-07-03 22:31:28.526+00', 394, 9);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 22:43:42.549+00', '2023-07-03 22:43:42.549+00', 395, 17);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 23:07:26.078+00', '2023-07-03 23:07:26.078+00', 396, 38);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-03 23:24:03.774+00', '2023-07-03 23:24:03.774+00', 397, 42);
 
 --
 -- Data for Name: coinset; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2070,6 +2080,8 @@ INSERT INTO public.country_currency (created_at, updated_at, country_id, currenc
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-05-25 18:33:46.793618+00', '2023-05-25 18:33:46.793618+00', 68, 35);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 15:29:48.418688+00', '2023-07-03 15:29:48.418688+00', 99, 40);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 15:54:46.447887+00', '2023-07-03 15:54:46.447887+00', 3, 5);
+INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 22:50:35.549352+00', '2023-07-03 22:50:35.549352+00', 138, 41);
+INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 23:16:11.585039+00', '2023-07-03 23:16:11.585039+00', 59, 42);
 
 --
 -- Data for Name: country_mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2110,6 +2122,11 @@ INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VA
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (2, 35, '2023-07-03', '2023-07-03');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (202, 36, '2023-07-03', '2023-07-03');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (99, 37, '2023-07-03', '2023-07-03');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (3, 9, '2023-07-03', '2023-07-03');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (3, 13, '2023-07-03', '2023-07-03');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (3, 19, '2023-07-03', '2023-07-03');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (138, 38, '2023-07-03', '2023-07-03');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (59, 42, '2023-07-03', '2023-07-03');
 
 --
 -- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2147,6 +2164,8 @@ INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comm
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (35, 'Kroner', 'DKK', '1873 - Present', NULL, NULL, false, '2023-05-25 18:30:04.276+00', '2023-05-25 18:30:04.276+00');
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (38, 'New Franc', 'F', '1960 - 2001', NULL, NULL, false, '2023-05-25 19:36:24.9+00', '2023-05-25 19:36:24.9+00');
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (40, 'Yen', '¥', '1871 - Present', NULL, NULL, true, '2023-07-03 15:29:08.126799+00', '2023-07-03 15:29:08.126799+00');
+INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (41, 'Krone', 'kr‎', '1875 - Present', NULL, NULL, true, '2023-07-03 22:49:06.609838+00', '2023-07-03 22:49:06.609838+00');
+INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (42, 'Peso', '$', '1847 - Present', NULL, NULL, true, '2023-07-03 23:13:15.591054+00', '2023-07-03 23:13:15.591054+00');
 
 --
 -- Data for Name: engraver; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2770,11 +2789,7 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (3, 'Staatliche Münzen Berlin', '1750 - Present', 'A', 'Berlin', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (4, 'Bayerisches Hauptmünzamt', '1871 - Present', 'D', 'München', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (5, 'Hamburgische Münze', '1873 - Present', 'J', 'Hamburg', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (9, 'San Francisco Mint', '1854 - Present', 'S', 'San Francisco, CA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (10, 'Carson City Mint', '1870 - 1893', 'CC', 'Carson City, NV', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (11, 'Mint of the Philippine Islands (US Colonial Mint)', '1920 - 1941', 'M', 'Manila, Phillipines', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (13, 'Denver Mint', '1863 - Present', 'D', 'Denver, CO', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (14, 'West Point Mint', '1937 - Present', 'W', 'West Point, NY', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (15, 'Münzstätte für Sachsen, die Sowjetische Besatzungszone Deutschlands, DDR', '1887 - 1953', 'E', 'Muldenhütten bei Freiberg', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (16, 'Royal Dutch Mint, Houten', NULL, NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (18, 'Münze Österreich AG, Wien', '1194 - Present', NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
@@ -2789,17 +2804,23 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (27, 'Prägeanstalt Gebrüder Kugel & Fink, Lüdenscheid', NULL, NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (28, 'Lithuanian Mint (Lietuvos Monetu Kalykla)', '1990 - Present', 'LMK', 'Vilnius', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (30, 'New Zealand Mint, Auckland, New Zealand', '1967 - Present', NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (12, 'Philadelphia Mint', '1793 - Present', 'P', 'Philadelphia, PA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (6, 'Dahlonega Mint', '1838 - 1861', 'D', 'Dahlonega, GA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (7, 'Charlotte Mint', '1849 - 1855, 1857, and 1859', 'C', 'Charlotte, NC', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (8, 'New Orleans Mint', '1838 - 1861 & 1879 - 1909', 'O', 'New Orleans, LA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (32, 'Royal Mint of Belgium, Brussels, Belgium', '983 - Present', NULL, NULL, '2023-04-01 17:56:46.235877+00', '2023-04-01 17:56:46.235877+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (17, 'Royal Mint, Llantrisant', '1968 - Present', NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (29, 'Mint of Finland (Suomen Rahapaja), Vantaa', '1988 - Present', 'FI', 'Vantaa', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (34, 'South African Mint, Centurion', '1992 - Present', NULL, NULL, '2023-04-30 17:37:09.436616+00', '2023-04-30 17:37:09.436616+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (35, 'Philadelphia Mint', '1793 - Present', NULL, 'Philadelphia, PA', '2023-05-03 22:31:26.900569+00', '2023-05-03 22:31:26.900569+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (36, 'Saint Petersburg / Leningrad / Petrograd, Russia', '1724 - Present', NULL, NULL, '2023-05-22 21:27:47.469407+00', '2023-05-22 21:27:47.469407+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (37, 'Japan Mint (独立行政法人造幣局)', '1945 - Present', NULL, 'Hiroschima', '2023-07-03 15:45:17.543152+00', '2023-07-03 15:45:17.543152+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (10, 'United States Mint', '1870 - 1893', 'CC', 'Carson City, NV', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (7, 'United States Mint', '1849 - 1855, 1857, and 1859', 'C', 'Charlotte, NC', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (6, 'United States Mint', '1838 - 1861', 'D', 'Dahlonega, GA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (13, 'United States Mint', '1863 - Present', 'D', 'Denver, CO', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (8, 'United States Mint', '1838 - 1861 & 1879 - 1909', 'O', 'New Orleans, LA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (12, 'United States Mint', '1793 - Present', 'P', 'Philadelphia, PA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (35, 'United States Mint', '1793 - Present', NULL, 'Philadelphia, PA', '2023-05-03 22:31:26.900569+00', '2023-05-03 22:31:26.900569+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (9, 'United States Mint', '1854 - Present', 'S', 'San Francisco, CA', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (14, 'United States Mint', '1937 - Present', 'W', 'West Point, NY', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (38, 'Royal Norwegian Mint', '1686 - Present', NULL, 'Kongsberg', '2023-07-03 22:54:33.193888+00', '2023-07-03 22:54:33.193888+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (42, 'Unknown', '????', NULL, 'Unknown', '2023-07-03 23:20:36.649543+00', '2023-07-03 23:20:36.649543+00');
 
 --
 -- Data for Name: period; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2828,6 +2849,7 @@ INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) 
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (23, 'Republic', '1905 - Present', '2023-05-25 18:16:56.649556+00', '2023-05-25 18:16:56.649556+00', 121);
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (24, 'Shōwa', '1926 - 1989', '2023-07-03 15:37:50.398839+00', '2023-07-03 15:37:50.398839+00', 99);
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (25, 'Republic', '1903 - Present', '2023-07-03 15:57:23.098319+00', '2023-07-03 15:57:23.098319+00', 3);
+INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (26, 'Republic', '1886 - Present', '2023-07-03 23:14:43.259118+00', '2023-07-03 23:14:43.259118+00', 59);
 
 --
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2850,6 +2872,7 @@ INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (14, 'Frederick IX', 'Schleswig-Holstein-Sonderburg-Glücksburg', '1947 - 1972', '2023-05-25 18:28:07.869917+00', '2023-05-25 18:28:07.869917+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (13, 'Albert II', 'Grimaldi', '2005 – Present', '2023-04-03 22:10:04.063597+00', '2023-04-03 22:10:04.063597+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (15, 'Shōwa', NULL, '1926 - 1989', '2023-07-03 15:35:48.489764+00', '2023-07-03 15:35:48.489764+00');
+INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (16, 'Olav V', 'Glücksburg', '1957 - 1991', '2023-07-03 23:00:27.847995+00', '2023-07-03 23:00:27.847995+00');
 
 --
 -- Data for Name: ruler_country; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2868,6 +2891,7 @@ INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_
 INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_id) OVERRIDING SYSTEM VALUE VALUES (11, '2023-06-04', '2023-06-04', 14, 68);
 INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_id) OVERRIDING SYSTEM VALUE VALUES (12, '2023-06-04', '2023-06-04', 13, 18);
 INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_id) OVERRIDING SYSTEM VALUE VALUES (13, '2023-07-03', '2023-07-03', 15, 99);
+INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_id) OVERRIDING SYSTEM VALUE VALUES (14, '2023-07-03', '2023-07-03', 16, 138);
 
 --
 -- Data for Name: shape; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2909,7 +2933,7 @@ SELECT pg_catalog.setval('public."CoinEngraversIdSeq"', 58, true);
 -- Name: CoinsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."CoinsIdSeq"', 393, true);
+SELECT pg_catalog.setval('public."CoinsIdSeq"', 397, true);
 
 --
 -- Name: CoinsetsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -2933,7 +2957,7 @@ SELECT pg_catalog.setval('public."CountriesIdSeq"', 203, true);
 -- Name: CurrenciesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."CurrenciesIdSeq"', 40, true);
+SELECT pg_catalog.setval('public."CurrenciesIdSeq"', 42, true);
 
 --
 -- Name: EngraversIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -2951,13 +2975,13 @@ SELECT pg_catalog.setval('public."ImagesIdSeq"', 697, true);
 -- Name: MintsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."MintsIdSeq"', 37, true);
+SELECT pg_catalog.setval('public."MintsIdSeq"', 42, true);
 
 --
 -- Name: PeriodsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."PeriodsIdSeq"', 25, true);
+SELECT pg_catalog.setval('public."PeriodsIdSeq"', 26, true);
 
 --
 -- Name: RolesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -2969,13 +2993,13 @@ SELECT pg_catalog.setval('public."RolesIdSeq"', 1, false);
 -- Name: RulerCountry_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."RulerCountry_id_seq"', 13, true);
+SELECT pg_catalog.setval('public."RulerCountry_id_seq"', 14, true);
 
 --
 -- Name: RulersIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."RulersIdSeq"', 15, true);
+SELECT pg_catalog.setval('public."RulersIdSeq"', 16, true);
 
 --
 -- Name: ShapesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
