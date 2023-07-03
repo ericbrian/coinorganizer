@@ -89,8 +89,8 @@ model coin_engravers {
 }
 
 model coin_mint {
-  created_at DateTime @db.Timestamptz(6)
-  updated_at DateTime @db.Timestamptz(6)
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
   coin_id    Int
   mint_id    Int
   coin       coin     @relation(fields: [coin_id], references: [id], onDelete: Cascade, map: "CoinMint_coinId_fkey")
@@ -133,7 +133,6 @@ model collection {
   coin                       coin?                           @relation(fields: [coin_id], references: [id], map: "Collections_coinId_fkey")
   coinset                    coinset?                        @relation(fields: [coinset_id], references: [id], onDelete: Cascade, map: "Collections_coinsetId_fkey")
   mint                       mint?                           @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "Collections_mintId_fkey")
-  user                       user?                           @relation(fields: [owner_id], references: [id], map: "Collections_ownerId_fkey")
   currency                   currency?                       @relation(fields: [purchased_with_currency_id], references: [id], onDelete: Cascade, map: "Collections_purchasedWithCurrencyId_fkey")
 }
 
@@ -150,7 +149,7 @@ model country {
   country                 country?           @relation("countryTocountry", fields: [territory_of_country_id], references: [id], map: "Countries_territoryOfCountryId_fkey")
   other_country           country[]          @relation("countryTocountry")
   country_currency        country_currency[]
-  mint                    mint[]
+  country_mint            country_mint[]
   period                  period[]
   ruler_country           ruler_country[]
 }
@@ -164,6 +163,17 @@ model country_currency {
   currency    currency @relation(fields: [currency_id], references: [id], onDelete: Cascade, map: "CountryCurrency_currencyId_fkey")
 
   @@id([country_id, currency_id], map: "CountryCurrency_pkey")
+}
+
+model country_mint {
+  country_id Int
+  mint_id    Int
+  created_at DateTime @default(now()) @db.Date
+  udpated_at DateTime @default(now()) @db.Date
+  country    country  @relation(fields: [country_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_country_mint_country")
+  mint       mint     @relation(fields: [mint_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_country_mint_mint")
+
+  @@id([country_id, mint_id], map: "PK_country_mint")
 }
 
 model currency {
@@ -214,11 +224,10 @@ model mint {
   mark_description String?         @db.VarChar(255)
   created_at       DateTime        @default(now()) @db.Timestamptz(6)
   updated_at       DateTime        @default(now()) @db.Timestamptz(6)
-  country_id       Int?
   banknote_mint    banknote_mint[]
   coin_mint        coin_mint[]
   collection       collection[]
-  country          country?        @relation(fields: [country_id], references: [id], map: "Mints_countryId_fkey")
+  country_mint     country_mint[]
 }
 
 model period {
@@ -276,18 +285,17 @@ model shape {
 }
 
 model user {
-  id                      Int          @id(map: "Users_pkey") @default(autoincrement())
-  email                   String       @unique(map: "Users_email_key") @db.VarChar(100)
-  username                String?      @unique(map: "Users_username_key") @db.VarChar(50)
-  first_name              String?      @db.VarChar(50)
-  last_name               String?      @db.VarChar(50)
-  provider                String?      @db.VarChar(50)
-  audience                String?      @db.VarChar(50)
-  created_at              DateTime     @db.Timestamptz(6)
-  updated_at              DateTime     @db.Timestamptz(6)
-  collection              collection[]
-  role_role_role_idTouser role[]       @relation("role_role_idTouser")
-  role_role_user_idTouser role[]       @relation("role_user_idTouser")
+  id                      Int      @id(map: "Users_pkey") @default(autoincrement())
+  email                   String   @unique(map: "Users_email_key") @db.VarChar(100)
+  username                String?  @unique(map: "Users_username_key") @db.VarChar(50)
+  first_name              String?  @db.VarChar(50)
+  last_name               String?  @db.VarChar(50)
+  provider                String?  @db.VarChar(50)
+  audience                String?  @db.VarChar(50)
+  created_at              DateTime @db.Timestamptz(6)
+  updated_at              DateTime @db.Timestamptz(6)
+  role_role_role_idTouser role[]   @relation("role_role_idTouser")
+  role_role_user_idTouser role[]   @relation("role_user_idTouser")
 }
 
 enum enumCoinEngraversSide {

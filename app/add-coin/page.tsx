@@ -11,6 +11,7 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import Link from "next/link";
 
 import {
+  Prisma,
   country as countryDb,
   currency as currencyDb,
   engraver as engraverDb,
@@ -38,6 +39,7 @@ import {
 import { CoinInput } from "@/global";
 import { engraversSort } from "@/lib/utils";
 import { saveNewCoin } from "@/http/coin";
+import { Alert, Snackbar } from "@mui/material";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -45,6 +47,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 export default function AddCoin() {
   const [isCountryListLoading, setIsCountryListLoading] =
     useState<boolean>(true);
+  const [snackbarAlertOpen, setSnackbarAlertOpen] = useState(false);
 
   const [countryList, setCountryList] = useState<countryDb[] | null>([]);
   const [country, setCountry] = useState<countryDb | null>(null);
@@ -86,10 +89,10 @@ export default function AddCoin() {
   const [mints, setMints] = useState<mintDb[] | null>(null);
 
   const [engraversList, setEngraversList] = useState<engraverDb[]>([]);
-  const [obverseEngraver, setObverseEngraver] = useState<engraverDb | null>(
+  const [obverseEngravers, setObverseEngravers] = useState<engraverDb | null>(
     null
   );
-  const [reverseEngraver, setReverseEngraver] = useState<engraverDb | null>(
+  const [reverseEngravers, setReverseEngravers] = useState<engraverDb | null>(
     null
   );
 
@@ -120,15 +123,59 @@ export default function AddCoin() {
       shape,
       ruler,
       period,
-      obverseEngraver,
-      reverseEngraver,
+      obverseEngravers,
+      reverseEngravers,
       mints,
     };
   };
 
+  const clearFormForNewCoin = () => {
+    setCountry(null);
+    setCurrency(null);
+    setRuler(null);
+    setPeriod(null);
+    setFaceValue("");
+    setObverse("");
+    setReverse("");
+    setEdge("");
+    setEdgeInscription("");
+    setYearStart("");
+    setYearEnd("");
+    setPrettyFaceValue("");
+    setSeriesOrThemeName("");
+    setCommonName("");
+    setComposition("");
+    setWeightG("");
+    setDiameterMm("");
+    setIsNifc(false);
+    setIsBullion(false);
+    setNumistaNumber("");
+    setComments("");
+    setMints(null);
+    setObverseEngravers(null);
+    setReverseEngravers(null);
+    setShape(null);
+  };
+
   const saveForm = async () => {
     const payload = getFormValues();
-    await saveNewCoin(payload);
+    saveNewCoin(payload)
+      .then((res) => {
+        setSnackbarAlertOpen(true);
+        clearFormForNewCoin();
+      })
+      .catch((e) => {
+        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+          const target = e.meta?.target;
+          // The .code property can be accessed in a type-safe manner
+          if (e.code === "P2002") {
+            console.log(
+              `There is a unique constraint violation, a new coin cannot be created in field ${target}.`
+            );
+          }
+        }
+        throw e;
+      });
   };
 
   useEffect(() => {
@@ -224,6 +271,8 @@ export default function AddCoin() {
                         disablePortal
                         id="country-select"
                         options={countryList}
+                        value={country}
+                        defaultValue={country}
                         onChange={(_e, value) => {
                           if (value) {
                             setCountry(value);
@@ -540,7 +589,7 @@ export default function AddCoin() {
                               sx={{ width: 500 }}
                               onChange={(e) => setDiameterMm(e.target.value)}
                             />
-                            milimeters
+                            millimeter
                           </td>
                         </tr>
                         <tr>
@@ -561,21 +610,22 @@ export default function AddCoin() {
                             <td>
                               <Autocomplete
                                 multiple
+                                disableCloseOnSelect
                                 id="checkboxes-tags-demo"
                                 options={filteredMints}
-                                disableCloseOnSelect
                                 sx={{ width: 700 }}
-                                getOptionLabel={(option) => {
-                                  let markLetter = "";
-                                  if (option.mark) markLetter = option.mark;
-                                  return `${option.mint} ${markLetter}`;
-                                }}
                                 onChange={(e, values) => {
                                   if (values) {
                                     setMints(values);
                                   } else {
                                     setMints(null);
                                   }
+                                }}
+                                getOptionLabel={(option) => {
+                                  let markLetter = "";
+                                  if (option.mark)
+                                    markLetter = `(${option.mark})`;
+                                  return `${option.mint} ${markLetter}`;
                                 }}
                                 renderOption={(props, option, { selected }) => (
                                   <li {...props}>
@@ -586,11 +636,10 @@ export default function AddCoin() {
                                       checked={selected}
                                     />
                                     {option.mint}
-                                    {option.mark && (
-                                      <span className="ml-2">
-                                        ({option.mark})
-                                      </span>
-                                    )}
+                                    {option.mark_description && (
+                                      <>, {option.mark_description}</>
+                                    )}{" "}
+                                    {option.mark && <>({option.mark})</>}
                                   </li>
                                 )}
                                 renderInput={(params) => (
@@ -632,7 +681,7 @@ export default function AddCoin() {
                         </tr>
                         <tr>
                           <td className="pr-4 text-right">
-                            Obverse Engraver/Designer:
+                            Obverse Engravers/Designers:
                           </td>
                           <td>
                             <Autocomplete
@@ -642,9 +691,9 @@ export default function AddCoin() {
                               sx={{ width: 700 }}
                               onChange={(e, value) => {
                                 if (value) {
-                                  setObverseEngraver(value);
+                                  setObverseEngravers(value);
                                 } else {
-                                  setObverseEngraver(null);
+                                  setObverseEngravers(null);
                                 }
                               }}
                               renderOption={(
@@ -658,7 +707,7 @@ export default function AddCoin() {
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
-                                  label="Obverse Engraver/Designer"
+                                  label="Obverse Engravers/Designers"
                                 />
                               )}
                               getOptionLabel={(option) => `${option.name}`}
@@ -667,7 +716,7 @@ export default function AddCoin() {
                         </tr>
                         <tr>
                           <td className="pr-4 text-right">
-                            Reverse Engraver/Designer:
+                            Reverse Engravers/Designers:
                           </td>
                           <td>
                             <Autocomplete
@@ -677,9 +726,9 @@ export default function AddCoin() {
                               sx={{ width: 700 }}
                               onChange={(e, value) => {
                                 if (value) {
-                                  setReverseEngraver(value);
+                                  setReverseEngravers(value);
                                 } else {
-                                  setReverseEngraver(null);
+                                  setReverseEngravers(null);
                                 }
                               }}
                               renderOption={(
@@ -693,7 +742,7 @@ export default function AddCoin() {
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
-                                  label="Reverse Engraver/Designer"
+                                  label="Reverse Engravers/Designers"
                                 />
                               )}
                               getOptionLabel={(option) => `${option.name}`}
@@ -755,7 +804,8 @@ export default function AddCoin() {
                       composition === "" ||
                       diameterMm === "" ||
                       weightG === "" ||
-                      numistaNumber === ""
+                      numistaNumber === "" ||
+                      mints == null
                     }
                   >
                     <SaveIcon className="pr-2" />
@@ -766,6 +816,16 @@ export default function AddCoin() {
           </FormControl>
         )}
       </div>
+      <Snackbar
+        open={snackbarAlertOpen}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setSnackbarAlertOpen(false)}
+      >
+        <Alert severity="success" sx={{ width: "100%" }}>
+          Coin saved!
+        </Alert>
+      </Snackbar>
     </>
   );
 }

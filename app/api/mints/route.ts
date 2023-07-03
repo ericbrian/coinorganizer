@@ -5,7 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const mints: mintDb[] = await prisma.mint.findMany({
-      orderBy: { mint: "asc" }
+      orderBy: { mint: "asc" },
+      include: { country_mint: true }
     });
     return NextResponse.json(mints);
   } catch (error) {

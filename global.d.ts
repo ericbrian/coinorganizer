@@ -37,6 +37,6 @@ type CoinInput = {
   ruler: rulerDb;
   period: periodDb;
   mints: mintDb[];
-  engraverObverse: engraverDb;
-  engraverReverse: engraverDb;
+  obverseEngravers: engraverDb;
+  reverseEngravers: engraverDb;
 };

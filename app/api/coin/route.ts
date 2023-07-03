@@ -1,27 +1,21 @@
+import { convertToPrismaCoinCreateInput } from "@/lib/utils";
 import prisma from "@/prisma/client";
+import { Prisma } from "@prisma/client";
 
 export async function POST(req: Request) {
-    const data = await req.json();
-
-    const coin = await prisma.coin.create({
-        data: {
-            obverse: data.obverse,
-            reverse: data.reverse,
-            face_value: data.face_value,
-
+    const payload = await req.json();
+    try {
+        const data = convertToPrismaCoinCreateInput(payload);
+        return await prisma.coin.create({ data });
+    } catch (e) {
+        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            // The .code property can be accessed in a type-safe manner
+            if (e.code === 'P2002') {
+                console.log(
+                    'There is a unique constraint violation, a new user cannot be created with this email'
+                )
+            }
         }
-    });
-
-    return new Response("Hello, Next.js!");
+        throw e
+    }
 }
-
-// const userAndPosts = await prisma.user.create({
-//     data: {
-//       posts: {
-//         create: [
-//           { title: 'Prisma Day 2020' }, // Populates authorId with user's id
-//           { title: 'How to write a Prisma schema' }, // Populates authorId with user's id
-//         ],
-//       },
-//     },
-//   })

@@ -17,9 +17,20 @@ import { CoinInput } from "@/global";
 //   (await axios.get(`${httpConfig.baseUrl}/coinsWithoutImages`)).data.data;
 
 export const saveNewCoin = async (payload: CoinInput) => {
+
     const coin = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/coin`, {
         method: 'POST',
         body: JSON.stringify(payload),
     });
     return coin;
 };
+
+export const getCoinById = async (coinId: number) => {
+    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coin/${coinId}`;
+    const res = await fetch(endpoint);
+    console.log({ res })
+    if (!res.ok) {
+        console.log(res);
+    }
+    return res.json();
+}

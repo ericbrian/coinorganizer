@@ -1,31 +1,17 @@
 import type { Metadata } from "next";
-import { coin as dbCoin, image as dbImage } from "@prisma/client";
+import { coin as coinDb, image as imageDb } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
-import appconfig from "@/appconfig";
+import { getCoinById } from "@/http/coin";
 
 export const metadata: Metadata = {
   title: "Coin Details",
 };
 
-async function getCoinById(coinId: number) {
-  const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/${coinId}`;
-  const res = await fetch(endpoint);
-  if (!res.ok) {
-    console.log(res);
-  }
-  return res.json();
-}
-
-export default async function CoinDetails({
-  searchParams,
-}: {
-  searchParams: { id: number };
-}) {
-  const coinId = searchParams.id;
-  const coin: dbCoin = await getCoinById(+coinId);
-
+export default async function CoinDetails({ searchParams }: any) {
+  const coin: coinDb = await getCoinById(+searchParams.id);
+  console.log({ coin });
   return (
     <div className="mt-4 grid grid-cols-5 gap-6">
       <div>
@@ -111,7 +97,7 @@ export default async function CoinDetails({
       <div>
         {Array.isArray(coin.image) &&
           coin.image.length > 0 &&
-          coin.image.map((image: dbImage) => (
+          coin.image.map((image: imageDb) => (
             <Image
               className="mb-2 rounded-3xl"
               key={image.id}
@@ -121,7 +107,7 @@ export default async function CoinDetails({
               alt={`${coin.common_name} Image` ?? "Coin image"}
               title={`${coin.common_name} Image` ?? "Coin image"}
             />
-          ))}{" "}
+          ))}
       </div>
     </div>
   );
