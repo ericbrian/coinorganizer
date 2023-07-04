@@ -46,244 +46,9 @@ CREATE TYPE public."enumCollectionsCollectableType" AS ENUM (
 
 ALTER TYPE public."enumCollectionsCollectableType" OWNER TO postgres;
 
---
--- Name: CoinsIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public."CoinsIdSeq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-ALTER TABLE public."CoinsIdSeq" OWNER TO postgres;
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
-
---
--- Name: coin; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.coin (
-    id integer DEFAULT nextval('public."CoinsIdSeq"'::regclass) NOT NULL,
-    face_value numeric(8,3) NOT NULL,
-    pretty_face_value character varying(30),
-    series_or_theme_name character varying(200),
-    common_name character varying(200),
-    obverse text NOT NULL,
-    reverse text NOT NULL,
-    edge character varying(255) NOT NULL,
-    edge_inscription character varying(255),
-    year_start character varying(255),
-    year_end character varying(255),
-    composition character varying(255),
-    is_non_circulating boolean DEFAULT false,
-    weight_grams numeric(7,3),
-    diameter_milimeters numeric(7,3),
-    comments text,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone,
-    period_id integer,
-    ruler_id integer,
-    country_id integer,
-    currency_id integer,
-    shape_id integer,
-    numista_number character varying(8),
-    is_bullion boolean DEFAULT false
-);
-
-ALTER TABLE public.coin OWNER TO postgres;
-
---
--- Name: coin_engravers; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.coin_engravers (
-    id integer NOT NULL,
-    side public."enumCoinEngraversSide" DEFAULT 'obverse'::public."enumCoinEngraversSide",
-    coin_id integer,
-    engraver_id integer
-);
-
-ALTER TABLE public.coin_engravers OWNER TO postgres;
-
---
--- Name: coin_mint; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.coin_mint (
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    coin_id integer NOT NULL,
-    mint_id integer NOT NULL
-);
-
-ALTER TABLE public.coin_mint OWNER TO postgres;
-
---
--- Name: country; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.country (
-    id integer NOT NULL,
-    name character varying(60) NOT NULL,
-    short_name character varying(40) NOT NULL,
-    is_active boolean DEFAULT true NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    territory_of_country_id integer
-);
-
-ALTER TABLE public.country OWNER TO postgres;
-
---
--- Name: currency; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.currency (
-    id integer NOT NULL,
-    name character varying(30) NOT NULL,
-    short_name character varying(10) NOT NULL,
-    years character varying(100),
-    demonitized_date character varying(100),
-    comments text,
-    display_short_name_at_left boolean DEFAULT true NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL
-);
-
-ALTER TABLE public.currency OWNER TO postgres;
-
---
--- Name: engraver; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.engraver (
-    id integer NOT NULL,
-    name character varying(100) NOT NULL,
-    comments text,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL
-);
-
-ALTER TABLE public.engraver OWNER TO postgres;
-
---
--- Name: mint; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.mint (
-    id integer NOT NULL,
-    mint character varying(255) NOT NULL,
-    years character varying(255),
-    mark character varying(10),
-    mark_description character varying(255),
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL
-);
-
-ALTER TABLE public.mint OWNER TO postgres;
-
---
--- Name: period; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.period (
-    id integer NOT NULL,
-    name character varying(60) NOT NULL,
-    years character varying(60) NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    country_id integer
-);
-
-ALTER TABLE public.period OWNER TO postgres;
-
---
--- Name: ruler; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.ruler (
-    id integer NOT NULL,
-    name character varying(60) NOT NULL,
-    house text,
-    years character varying(60) NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL
-);
-
-ALTER TABLE public.ruler OWNER TO postgres;
-
---
--- Name: shape; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.shape (
-    id integer NOT NULL,
-    name character varying(20),
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL
-);
-
-ALTER TABLE public.shape OWNER TO postgres;
-
---
--- Name: AllCoinInfo; Type: VIEW; Schema: public; Owner: postgres
---
-
-CREATE VIEW public."AllCoinInfo" AS
- SELECT c.id,
-    c.pretty_face_value AS "prettyFaceValue",
-    c.face_value AS "faceValue",
-    crncy.short_name AS shortcurrencyname,
-    crncy.name AS currency,
-    c.common_name AS "commonName",
-    c.obverse,
-    c.reverse,
-    c.edge,
-    c.edge_inscription AS "edgeInscription",
-    s.name AS shape,
-    c.year_start AS "yearStart",
-    c.year_end AS "yearEnd",
-        CASE
-            WHEN (p.name IS NOT NULL) THEN concat(p.name, ' (', p.years, ')')
-            ELSE NULL::text
-        END AS period,
-    cntry.short_name AS country,
-        CASE
-            WHEN (r.name IS NOT NULL) THEN concat(r.name, ' (', r.years, ', House of ', r.house, ')')
-            ELSE NULL::text
-        END AS ruler,
-    ( SELECT string_agg((e.name)::text, ', '::text) AS string_agg
-           FROM (public.coin_engravers ceo
-             LEFT JOIN public.engraver e ON ((e.id = ceo.engraver_id)))
-          WHERE ((ceo.coin_id = c.id) AND (ceo.side = 'obverse'::public."enumCoinEngraversSide"))) AS obverseengravers,
-    ( SELECT string_agg((e.name)::text, ', '::text) AS string_agg
-           FROM (public.coin_engravers ceo
-             LEFT JOIN public.engraver e ON ((e.id = ceo.engraver_id)))
-          WHERE ((ceo.coin_id = c.id) AND (ceo.side = 'reverse'::public."enumCoinEngraversSide"))) AS reverseengravers,
-    ( SELECT string_agg((e.mint)::text, ', '::text) AS string_agg
-           FROM (public.coin_mint ceo1
-             LEFT JOIN public.mint e ON ((e.id = ceo1.mint_id)))
-          WHERE (ceo1.coin_id = c.id)) AS mints,
-    ( SELECT string_agg((e.mark)::text, ', '::text) AS string_agg
-           FROM (public.coin_mint ceo2
-             LEFT JOIN public.mint e ON (((e.id = ceo2.mint_id) AND (e.mark IS NOT NULL))))
-          WHERE (ceo2.coin_id = c.id)) AS mintmarks
-   FROM (((((public.coin c
-     LEFT JOIN public.period p ON ((p.id = c.period_id)))
-     LEFT JOIN public.ruler r ON ((r.id = c.ruler_id)))
-     LEFT JOIN public.country cntry ON ((cntry.id = c.country_id)))
-     LEFT JOIN public.currency crncy ON ((crncy.id = c.currency_id)))
-     LEFT JOIN public.shape s ON ((s.id = c.shape_id)))
-  ORDER BY cntry.short_name, crncy.name, c.pretty_face_value, c.series_or_theme_name, c.year_start;
-
-ALTER TABLE public."AllCoinInfo" OWNER TO postgres;
 
 --
 -- Name: banknote; Type: TABLE; Schema: public; Owner: postgres
@@ -332,6 +97,19 @@ ALTER TABLE public."BanknotesIdSeq" OWNER TO postgres;
 ALTER SEQUENCE public."BanknotesIdSeq" OWNED BY public.banknote.id;
 
 --
+-- Name: coin_engravers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.coin_engravers (
+    id integer NOT NULL,
+    side public."enumCoinEngraversSide" DEFAULT 'obverse'::public."enumCoinEngraversSide",
+    coin_id integer,
+    engraver_id integer
+);
+
+ALTER TABLE public.coin_engravers OWNER TO postgres;
+
+--
 -- Name: CoinEngraversIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -350,6 +128,20 @@ ALTER TABLE public."CoinEngraversIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."CoinEngraversIdSeq" OWNED BY public.coin_engravers.id;
+
+--
+-- Name: CoinsIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."CoinsIdSeq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE public."CoinsIdSeq" OWNER TO postgres;
 
 --
 -- Name: coinset; Type: TABLE; Schema: public; Owner: postgres
@@ -435,6 +227,22 @@ ALTER TABLE public."CollectionsIdSeq" OWNER TO postgres;
 ALTER SEQUENCE public."CollectionsIdSeq" OWNED BY public.collection.id;
 
 --
+-- Name: country; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.country (
+    id integer NOT NULL,
+    name character varying(60) NOT NULL,
+    short_name character varying(40) NOT NULL,
+    is_active boolean DEFAULT true NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    territory_of_country_id integer
+);
+
+ALTER TABLE public.country OWNER TO postgres;
+
+--
 -- Name: CountriesIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -455,6 +263,24 @@ ALTER TABLE public."CountriesIdSeq" OWNER TO postgres;
 ALTER SEQUENCE public."CountriesIdSeq" OWNED BY public.country.id;
 
 --
+-- Name: currency; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.currency (
+    id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    short_name character varying(10) NOT NULL,
+    years character varying(100),
+    demonitized_date character varying(100),
+    comments text,
+    display_short_name_at_left boolean DEFAULT true NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+ALTER TABLE public.currency OWNER TO postgres;
+
+--
 -- Name: CurrenciesIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -473,6 +299,20 @@ ALTER TABLE public."CurrenciesIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."CurrenciesIdSeq" OWNED BY public.currency.id;
+
+--
+-- Name: engraver; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.engraver (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    comments text,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+ALTER TABLE public.engraver OWNER TO postgres;
 
 --
 -- Name: EngraversIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -535,6 +375,22 @@ ALTER TABLE public."ImagesIdSeq" OWNER TO postgres;
 ALTER SEQUENCE public."ImagesIdSeq" OWNED BY public.image.id;
 
 --
+-- Name: mint; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.mint (
+    id integer NOT NULL,
+    mint character varying(255) NOT NULL,
+    years character varying(255),
+    mark character varying(10),
+    mark_description character varying(255),
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+ALTER TABLE public.mint OWNER TO postgres;
+
+--
 -- Name: MintsIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -553,6 +409,21 @@ ALTER TABLE public."MintsIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."MintsIdSeq" OWNED BY public.mint.id;
+
+--
+-- Name: period; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.period (
+    id integer NOT NULL,
+    name character varying(60) NOT NULL,
+    years character varying(60) NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    country_id integer
+);
+
+ALTER TABLE public.period OWNER TO postgres;
 
 --
 -- Name: PeriodsIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -637,6 +508,21 @@ ALTER TABLE public.ruler_country ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTIT
 );
 
 --
+-- Name: ruler; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ruler (
+    id integer NOT NULL,
+    name character varying(60) NOT NULL,
+    house text,
+    years character varying(60) NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+ALTER TABLE public.ruler OWNER TO postgres;
+
+--
 -- Name: RulersIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -655,6 +541,19 @@ ALTER TABLE public."RulersIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."RulersIdSeq" OWNED BY public.ruler.id;
+
+--
+-- Name: shape; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.shape (
+    id integer NOT NULL,
+    name character varying(20),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+ALTER TABLE public.shape OWNER TO postgres;
 
 --
 -- Name: ShapesIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -728,6 +627,54 @@ CREATE TABLE public.banknote_mint (
 ALTER TABLE public.banknote_mint OWNER TO postgres;
 
 --
+-- Name: coin; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.coin (
+    id integer DEFAULT nextval('public."CoinsIdSeq"'::regclass) NOT NULL,
+    face_value numeric(8,3) NOT NULL,
+    pretty_face_value character varying(30),
+    series_or_theme_name character varying(200),
+    common_name character varying(200),
+    obverse text NOT NULL,
+    reverse text NOT NULL,
+    edge character varying(255) NOT NULL,
+    edge_inscription character varying(255),
+    year_start character varying(255),
+    year_end character varying(255),
+    composition character varying(255),
+    is_non_circulating boolean DEFAULT false,
+    weight_grams numeric(7,3),
+    diameter_milimeters numeric(7,3),
+    comments text,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted_at timestamp with time zone,
+    period_id integer,
+    ruler_id integer,
+    country_id integer,
+    currency_id integer,
+    shape_id integer,
+    numista_number character varying(8),
+    is_bullion boolean DEFAULT false
+);
+
+ALTER TABLE public.coin OWNER TO postgres;
+
+--
+-- Name: coin_mint; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.coin_mint (
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    coin_id integer NOT NULL,
+    mint_id integer NOT NULL
+);
+
+ALTER TABLE public.coin_mint OWNER TO postgres;
+
+--
 -- Name: country_currency; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -752,6 +699,72 @@ CREATE TABLE public.country_mint (
 );
 
 ALTER TABLE public.country_mint OWNER TO postgres;
+
+--
+-- Name: v_all_coin_info; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.v_all_coin_info AS
+ SELECT c.id,
+    c.pretty_face_value AS "prettyFaceValue",
+    c.face_value AS "faceValue",
+    crncy.short_name AS shortcurrencyname,
+    crncy.name AS currency,
+    c.common_name AS "commonName",
+    c.obverse,
+    c.reverse,
+    c.edge,
+    c.edge_inscription AS "edgeInscription",
+    s.name AS shape,
+    c.year_start AS "yearStart",
+    c.year_end AS "yearEnd",
+        CASE
+            WHEN (p.name IS NOT NULL) THEN concat(p.name, ' (', p.years, ')')
+            ELSE NULL::text
+        END AS period,
+    cntry.short_name AS country,
+        CASE
+            WHEN (r.name IS NOT NULL) THEN concat(r.name, ' (', r.years, ', House of ', r.house, ')')
+            ELSE NULL::text
+        END AS ruler,
+    ( SELECT string_agg((e.name)::text, ', '::text) AS string_agg
+           FROM (public.coin_engravers ceo
+             LEFT JOIN public.engraver e ON ((e.id = ceo.engraver_id)))
+          WHERE ((ceo.coin_id = c.id) AND (ceo.side = 'obverse'::public."enumCoinEngraversSide"))) AS obverseengravers,
+    ( SELECT string_agg((e.name)::text, ', '::text) AS string_agg
+           FROM (public.coin_engravers ceo
+             LEFT JOIN public.engraver e ON ((e.id = ceo.engraver_id)))
+          WHERE ((ceo.coin_id = c.id) AND (ceo.side = 'reverse'::public."enumCoinEngraversSide"))) AS reverseengravers,
+    ( SELECT string_agg((e.mint)::text, ', '::text) AS string_agg
+           FROM (public.coin_mint ceo1
+             LEFT JOIN public.mint e ON ((e.id = ceo1.mint_id)))
+          WHERE (ceo1.coin_id = c.id)) AS mints,
+    ( SELECT string_agg((e.mark)::text, ', '::text) AS string_agg
+           FROM (public.coin_mint ceo2
+             LEFT JOIN public.mint e ON (((e.id = ceo2.mint_id) AND (e.mark IS NOT NULL))))
+          WHERE (ceo2.coin_id = c.id)) AS mintmarks
+   FROM (((((public.coin c
+     LEFT JOIN public.period p ON ((p.id = c.period_id)))
+     LEFT JOIN public.ruler r ON ((r.id = c.ruler_id)))
+     LEFT JOIN public.country cntry ON ((cntry.id = c.country_id)))
+     LEFT JOIN public.currency crncy ON ((crncy.id = c.currency_id)))
+     LEFT JOIN public.shape s ON ((s.id = c.shape_id)))
+  ORDER BY cntry.short_name, crncy.name, c.pretty_face_value, c.series_or_theme_name, c.year_start;
+
+ALTER TABLE public.v_all_coin_info OWNER TO postgres;
+
+--
+-- Name: v_countries_with_coins; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.v_countries_with_coins AS
+ SELECT DISTINCT ct.id,
+    ct.short_name
+   FROM (public.country ct
+     LEFT JOIN public.coin c ON ((c.country_id = ct.id)))
+  WHERE (c.id IS NOT NULL);
+
+ALTER TABLE public.v_countries_with_coins OWNER TO postgres;
 
 --
 -- Name: banknote id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -2779,6 +2792,8 @@ INSERT INTO public.image (id, url, copyright, description, created_at, updated_a
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (695, '2023_0526_110917_060.JPG', NULL, NULL, '2023-05-28 18:36:43.845+00', '2023-05-28 18:36:43.845+00', NULL, 213, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (696, '2023_0530_151449_001.JPG', NULL, NULL, '2023-05-30 19:19:56.491+00', '2023-05-30 19:19:56.491+00', NULL, 374, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (697, '2023_0530_151458_002.JPG', NULL, NULL, '2023-05-30 19:20:02.971+00', '2023-05-30 19:20:02.971+00', NULL, 374, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (698, '2023_0618_102846_011.JPG', NULL, NULL, '2023-07-04 00:04:55.414+00', '2023-07-04 00:04:55.414+00', NULL, 393, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (699, '2023_0408_144955_104.JPG', NULL, NULL, '2023-07-04 00:07:17.581+00', '2023-07-04 00:07:17.581+00', NULL, 391, false, NULL, NULL);
 
 --
 -- Data for Name: mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2969,7 +2984,7 @@ SELECT pg_catalog.setval('public."EngraversIdSeq"', 33, true);
 -- Name: ImagesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."ImagesIdSeq"', 697, true);
+SELECT pg_catalog.setval('public."ImagesIdSeq"', 699, true);
 
 --
 -- Name: MintsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
