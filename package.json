@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "./node_modules/.bin/prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create-image-list": "ls | jq -R -s -c 'split(\"\n\")[:-1]'>../../app/add-images/images.json",
+    "backup-database": "pg_dump \"${POSTGRES_LOCAL_COINDB}\" --column-inserts > db/numisdb_backup.sql"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
