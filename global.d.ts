@@ -13,6 +13,12 @@ interface EventTarget {
   value: any;
 }
 
+type ImageInput = {
+  url: string;
+  is_preferred: boolean;
+  coin_id: number;
+}
+
 type CoinInput = {
   faceValue: number;
   obverse: string;
@@ -39,4 +45,9 @@ type CoinInput = {
   mints: mintDb[];
   obverseEngravers: engraverDb;
   reverseEngravers: engraverDb;
+};
+
+type SparseCountryListType = {
+  id: number;
+  short_name: string;
 };

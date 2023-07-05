@@ -1,7 +1,8 @@
 //* Coin
 
 import appconfig from "@/appconfig";
-import { CoinInput } from "@/global";
+import { CoinInput, ImageInput } from "@/global";
+import { coin as coinDb } from "@prisma/client";
 
 // export const getAllCoins = async () =>
 //   (await axios.get(`${httpConfig.baseUrl}/coins`)).data.data;
@@ -17,7 +18,6 @@ import { CoinInput } from "@/global";
 //   (await axios.get(`${httpConfig.baseUrl}/coinsWithoutImages`)).data.data;
 
 export const saveNewCoin = async (payload: CoinInput) => {
-
     const coin = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/coin`, {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -25,8 +25,25 @@ export const saveNewCoin = async (payload: CoinInput) => {
     return coin;
 };
 
+export const addImageToCoin = async (payload: ImageInput) => {
+    const image = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/coin/add-image`, {
+        method: 'PATCH',
+        body: JSON.stringify(payload),
+    });
+    return image;
+};
+
 export const getCoinById = async (coinId: number) => {
     const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coin/${coinId}`;
+    const res = await fetch(endpoint);
+    if (!res.ok) {
+        console.log(res);
+    }
+    return res.json();
+}
+
+export const getCoinsForCountry = async (countryId: number): coinDb[] => {
+    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/country/${countryId}`;
     const res = await fetch(endpoint);
     if (!res.ok) {
         console.log(res);

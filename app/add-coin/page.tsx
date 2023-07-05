@@ -338,7 +338,9 @@ export default function AddCoin() {
                               renderInput={(params) => (
                                 <TextField {...params} label="Currency" />
                               )}
-                              getOptionLabel={(option) => option.short_name}
+                              getOptionLabel={(option) =>
+                                `${option.name} (${option.short_name})`
+                              }
                               renderOption={(
                                 props: object,
                                 option: currencyDb

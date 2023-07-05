@@ -20,6 +20,16 @@ export const getCountryList = async () => {
   }
   return [];
 };
+export const getCountriesWithCoinsList = async () => {
+  const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/countries/with-coins`;
+  try {
+    const res = await fetch(endpoint);
+    return res.json();
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+};
 
 // export const getCountryListFromAddedCoins = async () =>
 //   (await axios.get(`${httpConfig.baseUrl}/countriesFromAddedCoins`)).data.data;

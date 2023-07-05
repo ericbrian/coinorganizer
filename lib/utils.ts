@@ -34,7 +34,7 @@ export const convertToPrismaCoinCreateInput = (payload: CoinInput) => {
   return {
     face_value: +payload.faceValue,
     pretty_face_value: payload.prettyFaceValue.trim(),
-    series_or_theme_name: payload.seriesOrThemeName.trim(),
+    series_or_theme_name: payload.seriesOrThemeName?.trim() ? payload.seriesOrThemeName?.trim() : null,
     common_name: payload.commonName.trim(),
     obverse: payload.obverse.trim(),
     reverse: payload.reverse.trim(),

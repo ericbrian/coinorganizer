@@ -4,6 +4,8 @@ import appconfig from "@/appconfig";
 import Image from "next/image";
 import React from "react";
 import allImages from "./images.json";
+import { addImageToCoin } from "@/http/coin";
+import { Prisma } from "@prisma/client";
 
 type AddImageCoins = {
   common_name: string;
@@ -14,52 +16,32 @@ type AddImageCoins = {
   country_name: string;
 };
 
-const filterImages = (
-  imagesAlreadyUsed: { url: string }[],
-  imagePool: string[]
-) => {
-  let hold = imagePool.filter((r) => !r.endsWith(".mov"));
-  const imagesNamesAlreadyUsed = imagesAlreadyUsed.map((r) => r.url);
-  imagesNamesAlreadyUsed.forEach((image) => {
-    const locatedAt = hold.indexOf(image);
-    if (locatedAt > -1) {
-      hold.splice(locatedAt, 1);
-    }
-  });
-  return hold;
-};
-
-async function getCoinsWithoutImages() {
-  const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/withoutimages`;
-  try {
-    const res = await fetch(endpoint);
-    return res.json();
-  } catch (error) {
-    return [];
-  }
-}
-
-async function getImagesNames() {
-  const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/images/namesonly`;
-  try {
-    const res = await fetch(endpoint);
-    return res.json();
-  } catch (error) {
-    return [];
-  }
-}
-
-const saveImageToCoinRecord = (payload: any) => {};
-
 export default async function AddImagesToCoins() {
   const coins: AddImageCoins[] = await getCoinsWithoutImages();
   const images: { url: string }[] = await getImagesNames();
-
   images.sort((a, b) => (a < b ? 0 : 1));
+
+  const filterImages = (
+    imagesAlreadyUsed: { url: string }[],
+    imagePool: string[]
+  ) => {
+    let hold = imagePool.filter((r) => !r.endsWith(".mov"));
+    const imagesNamesAlreadyUsed = imagesAlreadyUsed.map((r) => r.url);
+    imagesNamesAlreadyUsed.forEach((image) => {
+      const locatedAt = hold.indexOf(image);
+      if (locatedAt > -1) {
+        hold.splice(locatedAt, 1);
+      }
+    });
+    return hold;
+  };
+
   const filteredImages = filterImages(images, allImages);
 
   const allowDrop = (e: any) => e.preventDefault();
+
   const drag = (e: any) => e.dataTransfer.setData("text", e.target.id);
+
   const drop = (e: any) => {
     e.preventDefault();
     const coinId = e.target.id.split("-")[1];
@@ -69,9 +51,48 @@ export default async function AddImagesToCoins() {
       e.target.appendChild(document.getElementById(data));
       saveImageToCoinRecord(payload);
     } else {
-      console.error(JSON.stringify(payload));
+      saveImageToCoinRecord(JSON.stringify(payload));
     }
   };
+
+  const saveImageToCoinRecord = (payload: any) => {
+    addImageToCoin(payload)
+      .then((res) => {
+        // Pass, nothing to do
+      })
+      .catch((e) => {
+        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+          const target = e.meta?.target;
+          // The .code property can be accessed in a type-safe manner
+          if (e.code === "P2002") {
+            console.log(
+              `There is a unique constraint violation, a new coin cannot be created in field ${target}.`
+            );
+          }
+        }
+        throw e;
+      });
+  };
+
+  async function getCoinsWithoutImages() {
+    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/withoutimages`;
+    try {
+      const res = await fetch(endpoint);
+      return res.json();
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async function getImagesNames() {
+    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/images/namesonly`;
+    try {
+      const res = await fetch(endpoint);
+      return res.json();
+    } catch (error) {
+      return [];
+    }
+  }
 
   return (
     <div className="mt-4 grid grid-cols-2 gap-6">

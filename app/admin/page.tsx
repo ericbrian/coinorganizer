@@ -17,6 +17,11 @@ export default async function CoinDetails() {
             <Link href="/add-coin">Add a Coin</Link>
           </li>
           <li>
+            <Link href="/add-coin-to-collection">
+              Add a Coin to my Collection
+            </Link>
+          </li>
+          <li>
             <Link href="/add-images">Add Images to Coins</Link>
           </li>
         </ol>

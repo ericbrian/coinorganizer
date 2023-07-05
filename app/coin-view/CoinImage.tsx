@@ -12,7 +12,7 @@ export default function CoinImage(props: { images: dbImage[] }) {
     preferredImage = images[0];
   }
 
-  return (
+  let imageToUse = (
     <Image
       width={120}
       height={0}
@@ -20,4 +20,16 @@ export default function CoinImage(props: { images: dbImage[] }) {
       alt="coin image"
     />
   );
+
+  if (!preferredImage.url) {
+    imageToUse = (
+      <Image
+        width={120}
+        height={0}
+        src={`/images/No-Image-Placeholder.svg.png`}
+        alt="coin image placeholder"
+      />
+    );
+  }
+  return imageToUse;
 }
