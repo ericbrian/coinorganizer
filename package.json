@@ -7,7 +7,7 @@
     "build": "./node_modules/.bin/prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "create-image-list": "ls | jq -R -s -c 'split(\"\n\")[:-1]'>../../app/add-images/images.json",
+    "create-image-list": "ls public/images | jq -R -s -c 'split(\"\n\")[:-1]'>app/add-images/images.json",
     "backup-database": "pg_dump \"${POSTGRES_LOCAL_COINDB}\" --column-inserts > db/numisdb_backup.sql"
   },
   "dependencies": {
