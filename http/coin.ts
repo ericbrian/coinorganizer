@@ -42,8 +42,9 @@ export const getCoinById = async (coinId: number) => {
     return res.json();
 }
 
-export const getCoinsForCountry = async (countryId: number): coinDb[] => {
+export const getCoinsForCountry = async (countryId: number): Promise<coinDb[]> => {
     const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/country/${countryId}`;
+    console.log(endpoint)
     const res = await fetch(endpoint);
     if (!res.ok) {
         console.log(res);

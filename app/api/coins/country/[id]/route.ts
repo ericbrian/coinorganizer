@@ -2,17 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import prisma from "@/prisma/client";
 
-export async function GET(req: Request, { params }: any) {
-  const country_id = params.country_id;
+export async function GET(req: Request, { params }: { params: { id: number } }) {
+  const country_id = params.id;
+
   try {
     const data = await prisma.coin.findMany({
       where: {
         country: {
-          id: country_id
+          id: Number(country_id)
         }
       },
       include: {
+        country: true,
         image: true,
+        currency: true,
         ruler: true,
         period: true,
         coin_mint: {

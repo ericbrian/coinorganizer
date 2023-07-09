@@ -1,3 +1,12 @@
 //* Collection
 
-// export const createCollection = async (collection: CreateCollectionType) => (await axios.post(`${httpConfig.baseUrl}/collection`, collection)).data.data;
+import appconfig from "@/appconfig";
+import { CollectionInput } from "@/global";
+
+export const saveCoinInCollection = async (payload: CollectionInput) => {
+    const coin = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/collection`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+    });
+    return coin;
+};

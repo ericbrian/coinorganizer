@@ -1,4 +1,5 @@
 import {
+  coin as coinDb,
   country as countryDb,
   country_currency as countryCurrencyDb,
   currency as currencyDb,
@@ -7,7 +8,9 @@ import {
   period as periodDb,
   ruler as rulerDb,
   shape as shapeDb,
+  enumCollectionsCollectableType
 } from "@prisma/client";
+import { type } from "os";
 
 interface EventTarget {
   value: any;
@@ -45,6 +48,21 @@ type CoinInput = {
   mints: mintDb[];
   obverseEngravers: engraverDb;
   reverseEngravers: engraverDb;
+};
+
+type CollectionInput = {
+  coin: coinDb;
+  collectableType: enumCollectionsCollectableType;
+  year: string;
+  mint: mintDb;
+  paidCurrency: currencyDb
+  paidAmount: number;
+  sourcedFrom: string;
+  sourcedWhen: string;
+  condition: string;
+  storage: string;
+  isCleaned: boolean;
+  isProof: boolean;
 };
 
 type SparseCountryListType = {

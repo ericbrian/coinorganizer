@@ -2,9 +2,20 @@ import { ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 import {
+  Prisma,
+  coin as coinDb,
+  country as countryDb,
+  currency as currencyDb,
   engraver as engraverDb,
+  mint as mintDb,
+  period as periodDb,
+  ruler as rulerDb,
+  shape as shapeDb,
+  coin_mint as coinMintDb,
+  enumCollectionsCollectableType,
 } from "@prisma/client";
-import { CoinInput } from "@/global";
+
+import { CoinInput, CollectionInput } from "@/global";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -19,7 +30,6 @@ export function engraversSort(a: engraverDb, b: engraverDb) {
 }
 
 export const convertToPrismaCoinCreateInput = (payload: CoinInput) => {
-
   let allMints = null;
   if (payload.mints?.length > 0) {
     allMints = {
@@ -57,3 +67,26 @@ export const convertToPrismaCoinCreateInput = (payload: CoinInput) => {
     coin_mint: allMints
   }
 }
+
+export const convertToPrismaCollectionCreateInput = (payload: CollectionInput) => ({
+  year: payload.year.toString(),
+  condition: payload.condition,
+  storage: payload.storage,
+  collectable_type: enumCollectionsCollectableType.coin,
+  paid_amount: +payload.paidAmount,
+  sourced_from: payload.sourcedFrom?.trim() ? payload.sourcedFrom.trim() : null,
+  sourced_when: payload.sourcedWhen?.trim() ? payload.sourcedWhen.trim() : null,
+  is_cleaned: payload.isCleaned,
+  is_proof: payload.isProof,
+  coin_id: payload.coin.id,
+  mint_id: payload.mint?.id,
+  purchased_with_currency_id: payload.paidCurrency?.id,
+  owner_id: 1,
+});
+
+export function range(start: number, end: number): number[] {
+  if (start === end) return [start];
+  return [start, ...range(start + 1, end)];
+}
+
+export const getPossibleMints = (coin: coinDb): mintDb[] => coin.coin_mint?.map((coinMint: coinMintDb) => coinMint.mint) ?? [];
