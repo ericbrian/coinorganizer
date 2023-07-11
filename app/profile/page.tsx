@@ -111,8 +111,8 @@ export default function Profile() {
                 </div>
                 <div className="mt-2">
                   <span className="font-bold">Mint</span>:{" "}
-                  {item.mint && item.mint.mint},{" "}
-                  {item.mint && item.mint.mark_description}
+                  {item.mint && item.mint.mint}
+                  {item.mint && ", " + item.mint.mark_description}
                   {item.mint && item.mint.mark && (
                     <span> ({item.mint.mark})</span>
                   )}

@@ -54,13 +54,18 @@ export async function GET() {
                     }
                 },
                 {
+                    coin: {
+                        face_value: 'asc'
+                    }
+                },
+                {
                     year: 'asc'
                 },
                 {
                     coin: {
-                        face_value: 'asc'
+                        common_name: 'asc'
                     }
-                }
+                },
             ]
         });
         if (coins.length === 0) {
