@@ -3,7 +3,7 @@ import SignInButton from "../context-component/SignInButton";
 
 const Header = () => {
   return (
-    <header className="flex h-16 max-h-16 flex-col justify-center bg-stone-100">
+    <header className="noprint flex h-16 max-h-16 flex-col justify-center bg-stone-100">
       <nav className="container">
         <ul className="flex items-center justify-between gap-8 font-medium tracking-wider text-stone-500">
           <li className="text-sm">

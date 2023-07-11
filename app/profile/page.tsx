@@ -26,18 +26,41 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 export default function Profile() {
   const [collection, setCollection] = useState<collectionDb[]>([]);
+  const [collectionTotals, setCollectionTotals] = useState<string>("");
 
   useEffect(() => {
     getUserCollectionItems()
       .then((res) => {
         setCollection(res);
+        calculateTotals(res);
       })
       .catch(console.log);
   }, []);
 
+  function calculateTotals(collection: collectionDb[]) {
+    const totals: any = {};
+    collection.forEach((item) => {
+      const currencyKey = `${item.currency.name} (${item.currency.short_name})`;
+      if (currencyKey in totals) {
+        totals[currencyKey] += +item.paid_amount;
+      } else {
+        totals[currencyKey] = +item.paid_amount;
+      }
+    });
+
+    let totalString = "";
+    Object.keys(totals).forEach((key) => {
+      totalString += `${key} ${totals[key].toFixed(2)}, `;
+    });
+    setCollectionTotals(totalString.trim().slice(0, -1));
+  }
+
   return (
     <>
-      <h1 className="text-2xl">Profile</h1>
+      {/* {<div>{JSON.stringify(collectionTotals)}</div>} */}
+      <h1 className="mb-2 text-3xl font-bold">Profile</h1>
+
+      {collectionTotals && <p>Amount paid: {collectionTotals}</p>}
       <div>
         {collection &&
           Array.isArray(collection) &&
@@ -52,25 +75,50 @@ export default function Profile() {
 
                 <div className="text-lg">Features</div>
                 <div className="text-sm">
-                  <div>Country: {item.coin.country.name}</div>
+                  <div>
+                    <span className="font-bold">Country</span>:{" "}
+                    {item.coin.country.name}
+                  </div>
                   {item.coin.period && (
                     <div>
-                      Period: {item.coin.period.name} ({item.coin.period.years})
+                      <span className="font-bold">Period</span>:{" "}
+                      {item.coin.period.name} ({item.coin.period.years})
                     </div>
                   )}
                   <div>
-                    Years: {item.coin.year_start}
+                    <span className="font-bold">Years</span>:{" "}
+                    {item.coin.year_start}
                     {item.coin.year_end && ` - ${item.coin.year_end}`}
                   </div>
                   {item.coin.currency && (
-                    <div>Currency: {item.coin.currency.name}</div>
+                    <div>
+                      <span className="font-bold">Currency</span>:{" "}
+                      {item.coin.currency.name}
+                    </div>
                   )}
-                  <div>Composition: {item.coin.composition}</div>
-                  <div>Weight: {item.coin.weight_grams}</div>
-                  <div>Diameter: {item.coin.diameter_milimeters}</div>
-                  {item.coin.shape && <div>Shape: {item.coin.shape.name}</div>}
+                  <div>
+                    <span className="font-bold">Composition</span>:{" "}
+                    {item.coin.composition}
+                  </div>
+                  <div>
+                    <span className="font-bold">Weight</span>:{" "}
+                    {item.coin.weight_grams} g
+                  </div>
+                  <div>
+                    <span className="font-bold">Diameter</span>:{" "}
+                    {item.coin.diameter_milimeters} mm
+                  </div>
+                  {item.coin.shape && (
+                    <div>
+                      <span className="font-bold">Shape</span>:{" "}
+                      {item.coin.shape.name}
+                    </div>
+                  )}
                   {item.coin.numista_number && (
-                    <div>Numista Number: {item.coin.numista_number}</div>
+                    <div>
+                      <span className="font-bold">Numista Number</span>:{" "}
+                      {item.coin.numista_number}
+                    </div>
                   )}
                   {item.coin.currency?.demonitized_date && (
                     <div className="mt-2 font-bold">Demonitized</div>
@@ -124,13 +172,16 @@ export default function Profile() {
                   {item.sourced_when &&
                     new Date(item.sourced_when).toLocaleDateString()}
                 </div>
+                <div className="mt-2 text-xs">
+                  Ref#: {item.id}/Coin Ref#: {item.coin_id}
+                </div>
               </div>
               <div className="basis-1/5">
                 {item.coin.image[0]?.url && (
                   <Image
                     src={"/images/" + item.coin.image[0]?.url}
                     alt={item.coin.common_name}
-                    className="w-60 rounded-full"
+                    className="noprint w-60 rounded-full"
                     style={{ height: "auto" }}
                     width={120}
                     height={0}
