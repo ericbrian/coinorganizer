@@ -1,7 +1,7 @@
 "use client";
 
 import { getUserCollectionItems } from "@/http/collection";
-import { IconButton } from "@mui/material";
+import { IconButton, Link } from "@mui/material";
 import { collection as collectionDb } from "@prisma/client";
 import { useEffect, useState } from "react";
 import * as React from "react";
@@ -117,7 +117,13 @@ export default function Profile() {
                   {item.coin.numista_number && (
                     <div>
                       <span className="font-bold">Numista Number</span>:{" "}
-                      {item.coin.numista_number}
+                      <Link
+                        className="font-bold text-blue-500 underline"
+                        href={`https://en.numista.com/catalogue/pieces${item.coin.numista_number}.html`}
+                        target="numista"
+                      >
+                        {item.coin.numista_number}
+                      </Link>
                     </div>
                   )}
                   {item.coin.currency?.demonitized_date && (
@@ -171,6 +177,7 @@ export default function Profile() {
                   {item.paid_amount}, {item.sourced_from} on{" "}
                   {item.sourced_when &&
                     new Date(item.sourced_when).toLocaleDateString()}
+                  {item.storage && <span>. Storage: {item.storage}</span>}
                 </div>
                 <div className="mt-2 text-xs">
                   Ref#: {item.id}/Coin Ref#: {item.coin_id}
