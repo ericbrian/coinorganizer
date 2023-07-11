@@ -2840,6 +2840,8 @@ INSERT INTO public.image (id, url, copyright, description, created_at, updated_a
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (719, '10041355790005_21_JO24_10____AG_HEXA_REVERS_25c2.webp', NULL, NULL, '2023-07-06 20:43:07.76+00', '2023-07-06 20:43:07.76+00', NULL, 399, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (720, 'IMG_1416.jpeg', NULL, NULL, '2023-07-06 20:43:20.987+00', '2023-07-06 20:43:20.987+00', NULL, 399, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (721, 'IMG_1417.jpeg', NULL, NULL, '2023-07-06 20:43:32.571+00', '2023-07-06 20:43:32.571+00', NULL, 399, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (722, '2023_0625_144111_007.JPG', NULL, NULL, '2023-07-09 22:52:56.115+00', '2023-07-09 22:52:56.115+00', NULL, 400, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (723, '2023_0625_144122_008.JPG', NULL, NULL, '2023-07-09 22:53:05.759+00', '2023-07-09 22:53:05.759+00', NULL, 400, false, NULL, NULL);
 
 --
 -- Data for Name: mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2852,7 +2854,6 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (20, 'Perth Mint', '1899 - Present', 'P', 'Perth', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (21, 'Travencore', NULL, NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (23, 'Sherritt Mint', NULL, NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (17, 'Royal Mint, Llantrisant', '1968 - Present', NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (35, 'United States Mint', '1793 - Present', NULL, 'Philadelphia, PA', '2023-05-03 22:31:26.900569+00', '2023-05-03 22:31:26.900569+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (42, 'Unknown', '????', NULL, 'Unknown', '2023-07-03 23:20:36.649543+00', '2023-07-03 23:20:36.649543+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (43, 'Casa de Moneda de Chile', '1743 - Present', 'So', 'Santiago, Chile', '2023-07-05 22:44:03.799313+00', '2023-07-05 22:44:03.799313+00');
@@ -2883,6 +2884,7 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (28, 'Lithuanian Mint (Lietuvos Monetu Kalykla)', '1990 - Present', 'LMK', 'Vilnius, Lithuania', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (29, 'Mint of Finland (Suomen Rahapaja), Vantaa', '1988 - Present', 'FI', 'Vantaa, Finland', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (34, 'South African Mint', '1992 - Present', NULL, 'Centurion, South Africa', '2023-04-30 17:37:09.436616+00', '2023-04-30 17:37:09.436616+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (17, 'Royal Mint', '1968 - Present', NULL, 'Llantrisant', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 
 --
 -- Data for Name: period; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -3031,7 +3033,7 @@ SELECT pg_catalog.setval('public."EngraversIdSeq"', 33, true);
 -- Name: ImagesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."ImagesIdSeq"', 721, true);
+SELECT pg_catalog.setval('public."ImagesIdSeq"', 723, true);
 
 --
 -- Name: MintsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
