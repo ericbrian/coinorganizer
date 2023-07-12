@@ -8,6 +8,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { IconButtonProps } from "@mui/material/IconButton";
 import Image from "next/image";
+import appconfig from "@/appconfig";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -41,10 +42,11 @@ export default function Profile() {
     const totals: any = {};
     collection.forEach((item) => {
       const currencyKey = `${item.currency.name} (${item.currency.short_name})`;
+      const amount = item?.paid_amount ? +item.paid_amount : 0;
       if (currencyKey in totals) {
-        totals[currencyKey] += +item.paid_amount;
+        totals[currencyKey] += amount;
       } else {
-        totals[currencyKey] = +item.paid_amount;
+        totals[currencyKey] = amount;
       }
     });
 
@@ -60,7 +62,7 @@ export default function Profile() {
       {/* {<div>{JSON.stringify(collectionTotals)}</div>} */}
       <h1 className="mb-2 text-3xl font-bold">Profile</h1>
 
-      {collectionTotals && <p>Amount paid: {collectionTotals}</p>}
+      {collectionTotals && <p>Amount spent: {collectionTotals}</p>}
       <div>
         {collection &&
           Array.isArray(collection) &&
@@ -186,7 +188,7 @@ export default function Profile() {
               <div className="basis-1/5">
                 {item.coin.image[0]?.url && (
                   <Image
-                    src={"/images/" + item.coin.image[0]?.url}
+                    src={appconfig.cdn + item.coin.image[0]?.url}
                     alt={item.coin.common_name}
                     className="noprint w-60 rounded-full"
                     style={{ height: "auto" }}

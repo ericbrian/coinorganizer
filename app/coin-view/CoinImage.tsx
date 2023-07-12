@@ -1,6 +1,7 @@
 import React from "react";
 import { image as dbImage } from "@prisma/client";
 import Image from "next/image";
+import appconfig from "@/appconfig";
 
 export default function CoinImage(props: { images: dbImage[] }) {
   const images = props.images;
@@ -16,7 +17,7 @@ export default function CoinImage(props: { images: dbImage[] }) {
     <Image
       width={120}
       height={0}
-      src={`/images/${preferredImage.url}`}
+      src={`${appconfig.cdn}${preferredImage.url}`}
       alt="coin image"
     />
   );

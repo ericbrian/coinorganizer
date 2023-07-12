@@ -16,7 +16,7 @@ type AddImageCoins = {
   country_name: string;
 };
 
-export default async function AddImagesToCoins() {
+export default function AddImagesToCoins() {
   const coins: AddImageCoins[] = await getCoinsWithoutImages();
   const images: { url: string }[] = await getImagesNames();
   images.sort((a, b) => (a < b ? 0 : 1));
@@ -107,7 +107,7 @@ export default async function AddImagesToCoins() {
               <Image
                 style={{ display: "inline-block" }}
                 id={name}
-                src={"/images/" + name}
+                src={appconfig.cdn + name}
                 draggable="true"
                 onDragStart={(e) => drag(e)}
                 width="0"

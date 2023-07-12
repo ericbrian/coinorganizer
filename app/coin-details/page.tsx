@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
 import { getCoinById } from "@/http/coin";
+import appconfig from "@/appconfig";
 
 export const metadata: Metadata = {
   title: "Coin Details",
@@ -103,7 +104,7 @@ export default async function CoinDetails({ searchParams }: any) {
               key={image.id}
               width={240}
               height={0}
-              src={`/images/${image.url}`}
+              src={`${appconfig.cdn}${image.url}`}
               alt={`${coin.common_name} Image` ?? "Coin image"}
               title={`${coin.common_name} Image` ?? "Coin image"}
             />

@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true
   },
   images: {
-    domains: ['github.com', 'lh3.googleusercontent.com', 'localhost']
+    domains: ['github.com', 'lh3.googleusercontent.com', 'localhost', 'coin-organizer.b-cdn.net']
   }
 }
 
