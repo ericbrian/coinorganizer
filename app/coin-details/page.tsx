@@ -26,7 +26,7 @@ export default async function CoinDetails({ searchParams }: any) {
             <p className="mt-2">
               <span className="font-bold">Ruler:</span>
               <br />
-              {coin.ruler.name}
+              {coin.ruler.name} ({coin.ruler.years})
             </p>
           )}
           <p className="mt-2">
@@ -93,6 +93,9 @@ export default async function CoinDetails({ searchParams }: any) {
           {coin.edge_inscription && (
             <span> with inscription: {coin.edge_inscription}</span>
           )}
+        </p>
+        <p className="mt-2" style={{ whiteSpace: "pre-wrap" }}>
+          <span className="font-bold">Comments</span>: {coin.comments}
         </p>
       </div>
       <div>

@@ -2,7 +2,7 @@
 
 import appconfig from "@/appconfig";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import allImages from "./images.json";
 import { addImageToCoin } from "@/http/coin";
 import { Prisma } from "@prisma/client";
@@ -17,9 +17,22 @@ type AddImageCoins = {
 };
 
 export default function AddImagesToCoins() {
-  const coins: AddImageCoins[] = await getCoinsWithoutImages();
-  const images: { url: string }[] = await getImagesNames();
-  images.sort((a, b) => (a < b ? 0 : 1));
+  const [coins, setCoins] = React.useState<AddImageCoins[]>([]);
+  const [images, setImages] = React.useState<{ url: string }[]>([]);
+
+  useEffect(() => {
+    getCoinsWithoutImages()
+      .then((res) => {
+        setCoins(res);
+      })
+      .catch((e) => {});
+    getImagesNames()
+      .then((res) => {
+        res.sort((a: any, b: any) => (a < b ? 0 : 1));
+        setImages(res);
+      })
+      .catch((e) => {});
+  }, []);
 
   const filterImages = (
     imagesAlreadyUsed: { url: string }[],

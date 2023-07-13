@@ -1,33 +1,17 @@
 "use client";
 
 import { getUserCollectionItems } from "@/http/collection";
-import { IconButton, Link } from "@mui/material";
 import { collection as collectionDb } from "@prisma/client";
 import { useEffect, useState } from "react";
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import { IconButtonProps } from "@mui/material/IconButton";
 import Image from "next/image";
 import appconfig from "@/appconfig";
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import Link from "next/link";
 
 export default function Profile() {
   const [collection, setCollection] = useState<collectionDb[]>([]);
   const [collectionTotals, setCollectionTotals] = useState<string>("");
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     getUserCollectionItems()
@@ -40,9 +24,11 @@ export default function Profile() {
 
   function calculateTotals(collection: collectionDb[]) {
     const totals: any = {};
+    let count = 0;
     collection.forEach((item) => {
       const currencyKey = `${item.currency.name} (${item.currency.short_name})`;
       const amount = item?.paid_amount ? +item.paid_amount : 0;
+      count++;
       if (currencyKey in totals) {
         totals[currencyKey] += amount;
       } else {
@@ -55,6 +41,7 @@ export default function Profile() {
       totalString += `${key} ${totals[key].toFixed(2)}, `;
     });
     setCollectionTotals(totalString.trim().slice(0, -1));
+    setCount(count);
   }
 
   return (
@@ -62,7 +49,11 @@ export default function Profile() {
       {/* {<div>{JSON.stringify(collectionTotals)}</div>} */}
       <h1 className="mb-2 text-3xl font-bold">Profile</h1>
 
-      {collectionTotals && <p>Amount spent: {collectionTotals}</p>}
+      {collectionTotals && (
+        <p>
+          Amount spent on {count} coins: {collectionTotals}
+        </p>
+      )}
       <div>
         {collection &&
           Array.isArray(collection) &&
