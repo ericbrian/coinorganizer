@@ -22,7 +22,6 @@ SET row_security = off;
 
 -- *not* creating schema, since initdb creates it
 
-
 ALTER SCHEMA public OWNER TO postgres;
 
 --
@@ -34,7 +33,6 @@ CREATE TYPE public."enumCoinEngraversSide" AS ENUM (
     'reverse'
 );
 
-
 ALTER TYPE public."enumCoinEngraversSide" OWNER TO postgres;
 
 --
@@ -45,7 +43,6 @@ CREATE TYPE public."enumCollectionsCollectableType" AS ENUM (
     'coin',
     'note'
 );
-
 
 ALTER TYPE public."enumCollectionsCollectableType" OWNER TO postgres;
 
@@ -77,7 +74,6 @@ CREATE TABLE public.banknote (
     currency_id integer
 );
 
-
 ALTER TABLE public.banknote OWNER TO postgres;
 
 --
@@ -92,7 +88,6 @@ CREATE SEQUENCE public."BanknotesIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."BanknotesIdSeq" OWNER TO postgres;
 
 --
@@ -100,7 +95,6 @@ ALTER TABLE public."BanknotesIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."BanknotesIdSeq" OWNED BY public.banknote.id;
-
 
 --
 -- Name: coin_engravers; Type: TABLE; Schema: public; Owner: postgres
@@ -112,7 +106,6 @@ CREATE TABLE public.coin_engravers (
     coin_id integer,
     engraver_id integer
 );
-
 
 ALTER TABLE public.coin_engravers OWNER TO postgres;
 
@@ -128,7 +121,6 @@ CREATE SEQUENCE public."CoinEngraversIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."CoinEngraversIdSeq" OWNER TO postgres;
 
 --
@@ -136,7 +128,6 @@ ALTER TABLE public."CoinEngraversIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."CoinEngraversIdSeq" OWNED BY public.coin_engravers.id;
-
 
 --
 -- Name: CoinsIdSeq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -149,7 +140,6 @@ CREATE SEQUENCE public."CoinsIdSeq"
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
 
 ALTER TABLE public."CoinsIdSeq" OWNER TO postgres;
 
@@ -165,7 +155,6 @@ CREATE TABLE public.coinset (
     user_id integer
 );
 
-
 ALTER TABLE public.coinset OWNER TO postgres;
 
 --
@@ -180,7 +169,6 @@ CREATE SEQUENCE public."CoinsetsIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."CoinsetsIdSeq" OWNER TO postgres;
 
 --
@@ -188,7 +176,6 @@ ALTER TABLE public."CoinsetsIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."CoinsetsIdSeq" OWNED BY public.coinset.id;
-
 
 --
 -- Name: collection; Type: TABLE; Schema: public; Owner: postgres
@@ -217,7 +204,6 @@ CREATE TABLE public.collection (
     comments text
 );
 
-
 ALTER TABLE public.collection OWNER TO postgres;
 
 --
@@ -232,7 +218,6 @@ CREATE SEQUENCE public."CollectionsIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."CollectionsIdSeq" OWNER TO postgres;
 
 --
@@ -240,7 +225,6 @@ ALTER TABLE public."CollectionsIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."CollectionsIdSeq" OWNED BY public.collection.id;
-
 
 --
 -- Name: country; Type: TABLE; Schema: public; Owner: postgres
@@ -256,7 +240,6 @@ CREATE TABLE public.country (
     territory_of_country_id integer
 );
 
-
 ALTER TABLE public.country OWNER TO postgres;
 
 --
@@ -271,7 +254,6 @@ CREATE SEQUENCE public."CountriesIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."CountriesIdSeq" OWNER TO postgres;
 
 --
@@ -279,7 +261,6 @@ ALTER TABLE public."CountriesIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."CountriesIdSeq" OWNED BY public.country.id;
-
 
 --
 -- Name: currency; Type: TABLE; Schema: public; Owner: postgres
@@ -297,7 +278,6 @@ CREATE TABLE public.currency (
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
-
 ALTER TABLE public.currency OWNER TO postgres;
 
 --
@@ -312,7 +292,6 @@ CREATE SEQUENCE public."CurrenciesIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."CurrenciesIdSeq" OWNER TO postgres;
 
 --
@@ -320,7 +299,6 @@ ALTER TABLE public."CurrenciesIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."CurrenciesIdSeq" OWNED BY public.currency.id;
-
 
 --
 -- Name: engraver; Type: TABLE; Schema: public; Owner: postgres
@@ -333,7 +311,6 @@ CREATE TABLE public.engraver (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
-
 
 ALTER TABLE public.engraver OWNER TO postgres;
 
@@ -349,7 +326,6 @@ CREATE SEQUENCE public."EngraversIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."EngraversIdSeq" OWNER TO postgres;
 
 --
@@ -357,7 +333,6 @@ ALTER TABLE public."EngraversIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."EngraversIdSeq" OWNED BY public.engraver.id;
-
 
 --
 -- Name: image; Type: TABLE; Schema: public; Owner: postgres
@@ -377,7 +352,6 @@ CREATE TABLE public.image (
     collection_id integer
 );
 
-
 ALTER TABLE public.image OWNER TO postgres;
 
 --
@@ -392,7 +366,6 @@ CREATE SEQUENCE public."ImagesIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."ImagesIdSeq" OWNER TO postgres;
 
 --
@@ -400,7 +373,6 @@ ALTER TABLE public."ImagesIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."ImagesIdSeq" OWNED BY public.image.id;
-
 
 --
 -- Name: mint; Type: TABLE; Schema: public; Owner: postgres
@@ -416,7 +388,6 @@ CREATE TABLE public.mint (
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
-
 ALTER TABLE public.mint OWNER TO postgres;
 
 --
@@ -431,7 +402,6 @@ CREATE SEQUENCE public."MintsIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."MintsIdSeq" OWNER TO postgres;
 
 --
@@ -439,7 +409,6 @@ ALTER TABLE public."MintsIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."MintsIdSeq" OWNED BY public.mint.id;
-
 
 --
 -- Name: period; Type: TABLE; Schema: public; Owner: postgres
@@ -453,7 +422,6 @@ CREATE TABLE public.period (
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     country_id integer
 );
-
 
 ALTER TABLE public.period OWNER TO postgres;
 
@@ -469,7 +437,6 @@ CREATE SEQUENCE public."PeriodsIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."PeriodsIdSeq" OWNER TO postgres;
 
 --
@@ -477,7 +444,6 @@ ALTER TABLE public."PeriodsIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."PeriodsIdSeq" OWNED BY public.period.id;
-
 
 --
 -- Name: role; Type: TABLE; Schema: public; Owner: postgres
@@ -491,7 +457,6 @@ CREATE TABLE public.role (
     user_id integer,
     role_id integer
 );
-
 
 ALTER TABLE public.role OWNER TO postgres;
 
@@ -507,7 +472,6 @@ CREATE SEQUENCE public."RolesIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."RolesIdSeq" OWNER TO postgres;
 
 --
@@ -515,7 +479,6 @@ ALTER TABLE public."RolesIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."RolesIdSeq" OWNED BY public.role.id;
-
 
 --
 -- Name: ruler_country; Type: TABLE; Schema: public; Owner: postgres
@@ -528,7 +491,6 @@ CREATE TABLE public.ruler_country (
     ruler_id integer NOT NULL,
     country_id integer NOT NULL
 );
-
 
 ALTER TABLE public.ruler_country OWNER TO postgres;
 
@@ -545,7 +507,6 @@ ALTER TABLE public.ruler_country ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTIT
     CACHE 1
 );
 
-
 --
 -- Name: ruler; Type: TABLE; Schema: public; Owner: postgres
 --
@@ -558,7 +519,6 @@ CREATE TABLE public.ruler (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
-
 
 ALTER TABLE public.ruler OWNER TO postgres;
 
@@ -574,7 +534,6 @@ CREATE SEQUENCE public."RulersIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."RulersIdSeq" OWNER TO postgres;
 
 --
@@ -582,7 +541,6 @@ ALTER TABLE public."RulersIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."RulersIdSeq" OWNED BY public.ruler.id;
-
 
 --
 -- Name: shape; Type: TABLE; Schema: public; Owner: postgres
@@ -594,7 +552,6 @@ CREATE TABLE public.shape (
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL
 );
-
 
 ALTER TABLE public.shape OWNER TO postgres;
 
@@ -610,7 +567,6 @@ CREATE SEQUENCE public."ShapesIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."ShapesIdSeq" OWNER TO postgres;
 
 --
@@ -618,7 +574,6 @@ ALTER TABLE public."ShapesIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."ShapesIdSeq" OWNED BY public.shape.id;
-
 
 --
 -- Name: user; Type: TABLE; Schema: public; Owner: postgres
@@ -636,7 +591,6 @@ CREATE TABLE public."user" (
     updated_at timestamp with time zone NOT NULL
 );
 
-
 ALTER TABLE public."user" OWNER TO postgres;
 
 --
@@ -651,7 +605,6 @@ CREATE SEQUENCE public."UsersIdSeq"
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER TABLE public."UsersIdSeq" OWNER TO postgres;
 
 --
@@ -659,7 +612,6 @@ ALTER TABLE public."UsersIdSeq" OWNER TO postgres;
 --
 
 ALTER SEQUENCE public."UsersIdSeq" OWNED BY public."user".id;
-
 
 --
 -- Name: banknote_mint; Type: TABLE; Schema: public; Owner: postgres
@@ -671,7 +623,6 @@ CREATE TABLE public.banknote_mint (
     banknote_id integer NOT NULL,
     mint_id integer NOT NULL
 );
-
 
 ALTER TABLE public.banknote_mint OWNER TO postgres;
 
@@ -708,7 +659,6 @@ CREATE TABLE public.coin (
     is_bullion boolean DEFAULT false
 );
 
-
 ALTER TABLE public.coin OWNER TO postgres;
 
 --
@@ -721,7 +671,6 @@ CREATE TABLE public.coin_mint (
     coin_id integer NOT NULL,
     mint_id integer NOT NULL
 );
-
 
 ALTER TABLE public.coin_mint OWNER TO postgres;
 
@@ -736,7 +685,6 @@ CREATE TABLE public.country_currency (
     currency_id integer NOT NULL
 );
 
-
 ALTER TABLE public.country_currency OWNER TO postgres;
 
 --
@@ -749,7 +697,6 @@ CREATE TABLE public.country_mint (
     created_at date DEFAULT now() NOT NULL,
     udpated_at date DEFAULT now() NOT NULL
 );
-
 
 ALTER TABLE public.country_mint OWNER TO postgres;
 
@@ -804,7 +751,6 @@ CREATE VIEW public.v_all_coin_info AS
      LEFT JOIN public.shape s ON ((s.id = c.shape_id)))
   ORDER BY cntry.short_name, crncy.name, c.pretty_face_value, c.series_or_theme_name, c.year_start;
 
-
 ALTER TABLE public.v_all_coin_info OWNER TO postgres;
 
 --
@@ -818,7 +764,6 @@ CREATE VIEW public.v_countries_with_coins AS
      LEFT JOIN public.coin c ON ((c.country_id = ct.id)))
   WHERE (c.id IS NOT NULL);
 
-
 ALTER TABLE public.v_countries_with_coins OWNER TO postgres;
 
 --
@@ -827,13 +772,11 @@ ALTER TABLE public.v_countries_with_coins OWNER TO postgres;
 
 ALTER TABLE ONLY public.banknote ALTER COLUMN id SET DEFAULT nextval('public."BanknotesIdSeq"'::regclass);
 
-
 --
 -- Name: coin_engravers id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coin_engravers ALTER COLUMN id SET DEFAULT nextval('public."CoinEngraversIdSeq"'::regclass);
-
 
 --
 -- Name: coinset id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -841,13 +784,11 @@ ALTER TABLE ONLY public.coin_engravers ALTER COLUMN id SET DEFAULT nextval('publ
 
 ALTER TABLE ONLY public.coinset ALTER COLUMN id SET DEFAULT nextval('public."CoinsetsIdSeq"'::regclass);
 
-
 --
 -- Name: collection id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.collection ALTER COLUMN id SET DEFAULT nextval('public."CollectionsIdSeq"'::regclass);
-
 
 --
 -- Name: country id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -855,13 +796,11 @@ ALTER TABLE ONLY public.collection ALTER COLUMN id SET DEFAULT nextval('public."
 
 ALTER TABLE ONLY public.country ALTER COLUMN id SET DEFAULT nextval('public."CountriesIdSeq"'::regclass);
 
-
 --
 -- Name: currency id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.currency ALTER COLUMN id SET DEFAULT nextval('public."CurrenciesIdSeq"'::regclass);
-
 
 --
 -- Name: engraver id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -869,13 +808,11 @@ ALTER TABLE ONLY public.currency ALTER COLUMN id SET DEFAULT nextval('public."Cu
 
 ALTER TABLE ONLY public.engraver ALTER COLUMN id SET DEFAULT nextval('public."EngraversIdSeq"'::regclass);
 
-
 --
 -- Name: image id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.image ALTER COLUMN id SET DEFAULT nextval('public."ImagesIdSeq"'::regclass);
-
 
 --
 -- Name: mint id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -883,13 +820,11 @@ ALTER TABLE ONLY public.image ALTER COLUMN id SET DEFAULT nextval('public."Image
 
 ALTER TABLE ONLY public.mint ALTER COLUMN id SET DEFAULT nextval('public."MintsIdSeq"'::regclass);
 
-
 --
 -- Name: period id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.period ALTER COLUMN id SET DEFAULT nextval('public."PeriodsIdSeq"'::regclass);
-
 
 --
 -- Name: role id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -897,13 +832,11 @@ ALTER TABLE ONLY public.period ALTER COLUMN id SET DEFAULT nextval('public."Peri
 
 ALTER TABLE ONLY public.role ALTER COLUMN id SET DEFAULT nextval('public."RolesIdSeq"'::regclass);
 
-
 --
 -- Name: ruler id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ruler ALTER COLUMN id SET DEFAULT nextval('public."RulersIdSeq"'::regclass);
-
 
 --
 -- Name: shape id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -911,13 +844,11 @@ ALTER TABLE ONLY public.ruler ALTER COLUMN id SET DEFAULT nextval('public."Ruler
 
 ALTER TABLE ONLY public.shape ALTER COLUMN id SET DEFAULT nextval('public."ShapesIdSeq"'::regclass);
 
-
 --
 -- Name: user id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public."UsersIdSeq"'::regclass);
-
 
 --
 -- Data for Name: banknote; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -927,12 +858,9 @@ INSERT INTO public.banknote (id, face_value, pretty_face_value, common_name, obv
 INSERT INTO public.banknote (id, face_value, pretty_face_value, common_name, obverse, reverse, year_start, year_end, composition, dimensions_milimeters, comments, created_at, updated_at, deleted_at, period_id, country_id, currency_id) VALUES (2, 20.000, '20 Yuan', 'Beijing Winter Olympics', 'Couple ice skating; official emblem of the Winter Olympic Games; national emblem of the People''s Republic of China', '???', '2022', NULL, 'Polymer', '145 x 70', NULL, '2023-01-14 10:38:10.084626+00', '2023-01-14 10:38:10.084626+00', NULL, NULL, 58, 23);
 INSERT INTO public.banknote (id, face_value, pretty_face_value, common_name, obverse, reverse, year_start, year_end, composition, dimensions_milimeters, comments, created_at, updated_at, deleted_at, period_id, country_id, currency_id) VALUES (3, 20.000, '20 Yuan', 'Beijing Winter Olympics', 'Freestyle skier; official emblem of the 2022 Winter Olympic Games; national emblem of the People''s Republic of China', 'National Ski Jumping Center in Zhangjiakou. Great Wall of China at bottom.', '2022', NULL, 'Polymer', '145 x 70', NULL, '2023-01-14 10:38:10.084626+00', '2023-01-14 10:38:10.084626+00', NULL, NULL, 58, 23);
 
-
 --
 -- Data for Name: banknote_mint; Type: TABLE DATA; Schema: public; Owner: postgres
 --
-
-
 
 --
 -- Data for Name: coin; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1287,7 +1215,7 @@ INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (399, 10.000, '€10', '2024 Summer Olympic Games, Paris', '10 Euro Olympic Games, Paris 2024 - France 2022', 'The genius of freedom throwing a discus. Behind him, the Arc de Triomphe symbol of the city of Paris, and an athletics stadium. The logo of the Olympic Games Paris 2024 on the right.', 'The face value between two branches of laurel and oak, surrounded by the French motto and three hexagons.', 'Plain', '', '2022', NULL, 'Silver (.500)', true, 17.000, 31.820, NULL, '2023-07-06 20:25:11.35+00', '2023-07-06 20:25:11.35+00', NULL, 8, NULL, 20, 6, NULL, '341204', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (394, 0.500, '½ Balboa', '', '½ Balboa', 'Coat of arms with 9 stars above. Name of the country above, wreath and date below.', 'Armoured bust with helmet of Vasco Núñez de Balboa facing left surrounded by value in letters and wreath. The bust touches the rim below.', 'Reeded', '', '1966', '1993', 'Billon (.400 silver) (Copper .600)', false, 11.500, 30.600, NULL, '2023-07-03 22:31:28.53+00', '2023-07-03 22:31:28.53+00', NULL, 25, NULL, 3, 5, 1, '7526', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (400, 0.500, '50 Pence', 'Beatrix Potter', 'Jemima Puddle-Duck 50 Pence', 'Fifth crowned portrait of HM Queen Elizabeth II right, wearing the George IV State Diadem, legend around.', 'Image of Beatrix Potter''s Jemima Puddle-Duck dividing legend.', 'Plain', '', '2016', NULL, 'Copper-nickel', false, 8.000, 27.300, NULL, '2023-07-09 17:39:32.585+00', '2023-07-09 17:39:32.585+00', NULL, 4, 6, 8, 7, 6, '88895', false);
-
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (401, 2.000, '£2', 'Silver Britannia', 'Charles III Coronation', 'Crowned portrait of HM King Charles III left, legend around.', 'Standing image of Britannia holding trident in her right hand, with shield bearing the Union flag and olive branch in her left hand, security padlock, legend around.', 'Reeded', '', '2023', NULL, 'Silver (.999)', true, 31.210, 38.610, 'This special edition of one of the most celebrated bullion coins in the world celebrates the coronation of His Majesty King Charles III. The obverse features the first crowned coinage portrait of His Majesty King Charles III, designed by Martin Jennings, whilst the reverse of the coin features Britannia, an icon that is recognised around the world.\n\n- Features the first crowned coinage portrait of His Majesty The King, designed by Martin Jennings\n- A latent image which changes from a padlock to Britannia''s famous trident\n- Surface animation bringing the background of sparkling waves to life\n- Micro text gives both decoration and protection – ''an ornament and a safeguard''\n- Britannia''s shield bearing the Union Flag accented with tincture lines\n\nThe 2023 Coronation Britannia coins will be the only Britannia bullion coins in history to feature the first crowned effigy of His Majesty King Charles III.\n\nThe official crowned bullion effigy struck to mark the coronation of His Majesty King Charles III does not feature the traditional Britannia edge castellation. In line with The Royal Mint’s commitment to sustainability, we have used the same crowned obverse as the rest of the Coronation bullion coin range to improve efficiency and reduce waste.', '2023-07-12 20:24:52.652+00', '2023-07-12 20:24:52.652+00', NULL, 4, 7, 8, 7, 1, '370264', true);
 
 --
 -- Data for Name: coin_engravers; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1351,7 +1279,6 @@ INSERT INTO public.coin_engravers (id, side, coin_id, engraver_id) VALUES (55, '
 INSERT INTO public.coin_engravers (id, side, coin_id, engraver_id) VALUES (56, 'reverse', 86, 27);
 INSERT INTO public.coin_engravers (id, side, coin_id, engraver_id) VALUES (57, 'reverse', 87, 28);
 INSERT INTO public.coin_engravers (id, side, coin_id, engraver_id) VALUES (58, 'reverse', 124, 31);
-
 
 --
 -- Data for Name: coin_mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1418,7 +1345,7 @@ INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES (
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-05 22:46:30.908+00', '2023-07-05 22:46:30.908+00', 398, 43);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-06 20:25:11.347+00', '2023-07-06 20:25:11.347+00', 399, 25);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-09 17:39:32.582+00', '2023-07-09 17:39:32.582+00', 400, 17);
-
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-12 20:24:52.649+00', '2023-07-12 20:24:52.649+00', 401, 17);
 
 --
 -- Data for Name: coinset; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1431,7 +1358,6 @@ INSERT INTO public.coinset (id, name, created_at, updated_at, user_id) VALUES (4
 INSERT INTO public.coinset (id, name, created_at, updated_at, user_id) VALUES (5, 'Proof Set - USA - 1980', '2023-01-14 10:31:31.303322+00', '2023-01-14 10:31:31.303322+00', 1);
 INSERT INTO public.coinset (id, name, created_at, updated_at, user_id) VALUES (6, 'Wildlife Set - Canada - 1967', '2023-01-14 10:31:31.303322+00', '2023-01-14 10:31:31.303322+00', 1);
 INSERT INTO public.coinset (id, name, created_at, updated_at, user_id) VALUES (7, '50 Years of the 50p - British Culture', '2023-04-25 20:54:36.981586+00', '2023-04-25 20:54:36.981586+00', 1);
-
 
 --
 -- Data for Name: collection; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1944,7 +1870,6 @@ INSERT INTO public.collection (id, collectable_type, year, serial_number, condit
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, owner_id, comments) VALUES (524, 'coin', '1971', NULL, '', 0.00, 'eBay, collectorscouch', '2023-06-19 17:20:53+00', false, '', false, '2023-07-09 17:21:45.359+00', '2023-07-09 17:21:45.359+00', NULL, 396, NULL, 38, 1, 1, NULL);
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, owner_id, comments) VALUES (523, 'coin', '1967', NULL, '', 2.15, 'eBay, collectorscouch', '2023-07-09 17:17:45.864+00', false, '1967 collection', false, '2023-07-09 17:20:53.928+00', '2023-07-09 17:20:53.928+00', NULL, 396, NULL, 38, 1, 1, NULL);
 
-
 --
 -- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2151,7 +2076,6 @@ INSERT INTO public.country (id, name, short_name, is_active, created_at, updated
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id) VALUES (203, 'Sasanian Empire', 'Sasanian Empire', false, '2023-05-25 21:30:11.980528+00', '2023-05-25 21:30:11.980528+00', NULL);
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id) VALUES (2, 'United States of America', 'United States', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL);
 
-
 --
 -- Data for Name: country_currency; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2195,7 +2119,6 @@ INSERT INTO public.country_currency (created_at, updated_at, country_id, currenc
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 22:50:35.549352+00', '2023-07-03 22:50:35.549352+00', 138, 41);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 23:16:11.585039+00', '2023-07-03 23:16:11.585039+00', 59, 42);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-05 22:34:57.279242+00', '2023-07-05 22:34:57.279242+00', 57, 43);
-
 
 --
 -- Data for Name: country_mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2243,7 +2166,6 @@ INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VA
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (59, 42, '2023-07-03', '2023-07-03');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (57, 43, '2023-07-05', '2023-07-05');
 
-
 --
 -- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2284,7 +2206,6 @@ INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comm
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (13, 'Indian Fanam', 'Fanam', '??? - 1815', '1815', 'Kingdom of Travancore', true, '2023-01-14 10:31:20.129449+00', '2023-01-14 10:31:20.129449+00');
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (18, 'French Old franc', 'F', '1795 - 1959', NULL, NULL, true, '2023-01-14 10:31:20.129449+00', '2023-01-14 10:31:20.129449+00');
 
-
 --
 -- Data for Name: engraver; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2321,7 +2242,6 @@ INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES 
 INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (30, 'Jitan V. Patel', NULL, '2023-01-14 10:30:44.175768+00', '2023-01-14 10:30:44.175768+00');
 INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (31, 'Luc Luycx', 'Luycx is a computer engineer and medallist. He was born in Aalst, Belgium and now lives in Dendermonde. Luycx worked for the Royal Belgian Mint.[4] He designed the euro coins in 1996. His signature on all euro coins is visible as two L letters connected together (LL). On the 2-euro coin, this is visible under the O of the word EURO on the common side.', '2023-01-14 10:30:44.175768+00', '2023-01-14 10:30:44.175768+00');
 INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (33, 'James Barton Longacre', 'He was an American portraitist and engraver, and from 1844 until his death the fourth Chief Engraver of the United States Mint. ', '2023-04-01 15:57:00.655268+00', '2023-04-01 15:57:00.655268+00');
-
 
 --
 -- Data for Name: image; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2861,7 +2781,8 @@ INSERT INTO public.image (id, url, copyright, description, created_at, updated_a
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (721, 'IMG_1417.jpeg', NULL, NULL, '2023-07-06 20:43:32.571+00', '2023-07-06 20:43:32.571+00', NULL, 399, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (722, '2023_0625_144111_007.JPG', NULL, NULL, '2023-07-09 22:52:56.115+00', '2023-07-09 22:52:56.115+00', NULL, 400, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (723, '2023_0625_144122_008.JPG', NULL, NULL, '2023-07-09 22:53:05.759+00', '2023-07-09 22:53:05.759+00', NULL, 400, false, NULL, NULL);
-
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (724, '649fe1db7e2fe4.50465190-original.jpg', NULL, NULL, '2023-07-12 20:59:44.388+00', '2023-07-12 20:59:44.388+00', NULL, 401, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (725, '649fe14d811e02.28618270-original.jpg', NULL, NULL, '2023-07-12 20:59:51.494+00', '2023-07-12 20:59:51.494+00', NULL, 401, false, NULL, NULL);
 
 --
 -- Data for Name: mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2906,7 +2827,6 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (34, 'South African Mint', '1992 - Present', NULL, 'Centurion, South Africa', '2023-04-30 17:37:09.436616+00', '2023-04-30 17:37:09.436616+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (17, 'Royal Mint', '1968 - Present', NULL, 'Llantrisant', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 
-
 --
 -- Data for Name: period; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2936,12 +2856,9 @@ INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) 
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (25, 'Republic', '1903 - Present', '2023-07-03 15:57:23.098319+00', '2023-07-03 15:57:23.098319+00', 3);
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (26, 'Republic', '1886 - Present', '2023-07-03 23:14:43.259118+00', '2023-07-03 23:14:43.259118+00', 59);
 
-
 --
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
-
-
 
 --
 -- Data for Name: ruler; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2956,12 +2873,11 @@ INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (4, 'Eduard VIII', 'Windsor', '1936', '2023-01-14 10:44:42.142798+00', '2023-01-14 10:44:42.142798+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (5, 'George VI', 'Windsor', '1936 - 1952', '2023-01-14 10:44:42.142798+00', '2023-01-14 10:44:42.142798+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (6, 'Elizabeth II', 'Windsor', '1952 - 2022', '2023-01-14 10:44:42.142798+00', '2023-01-14 10:44:42.142798+00');
-INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (7, 'Charles III', 'Windsor', '2023 - Present', '2023-01-14 10:44:42.142798+00', '2023-01-14 10:44:42.142798+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (14, 'Frederick IX', 'Schleswig-Holstein-Sonderburg-Glücksburg', '1947 - 1972', '2023-05-25 18:28:07.869917+00', '2023-05-25 18:28:07.869917+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (13, 'Albert II', 'Grimaldi', '2005 – Present', '2023-04-03 22:10:04.063597+00', '2023-04-03 22:10:04.063597+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (15, 'Shōwa', NULL, '1926 - 1989', '2023-07-03 15:35:48.489764+00', '2023-07-03 15:35:48.489764+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (16, 'Olav V', 'Glücksburg', '1957 - 1991', '2023-07-03 23:00:27.847995+00', '2023-07-03 23:00:27.847995+00');
-
+INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (7, 'Charles III', 'Windsor', '2022 - Present', '2023-01-14 10:44:42.142798+00', '2023-01-14 10:44:42.142798+00');
 
 --
 -- Data for Name: ruler_country; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2981,7 +2897,6 @@ INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_
 INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_id) OVERRIDING SYSTEM VALUE VALUES (12, '2023-06-04', '2023-06-04', 13, 18);
 INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_id) OVERRIDING SYSTEM VALUE VALUES (13, '2023-07-03', '2023-07-03', 15, 99);
 INSERT INTO public.ruler_country (id, created_at, updated_at, ruler_id, country_id) OVERRIDING SYSTEM VALUE VALUES (14, '2023-07-03', '2023-07-03', 16, 138);
-
 
 --
 -- Data for Name: shape; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -3003,12 +2918,9 @@ INSERT INTO public.shape (id, name, created_at, updated_at) VALUES (13, 'Pentade
 INSERT INTO public.shape (id, name, created_at, updated_at) VALUES (14, 'Scalloped', '2023-01-14 10:30:07.762395+00', '2023-01-14 10:30:07.762395+00');
 INSERT INTO public.shape (id, name, created_at, updated_at) VALUES (15, 'Holed', '2023-01-14 10:30:07.762395+00', '2023-01-14 10:30:07.762395+00');
 
-
 --
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
-
-
 
 --
 -- Name: BanknotesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3016,20 +2928,17 @@ INSERT INTO public.shape (id, name, created_at, updated_at) VALUES (15, 'Holed',
 
 SELECT pg_catalog.setval('public."BanknotesIdSeq"', 3, true);
 
-
 --
 -- Name: CoinEngraversIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."CoinEngraversIdSeq"', 58, true);
 
-
 --
 -- Name: CoinsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."CoinsIdSeq"', 400, true);
-
+SELECT pg_catalog.setval('public."CoinsIdSeq"', 401, true);
 
 --
 -- Name: CoinsetsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3037,13 +2946,11 @@ SELECT pg_catalog.setval('public."CoinsIdSeq"', 400, true);
 
 SELECT pg_catalog.setval('public."CoinsetsIdSeq"', 7, true);
 
-
 --
 -- Name: CollectionsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."CollectionsIdSeq"', 532, true);
-
+SELECT pg_catalog.setval('public."CollectionsIdSeq"', 533, true);
 
 --
 -- Name: CountriesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3051,13 +2958,11 @@ SELECT pg_catalog.setval('public."CollectionsIdSeq"', 532, true);
 
 SELECT pg_catalog.setval('public."CountriesIdSeq"', 203, true);
 
-
 --
 -- Name: CurrenciesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."CurrenciesIdSeq"', 43, true);
-
 
 --
 -- Name: EngraversIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3065,13 +2970,11 @@ SELECT pg_catalog.setval('public."CurrenciesIdSeq"', 43, true);
 
 SELECT pg_catalog.setval('public."EngraversIdSeq"', 33, true);
 
-
 --
 -- Name: ImagesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."ImagesIdSeq"', 723, true);
-
+SELECT pg_catalog.setval('public."ImagesIdSeq"', 725, true);
 
 --
 -- Name: MintsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3079,13 +2982,11 @@ SELECT pg_catalog.setval('public."ImagesIdSeq"', 723, true);
 
 SELECT pg_catalog.setval('public."MintsIdSeq"', 43, true);
 
-
 --
 -- Name: PeriodsIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."PeriodsIdSeq"', 26, true);
-
 
 --
 -- Name: RolesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3093,13 +2994,11 @@ SELECT pg_catalog.setval('public."PeriodsIdSeq"', 26, true);
 
 SELECT pg_catalog.setval('public."RolesIdSeq"', 1, false);
 
-
 --
 -- Name: RulerCountry_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."RulerCountry_id_seq"', 14, true);
-
 
 --
 -- Name: RulersIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3107,20 +3006,17 @@ SELECT pg_catalog.setval('public."RulerCountry_id_seq"', 14, true);
 
 SELECT pg_catalog.setval('public."RulersIdSeq"', 16, true);
 
-
 --
 -- Name: ShapesIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."ShapesIdSeq"', 15, true);
 
-
 --
 -- Name: UsersIdSeq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."UsersIdSeq"', 1, false);
-
 
 --
 -- Name: banknote_mint BanknoteMint_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3129,14 +3025,12 @@ SELECT pg_catalog.setval('public."UsersIdSeq"', 1, false);
 ALTER TABLE ONLY public.banknote_mint
     ADD CONSTRAINT "BanknoteMint_pkey" PRIMARY KEY (banknote_id, mint_id);
 
-
 --
 -- Name: banknote Banknotes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.banknote
     ADD CONSTRAINT "Banknotes_pkey" PRIMARY KEY (id);
-
 
 --
 -- Name: coin_engravers CoinEngravers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3145,14 +3039,12 @@ ALTER TABLE ONLY public.banknote
 ALTER TABLE ONLY public.coin_engravers
     ADD CONSTRAINT "CoinEngravers_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: coin_mint CoinMint_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coin_mint
     ADD CONSTRAINT "CoinMint_pkey" PRIMARY KEY (coin_id, mint_id);
-
 
 --
 -- Name: coin Coins_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3161,14 +3053,12 @@ ALTER TABLE ONLY public.coin_mint
 ALTER TABLE ONLY public.coin
     ADD CONSTRAINT "Coins_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: coinset Coinsets_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coinset
     ADD CONSTRAINT "Coinsets_pkey" PRIMARY KEY (id);
-
 
 --
 -- Name: collection Collections_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3177,14 +3067,12 @@ ALTER TABLE ONLY public.coinset
 ALTER TABLE ONLY public.collection
     ADD CONSTRAINT "Collections_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: country Countries_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.country
     ADD CONSTRAINT "Countries_name_key" UNIQUE (name);
-
 
 --
 -- Name: country Countries_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3193,14 +3081,12 @@ ALTER TABLE ONLY public.country
 ALTER TABLE ONLY public.country
     ADD CONSTRAINT "Countries_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: country Countries_shortName_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.country
     ADD CONSTRAINT "Countries_shortName_key" UNIQUE (short_name);
-
 
 --
 -- Name: country_currency CountryCurrency_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3209,14 +3095,12 @@ ALTER TABLE ONLY public.country
 ALTER TABLE ONLY public.country_currency
     ADD CONSTRAINT "CountryCurrency_pkey" PRIMARY KEY (country_id, currency_id);
 
-
 --
 -- Name: currency Currencies_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.currency
     ADD CONSTRAINT "Currencies_pkey" PRIMARY KEY (id);
-
 
 --
 -- Name: engraver Engravers_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3225,14 +3109,12 @@ ALTER TABLE ONLY public.currency
 ALTER TABLE ONLY public.engraver
     ADD CONSTRAINT "Engravers_name_key" UNIQUE (name);
 
-
 --
 -- Name: engraver Engravers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.engraver
     ADD CONSTRAINT "Engravers_pkey" PRIMARY KEY (id);
-
 
 --
 -- Name: image Images_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3241,14 +3123,12 @@ ALTER TABLE ONLY public.engraver
 ALTER TABLE ONLY public.image
     ADD CONSTRAINT "Images_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: mint Mints_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.mint
     ADD CONSTRAINT "Mints_pkey" PRIMARY KEY (id);
-
 
 --
 -- Name: country_mint PK_country_mint; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3257,14 +3137,12 @@ ALTER TABLE ONLY public.mint
 ALTER TABLE ONLY public.country_mint
     ADD CONSTRAINT "PK_country_mint" PRIMARY KEY (country_id, mint_id);
 
-
 --
 -- Name: period Periods_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.period
     ADD CONSTRAINT "Periods_pkey" PRIMARY KEY (id);
-
 
 --
 -- Name: role Roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3273,14 +3151,12 @@ ALTER TABLE ONLY public.period
 ALTER TABLE ONLY public.role
     ADD CONSTRAINT "Roles_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: ruler_country RulerCountry_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ruler_country
     ADD CONSTRAINT "RulerCountry_pkey" PRIMARY KEY (id);
-
 
 --
 -- Name: ruler Rulers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3289,14 +3165,12 @@ ALTER TABLE ONLY public.ruler_country
 ALTER TABLE ONLY public.ruler
     ADD CONSTRAINT "Rulers_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: shape Shapes_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.shape
     ADD CONSTRAINT "Shapes_name_key" UNIQUE (name);
-
 
 --
 -- Name: shape Shapes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3305,14 +3179,12 @@ ALTER TABLE ONLY public.shape
 ALTER TABLE ONLY public.shape
     ADD CONSTRAINT "Shapes_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: user Users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT "Users_email_key" UNIQUE (email);
-
 
 --
 -- Name: user Users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3321,14 +3193,12 @@ ALTER TABLE ONLY public."user"
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT "Users_pkey" PRIMARY KEY (id);
 
-
 --
 -- Name: user Users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT "Users_username_key" UNIQUE (username);
-
 
 --
 -- Name: coin unq_coin_numistaNumber; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -3337,13 +3207,11 @@ ALTER TABLE ONLY public."user"
 ALTER TABLE ONLY public.coin
     ADD CONSTRAINT "unq_coin_numistaNumber" UNIQUE (numista_number);
 
-
 --
 -- Name: RulerCountry_rulerId_countryId_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX "RulerCountry_rulerId_countryId_idx" ON public.ruler_country USING btree (ruler_id, country_id);
-
 
 --
 -- Name: banknote_mint BanknoteMint_banknoteId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3352,14 +3220,12 @@ CREATE INDEX "RulerCountry_rulerId_countryId_idx" ON public.ruler_country USING 
 ALTER TABLE ONLY public.banknote_mint
     ADD CONSTRAINT "BanknoteMint_banknoteId_fkey" FOREIGN KEY (banknote_id) REFERENCES public.banknote(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-
 --
 -- Name: banknote_mint BanknoteMint_mintId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.banknote_mint
     ADD CONSTRAINT "BanknoteMint_mintId_fkey" FOREIGN KEY (mint_id) REFERENCES public.mint(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
 
 --
 -- Name: banknote Banknotes_countryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3368,14 +3234,12 @@ ALTER TABLE ONLY public.banknote_mint
 ALTER TABLE ONLY public.banknote
     ADD CONSTRAINT "Banknotes_countryId_fkey" FOREIGN KEY (country_id) REFERENCES public.country(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
-
 --
 -- Name: banknote Banknotes_currencyId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.banknote
     ADD CONSTRAINT "Banknotes_currencyId_fkey" FOREIGN KEY (currency_id) REFERENCES public.currency(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: banknote Banknotes_periodId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3384,14 +3248,12 @@ ALTER TABLE ONLY public.banknote
 ALTER TABLE ONLY public.banknote
     ADD CONSTRAINT "Banknotes_periodId_fkey" FOREIGN KEY (period_id) REFERENCES public.period(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
-
 --
 -- Name: coin_mint CoinMint_coinId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coin_mint
     ADD CONSTRAINT "CoinMint_coinId_fkey" FOREIGN KEY (coin_id) REFERENCES public.coin(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
 
 --
 -- Name: coin_mint CoinMint_mintId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3400,14 +3262,12 @@ ALTER TABLE ONLY public.coin_mint
 ALTER TABLE ONLY public.coin_mint
     ADD CONSTRAINT "CoinMint_mintId_fkey" FOREIGN KEY (mint_id) REFERENCES public.mint(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-
 --
 -- Name: coin Coins_countryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coin
     ADD CONSTRAINT "Coins_countryId_fkey" FOREIGN KEY (country_id) REFERENCES public.country(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: coin Coins_currencyId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3416,14 +3276,12 @@ ALTER TABLE ONLY public.coin
 ALTER TABLE ONLY public.coin
     ADD CONSTRAINT "Coins_currencyId_fkey" FOREIGN KEY (currency_id) REFERENCES public.currency(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
-
 --
 -- Name: coin Coins_periodId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coin
     ADD CONSTRAINT "Coins_periodId_fkey" FOREIGN KEY (period_id) REFERENCES public.period(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: coin Coins_rulerId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3432,14 +3290,12 @@ ALTER TABLE ONLY public.coin
 ALTER TABLE ONLY public.coin
     ADD CONSTRAINT "Coins_rulerId_fkey" FOREIGN KEY (ruler_id) REFERENCES public.ruler(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
-
 --
 -- Name: coin Coins_shapeId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.coin
     ADD CONSTRAINT "Coins_shapeId_fkey" FOREIGN KEY (shape_id) REFERENCES public.shape(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: collection Collections_banknoteId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3448,14 +3304,12 @@ ALTER TABLE ONLY public.coin
 ALTER TABLE ONLY public.collection
     ADD CONSTRAINT "Collections_banknoteId_fkey" FOREIGN KEY (banknote_id) REFERENCES public.banknote(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
-
 --
 -- Name: collection Collections_coinId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.collection
     ADD CONSTRAINT "Collections_coinId_fkey" FOREIGN KEY (coin_id) REFERENCES public.coin(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: collection Collections_coinsetId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3464,14 +3318,12 @@ ALTER TABLE ONLY public.collection
 ALTER TABLE ONLY public.collection
     ADD CONSTRAINT "Collections_coinsetId_fkey" FOREIGN KEY (coinset_id) REFERENCES public.coinset(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-
 --
 -- Name: collection Collections_mintId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.collection
     ADD CONSTRAINT "Collections_mintId_fkey" FOREIGN KEY (mint_id) REFERENCES public.mint(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
 
 --
 -- Name: collection Collections_purchasedWithCurrencyId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3480,14 +3332,12 @@ ALTER TABLE ONLY public.collection
 ALTER TABLE ONLY public.collection
     ADD CONSTRAINT "Collections_purchasedWithCurrencyId_fkey" FOREIGN KEY (purchased_with_currency_id) REFERENCES public.currency(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-
 --
 -- Name: country Countries_territoryOfCountryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.country
     ADD CONSTRAINT "Countries_territoryOfCountryId_fkey" FOREIGN KEY (territory_of_country_id) REFERENCES public.country(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: country_currency CountryCurrency_countryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3496,14 +3346,12 @@ ALTER TABLE ONLY public.country
 ALTER TABLE ONLY public.country_currency
     ADD CONSTRAINT "CountryCurrency_countryId_fkey" FOREIGN KEY (country_id) REFERENCES public.country(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-
 --
 -- Name: country_currency CountryCurrency_currencyId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.country_currency
     ADD CONSTRAINT "CountryCurrency_currencyId_fkey" FOREIGN KEY (currency_id) REFERENCES public.currency(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
 
 --
 -- Name: collection FK_collection_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3512,14 +3360,12 @@ ALTER TABLE ONLY public.country_currency
 ALTER TABLE ONLY public.collection
     ADD CONSTRAINT "FK_collection_user" FOREIGN KEY (owner_id) REFERENCES public."user"(id) NOT VALID;
 
-
 --
 -- Name: country_mint FK_country_mint_country; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.country_mint
     ADD CONSTRAINT "FK_country_mint_country" FOREIGN KEY (country_id) REFERENCES public.country(id) NOT VALID;
-
 
 --
 -- Name: country_mint FK_country_mint_mint; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3528,14 +3374,12 @@ ALTER TABLE ONLY public.country_mint
 ALTER TABLE ONLY public.country_mint
     ADD CONSTRAINT "FK_country_mint_mint" FOREIGN KEY (mint_id) REFERENCES public.mint(id) NOT VALID;
 
-
 --
 -- Name: image Images_banknoteId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.image
     ADD CONSTRAINT "Images_banknoteId_fkey" FOREIGN KEY (banknote_id) REFERENCES public.banknote(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: image Images_coinId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3544,14 +3388,12 @@ ALTER TABLE ONLY public.image
 ALTER TABLE ONLY public.image
     ADD CONSTRAINT "Images_coinId_fkey" FOREIGN KEY (coin_id) REFERENCES public.coin(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
-
 --
 -- Name: period Periods_countryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.period
     ADD CONSTRAINT "Periods_countryId_fkey" FOREIGN KEY (country_id) REFERENCES public.country(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: role Roles_roleId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3560,14 +3402,12 @@ ALTER TABLE ONLY public.period
 ALTER TABLE ONLY public.role
     ADD CONSTRAINT "Roles_roleId_fkey" FOREIGN KEY (role_id) REFERENCES public."user"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-
 --
 -- Name: role Roles_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.role
     ADD CONSTRAINT "Roles_userId_fkey" FOREIGN KEY (user_id) REFERENCES public."user"(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
 
 --
 -- Name: ruler_country RulerCountry_countryId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -3576,14 +3416,12 @@ ALTER TABLE ONLY public.role
 ALTER TABLE ONLY public.ruler_country
     ADD CONSTRAINT "RulerCountry_countryId_fkey" FOREIGN KEY (country_id) REFERENCES public.country(id);
 
-
 --
 -- Name: ruler_country RulerCountry_rulerId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.ruler_country
     ADD CONSTRAINT "RulerCountry_rulerId_fkey" FOREIGN KEY (ruler_id) REFERENCES public.ruler(id);
-
 
 --
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
@@ -3592,8 +3430,6 @@ ALTER TABLE ONLY public.ruler_country
 REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
-
 --
 -- PostgreSQL database dump complete
 --
-
