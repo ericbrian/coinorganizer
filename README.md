@@ -10,3 +10,9 @@ To Regenerate Prisma Schema, use:
     1. Remove old database models from schema file: prisma/schema.prisma
     2. Run: ./node_modules/.bin/prisma db pull
     3. Run: ./node_modules/.bin/prisma generate
+
+You can now start using Prisma Client in your code. Reference: https://pris.ly/d/client
+
+    import { PrismaClient } from '@prisma/client'
+    const prisma = new PrismaClient()
+
