@@ -69,3 +69,8 @@ type SparseCountryListType = {
   id: number;
   short_name: string;
 };
+
+type EngraverInput = {
+  name: string;
+  comments: string;
+};
