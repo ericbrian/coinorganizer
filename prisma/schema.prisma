@@ -1,363 +1,346 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_LOCAL_COINDB")
+    provider = "postgresql"
+    url      = env("POSTGRES_LOCAL_COINDB")
 }
 
 model banknote {
-  id                    Int             @id(map: "Banknotes_pkey") @default(autoincrement())
-  face_value            Decimal         @db.Decimal(8, 3)
-  pretty_face_value     String          @db.VarChar(30)
-  common_name           String?         @db.VarChar(60)
-  obverse               String
-  reverse               String
-  year_start            String?         @db.VarChar(255)
-  year_end              String?         @db.VarChar(255)
-  composition           String?         @db.VarChar(255)
-  dimensions_milimeters String?         @db.VarChar(40)
-  comments              String?
-  created_at            DateTime        @db.Timestamptz(6)
-  updated_at            DateTime        @db.Timestamptz(6)
-  deleted_at            DateTime?       @db.Timestamptz(6)
-  period_id             Int?
-  country_id            Int?
-  currency_id           Int?
-  country               country?        @relation(fields: [country_id], references: [id], map: "Banknotes_countryId_fkey")
-  currency              currency?       @relation(fields: [currency_id], references: [id], map: "Banknotes_currencyId_fkey")
-  period                period?         @relation(fields: [period_id], references: [id], map: "Banknotes_periodId_fkey")
-  banknote_mint         banknote_mint[]
-  collection            collection[]
-  image                 image[]
+    id                    Int             @id(map: "Banknotes_pkey") @default(autoincrement())
+    face_value            Decimal         @db.Decimal(8, 3)
+    pretty_face_value     String          @db.VarChar(30)
+    common_name           String?         @db.VarChar(60)
+    obverse               String
+    reverse               String
+    year_start            String?         @db.VarChar(255)
+    year_end              String?         @db.VarChar(255)
+    composition           String?         @db.VarChar(255)
+    dimensions_milimeters String?         @db.VarChar(40)
+    comments              String?
+    created_at            DateTime        @db.Timestamptz(6)
+    updated_at            DateTime        @db.Timestamptz(6)
+    deleted_at            DateTime?       @db.Timestamptz(6)
+    period_id             Int?
+    country_id            Int?
+    currency_id           Int?
+    country               country?        @relation(fields: [country_id], references: [id], map: "Banknotes_countryId_fkey")
+    currency              currency?       @relation(fields: [currency_id], references: [id], map: "Banknotes_currencyId_fkey")
+    period                period?         @relation(fields: [period_id], references: [id], map: "Banknotes_periodId_fkey")
+    banknote_mint         banknote_mint[]
+    collection            collection[]
+    image                 image[]
 }
 
 model banknote_mint {
-  created_at  DateTime @db.Timestamptz(6)
-  updated_at  DateTime @db.Timestamptz(6)
-  banknote_id Int
-  mint_id     Int
-  banknote    banknote @relation(fields: [banknote_id], references: [id], onDelete: Cascade, map: "BanknoteMint_banknoteId_fkey")
-  mint        mint     @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "BanknoteMint_mintId_fkey")
+    created_at  DateTime @db.Timestamptz(6)
+    updated_at  DateTime @db.Timestamptz(6)
+    banknote_id Int
+    mint_id     Int
+    banknote    banknote @relation(fields: [banknote_id], references: [id], onDelete: Cascade, map: "BanknoteMint_banknoteId_fkey")
+    mint        mint     @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "BanknoteMint_mintId_fkey")
 
-  @@id([banknote_id, mint_id], map: "BanknoteMint_pkey")
+    @@id([banknote_id, mint_id], map: "BanknoteMint_pkey")
 }
 
 model coin {
-  id                   Int          @id(map: "Coins_pkey") @default(autoincrement())
-  face_value           Decimal      @db.Decimal(8, 3)
-  pretty_face_value    String?      @db.VarChar(30)
-  series_or_theme_name String?      @db.VarChar(200)
-  common_name          String?      @db.VarChar(200)
-  obverse              String
-  reverse              String
-  edge                 String       @db.VarChar(255)
-  edge_inscription     String?      @db.VarChar(255)
-  year_start           String?      @db.VarChar(255)
-  year_end             String?      @db.VarChar(255)
-  composition          String?      @db.VarChar(255)
-  is_non_circulating   Boolean?     @default(false)
-  weight_grams         Decimal?     @db.Decimal(7, 3)
-  diameter_milimeters  Decimal?     @db.Decimal(7, 3)
-  comments             String?
-  created_at           DateTime     @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime     @default(now()) @db.Timestamptz(6)
-  deleted_at           DateTime?    @db.Timestamptz(6)
-  period_id            Int?
-  ruler_id             Int?
-  country_id           Int?
-  currency_id          Int?
-  shape_id             Int?
-  numista_number       String?      @unique(map: "unq_coin_numistaNumber") @db.VarChar(8)
-  is_bullion           Boolean?     @default(false)
-  country              country?     @relation(fields: [country_id], references: [id], map: "Coins_countryId_fkey")
-  currency             currency?    @relation(fields: [currency_id], references: [id], map: "Coins_currencyId_fkey")
-  period               period?      @relation(fields: [period_id], references: [id], map: "Coins_periodId_fkey")
-  ruler                ruler?       @relation(fields: [ruler_id], references: [id], map: "Coins_rulerId_fkey")
-  shape                shape?       @relation(fields: [shape_id], references: [id], map: "Coins_shapeId_fkey")
-  coin_mint            coin_mint[]
-  collection           collection[]
-  image                image[]
+    id                   Int          @id(map: "Coins_pkey") @default(autoincrement())
+    face_value           Decimal      @db.Decimal(8, 3)
+    pretty_face_value    String?      @db.VarChar(30)
+    series_or_theme_name String?      @db.VarChar(200)
+    common_name          String?      @db.VarChar(200)
+    obverse              String
+    reverse              String
+    edge                 String       @db.VarChar(255)
+    edge_inscription     String?      @db.VarChar(255)
+    year_start           String?      @db.VarChar(255)
+    year_end             String?      @db.VarChar(255)
+    composition          String?      @db.VarChar(255)
+    is_non_circulating   Boolean?     @default(false)
+    weight_grams         Decimal?     @db.Decimal(7, 3)
+    diameter_milimeters  Decimal?     @db.Decimal(7, 3)
+    comments             String?
+    created_at           DateTime     @default(now()) @db.Timestamptz(6)
+    updated_at           DateTime     @default(now()) @db.Timestamptz(6)
+    deleted_at           DateTime?    @db.Timestamptz(6)
+    period_id            Int?
+    ruler_id             Int?
+    country_id           Int?
+    currency_id          Int?
+    shape_id             Int?
+    numista_number       String?      @unique(map: "unq_coin_numistaNumber") @db.VarChar(8)
+    is_bullion           Boolean?     @default(false)
+    country              country?     @relation(fields: [country_id], references: [id], map: "Coins_countryId_fkey")
+    currency             currency?    @relation(fields: [currency_id], references: [id], map: "Coins_currencyId_fkey")
+    period               period?      @relation(fields: [period_id], references: [id], map: "Coins_periodId_fkey")
+    ruler                ruler?       @relation(fields: [ruler_id], references: [id], map: "Coins_rulerId_fkey")
+    shape                shape?       @relation(fields: [shape_id], references: [id], map: "Coins_shapeId_fkey")
+    coin_mint            coin_mint[]
+    collection           collection[]
+    image                image[]
 }
 
 model coin_engravers {
-  id          Int                    @id(map: "CoinEngravers_pkey") @default(autoincrement())
-  side        enumCoinEngraversSide? @default(obverse)
-  coin_id     Int?
-  engraver_id Int?
+    id          Int                    @id(map: "CoinEngravers_pkey") @default(autoincrement())
+    side        enumCoinEngraversSide? @default(obverse)
+    coin_id     Int?
+    engraver_id Int?
 }
 
 model coin_mint {
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  updated_at DateTime @default(now()) @db.Timestamptz(6)
-  coin_id    Int
-  mint_id    Int
-  coin       coin     @relation(fields: [coin_id], references: [id], onDelete: Cascade, map: "CoinMint_coinId_fkey")
-  mint       mint     @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "CoinMint_mintId_fkey")
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+    coin_id    Int
+    mint_id    Int
+    coin       coin     @relation(fields: [coin_id], references: [id], onDelete: Cascade, map: "CoinMint_coinId_fkey")
+    mint       mint     @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "CoinMint_mintId_fkey")
 
-  @@id([coin_id, mint_id], map: "CoinMint_pkey")
+    @@id([coin_id, mint_id], map: "CoinMint_pkey")
 }
 
 model coinset {
-  id         Int          @id(map: "Coinsets_pkey") @default(autoincrement())
-  name       String       @db.VarChar(60)
-  created_at DateTime     @default(now()) @db.Timestamptz(6)
-  updated_at DateTime     @default(now()) @db.Timestamptz(6)
-  user_id    Int?
-  collection collection[]
+    id         Int          @id(map: "Coinsets_pkey") @default(autoincrement())
+    name       String       @db.VarChar(60)
+    created_at DateTime     @default(now()) @db.Timestamptz(6)
+    updated_at DateTime     @default(now()) @db.Timestamptz(6)
+    user_id    Int?
+    collection collection[]
 }
 
 model collection {
-  id                         Int                             @id(map: "Collections_pkey") @default(autoincrement())
-  collectable_type           enumCollectionsCollectableType? @default(coin)
-  year                       String                          @db.VarChar(10)
-  serial_number              String?                         @db.VarChar(16)
-  condition                  String?
-  paid_amount                Decimal?                        @db.Decimal(7, 2)
-  sourced_from               String?                         @db.VarChar(255)
-  sourced_when               DateTime?                       @db.Timestamptz(6)
-  is_cleaned                 Boolean?                        @default(false)
-  storage                    String?                         @db.VarChar(255)
-  is_proof                   Boolean?                        @default(false)
-  created_at                 DateTime                        @default(now()) @db.Timestamptz(6)
-  updated_at                 DateTime                        @default(now()) @db.Timestamptz(6)
-  banknote_id                Int?
-  coin_id                    Int?
-  coinset_id                 Int?
-  mint_id                    Int?
-  purchased_with_currency_id Int?
-  owner_id                   Int?
-  comments                   String?
-  banknote                   banknote?                       @relation(fields: [banknote_id], references: [id], map: "Collections_banknoteId_fkey")
-  coin                       coin?                           @relation(fields: [coin_id], references: [id], map: "Collections_coinId_fkey")
-  coinset                    coinset?                        @relation(fields: [coinset_id], references: [id], onDelete: Cascade, map: "Collections_coinsetId_fkey")
-  mint                       mint?                           @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "Collections_mintId_fkey")
-  currency                   currency?                       @relation(fields: [purchased_with_currency_id], references: [id], onDelete: Cascade, map: "Collections_purchasedWithCurrencyId_fkey")
-  user                       user_old?                       @relation(fields: [owner_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_collection_user")
+    id                         Int                             @id(map: "Collections_pkey") @default(autoincrement())
+    collectable_type           enumCollectionsCollectableType? @default(coin)
+    year                       String                          @db.VarChar(10)
+    serial_number              String?                         @db.VarChar(16)
+    condition                  String?
+    paid_amount                Decimal?                        @db.Decimal(7, 2)
+    sourced_from               String?                         @db.VarChar(255)
+    sourced_when               DateTime?                       @db.Timestamptz(6)
+    is_cleaned                 Boolean?                        @default(false)
+    storage                    String?                         @db.VarChar(255)
+    is_proof                   Boolean?                        @default(false)
+    created_at                 DateTime                        @default(now()) @db.Timestamptz(6)
+    updated_at                 DateTime                        @default(now()) @db.Timestamptz(6)
+    banknote_id                Int?
+    coin_id                    Int?
+    coinset_id                 Int?
+    mint_id                    Int?
+    purchased_with_currency_id Int?
+    owner_id                   Int?
+    comments                   String?
+    banknote                   banknote?                       @relation(fields: [banknote_id], references: [id], map: "Collections_banknoteId_fkey")
+    coin                       coin?                           @relation(fields: [coin_id], references: [id], map: "Collections_coinId_fkey")
+    coinset                    coinset?                        @relation(fields: [coinset_id], references: [id], onDelete: Cascade, map: "Collections_coinsetId_fkey")
+    mint                       mint?                           @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "Collections_mintId_fkey")
+    currency                   currency?                       @relation(fields: [purchased_with_currency_id], references: [id], onDelete: Cascade, map: "Collections_purchasedWithCurrencyId_fkey")
 }
 
 model country {
-  id                      Int                @id(map: "Countries_pkey") @default(autoincrement())
-  name                    String             @unique(map: "Countries_name_key") @db.VarChar(60)
-  short_name              String             @db.VarChar(40)
-  is_active               Boolean            @default(true)
-  created_at              DateTime           @default(now()) @db.Timestamptz(6)
-  updated_at              DateTime           @default(now()) @db.Timestamptz(6)
-  territory_of_country_id Int?
-  banknote                banknote[]
-  coin                    coin[]
-  country                 country?           @relation("countryTocountry", fields: [territory_of_country_id], references: [id], map: "Countries_territoryOfCountryId_fkey")
-  other_country           country[]          @relation("countryTocountry")
-  country_currency        country_currency[]
-  country_mint            country_mint[]
-  period                  period[]
-  ruler_country           ruler_country[]
+    id                      Int                @id(map: "Countries_pkey") @default(autoincrement())
+    name                    String             @unique(map: "Countries_name_key") @db.VarChar(60)
+    short_name              String             @db.VarChar(40)
+    is_active               Boolean            @default(true)
+    created_at              DateTime           @default(now()) @db.Timestamptz(6)
+    updated_at              DateTime           @default(now()) @db.Timestamptz(6)
+    territory_of_country_id Int?
+    iso_3166_alpha_2        String?            @unique(map: "Countries_iso3166Alpha2_key") @db.Char(2)
+    banknote                banknote[]
+    coin                    coin[]
+    country                 country?           @relation("countryTocountry", fields: [territory_of_country_id], references: [id], map: "Countries_territoryOfCountryId_fkey")
+    other_country           country[]          @relation("countryTocountry")
+    country_currency        country_currency[]
+    country_mint            country_mint[]
+    period                  period[]
+    ruler_country           ruler_country[]
 }
 
 model country_currency {
-  created_at  DateTime @default(now()) @db.Timestamptz(6)
-  updated_at  DateTime @default(now()) @db.Timestamptz(6)
-  country_id  Int
-  currency_id Int
-  country     country  @relation(fields: [country_id], references: [id], onDelete: Cascade, map: "CountryCurrency_countryId_fkey")
-  currency    currency @relation(fields: [currency_id], references: [id], onDelete: Cascade, map: "CountryCurrency_currencyId_fkey")
+    created_at  DateTime @default(now()) @db.Timestamptz(6)
+    updated_at  DateTime @default(now()) @db.Timestamptz(6)
+    country_id  Int
+    currency_id Int
+    country     country  @relation(fields: [country_id], references: [id], onDelete: Cascade, map: "CountryCurrency_countryId_fkey")
+    currency    currency @relation(fields: [currency_id], references: [id], onDelete: Cascade, map: "CountryCurrency_currencyId_fkey")
 
-  @@id([country_id, currency_id], map: "CountryCurrency_pkey")
+    @@id([country_id, currency_id], map: "CountryCurrency_pkey")
 }
 
 model country_mint {
-  country_id Int
-  mint_id    Int
-  created_at DateTime @default(now()) @db.Date
-  udpated_at DateTime @default(now()) @db.Date
-  country    country  @relation(fields: [country_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_country_mint_country")
-  mint       mint     @relation(fields: [mint_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_country_mint_mint")
+    country_id Int
+    mint_id    Int
+    created_at DateTime @default(now()) @db.Date
+    udpated_at DateTime @default(now()) @db.Date
+    country    country  @relation(fields: [country_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_country_mint_country")
+    mint       mint     @relation(fields: [mint_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_country_mint_mint")
 
-  @@id([country_id, mint_id], map: "PK_country_mint")
+    @@id([country_id, mint_id], map: "PK_country_mint")
 }
 
 model currency {
-  id                         Int                @id(map: "Currencies_pkey") @default(autoincrement())
-  name                       String             @db.VarChar(30)
-  short_name                 String             @db.VarChar(10)
-  years                      String?            @db.VarChar(100)
-  demonitized_date           String?            @db.VarChar(100)
-  comments                   String?
-  display_short_name_at_left Boolean            @default(true)
-  created_at                 DateTime           @default(now()) @db.Timestamptz(6)
-  updated_at                 DateTime           @default(now()) @db.Timestamptz(6)
-  banknote                   banknote[]
-  coin                       coin[]
-  collection                 collection[]
-  country_currency           country_currency[]
+    id                         Int                @id(map: "Currencies_pkey") @default(autoincrement())
+    name                       String             @db.VarChar(30)
+    short_name                 String             @db.VarChar(10)
+    years                      String?            @db.VarChar(100)
+    demonitized_date           String?            @db.VarChar(100)
+    comments                   String?
+    display_short_name_at_left Boolean            @default(true)
+    created_at                 DateTime           @default(now()) @db.Timestamptz(6)
+    updated_at                 DateTime           @default(now()) @db.Timestamptz(6)
+    banknote                   banknote[]
+    coin                       coin[]
+    collection                 collection[]
+    country_currency           country_currency[]
 }
 
 model engraver {
-  id         Int      @id(map: "Engravers_pkey") @default(autoincrement())
-  name       String   @unique(map: "Engravers_name_key") @db.VarChar(100)
-  comments   String?
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  updated_at DateTime @default(now()) @db.Timestamptz(6)
+    id         Int      @id(map: "Engravers_pkey") @default(autoincrement())
+    name       String   @unique(map: "Engravers_name_key") @db.VarChar(100)
+    comments   String?
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
 }
 
 model image {
-  id            Int       @id(map: "Images_pkey") @default(autoincrement())
-  url           String?
-  copyright     String?   @db.VarChar(100)
-  description   String?   @db.VarChar(100)
-  created_at    DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at    DateTime  @default(now()) @db.Timestamptz(6)
-  banknote_id   Int?
-  coin_id       Int?
-  is_preferred  Boolean?  @default(false)
-  raw_html      String?
-  collection_id Int?
-  banknote      banknote? @relation(fields: [banknote_id], references: [id], map: "Images_banknoteId_fkey")
-  coin          coin?     @relation(fields: [coin_id], references: [id], map: "Images_coinId_fkey")
+    id            Int       @id(map: "Images_pkey") @default(autoincrement())
+    url           String?
+    copyright     String?   @db.VarChar(100)
+    description   String?   @db.VarChar(100)
+    created_at    DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at    DateTime  @default(now()) @db.Timestamptz(6)
+    banknote_id   Int?
+    coin_id       Int?
+    is_preferred  Boolean?  @default(false)
+    raw_html      String?
+    collection_id Int?
+    banknote      banknote? @relation(fields: [banknote_id], references: [id], map: "Images_banknoteId_fkey")
+    coin          coin?     @relation(fields: [coin_id], references: [id], map: "Images_coinId_fkey")
 }
 
 model mint {
-  id               Int             @id(map: "Mints_pkey") @default(autoincrement())
-  mint             String          @db.VarChar(255)
-  years            String?         @db.VarChar(255)
-  mark             String?         @db.VarChar(10)
-  mark_description String?         @db.VarChar(255)
-  created_at       DateTime        @default(now()) @db.Timestamptz(6)
-  updated_at       DateTime        @default(now()) @db.Timestamptz(6)
-  banknote_mint    banknote_mint[]
-  coin_mint        coin_mint[]
-  collection       collection[]
-  country_mint     country_mint[]
+    id               Int             @id(map: "Mints_pkey") @default(autoincrement())
+    mint             String          @db.VarChar(255)
+    years            String?         @db.VarChar(255)
+    mark             String?         @db.VarChar(10)
+    mark_description String?         @db.VarChar(255)
+    created_at       DateTime        @default(now()) @db.Timestamptz(6)
+    updated_at       DateTime        @default(now()) @db.Timestamptz(6)
+    banknote_mint    banknote_mint[]
+    coin_mint        coin_mint[]
+    collection       collection[]
+    country_mint     country_mint[]
 }
 
 model period {
-  id         Int        @id(map: "Periods_pkey") @default(autoincrement())
-  name       String     @db.VarChar(60)
-  years      String     @db.VarChar(60)
-  created_at DateTime   @default(now()) @db.Timestamptz(6)
-  updated_at DateTime   @default(now()) @db.Timestamptz(6)
-  country_id Int?
-  banknote   banknote[]
-  coin       coin[]
-  country    country?   @relation(fields: [country_id], references: [id], map: "Periods_countryId_fkey")
+    id         Int        @id(map: "Periods_pkey") @default(autoincrement())
+    name       String     @db.VarChar(60)
+    years      String     @db.VarChar(60)
+    created_at DateTime   @default(now()) @db.Timestamptz(6)
+    updated_at DateTime   @default(now()) @db.Timestamptz(6)
+    country_id Int?
+    banknote   banknote[]
+    coin       coin[]
+    country    country?   @relation(fields: [country_id], references: [id], map: "Periods_countryId_fkey")
 }
 
 model role {
-  id                      Int       @id(map: "Roles_pkey") @default(autoincrement())
-  role                    String    @db.VarChar(255)
-  created_at              DateTime  @db.Timestamptz(6)
-  updated_at              DateTime  @db.Timestamptz(6)
-  user_id                 Int?
-  role_id                 Int?
-  user_role_role_idTouser user_old? @relation("role_role_idTouser", fields: [role_id], references: [id], onDelete: Cascade, map: "Roles_roleId_fkey")
-  user_role_user_idTouser user_old? @relation("role_user_idTouser", fields: [user_id], references: [id], map: "Roles_userId_fkey")
+    id         Int      @id(map: "Roles_pkey") @default(autoincrement())
+    role       String   @db.VarChar(255)
+    created_at DateTime @db.Timestamptz(6)
+    updated_at DateTime @db.Timestamptz(6)
+    user_id    Int?
+    role_id    Int?
 }
 
 model ruler {
-  id            Int             @id(map: "Rulers_pkey") @default(autoincrement())
-  name          String          @db.VarChar(60)
-  house         String?
-  years         String          @db.VarChar(60)
-  created_at    DateTime        @default(now()) @db.Timestamptz(6)
-  updated_at    DateTime        @default(now()) @db.Timestamptz(6)
-  coin          coin[]
-  ruler_country ruler_country[]
+    id            Int             @id(map: "Rulers_pkey") @default(autoincrement())
+    name          String          @db.VarChar(60)
+    house         String?
+    years         String          @db.VarChar(60)
+    created_at    DateTime        @default(now()) @db.Timestamptz(6)
+    updated_at    DateTime        @default(now()) @db.Timestamptz(6)
+    coin          coin[]
+    ruler_country ruler_country[]
 }
 
 model ruler_country {
-  id         Int      @id(map: "RulerCountry_pkey") @default(autoincrement())
-  created_at DateTime @default(now()) @db.Date
-  updated_at DateTime @default(now()) @db.Date
-  ruler_id   Int
-  country_id Int
-  country    country  @relation(fields: [country_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RulerCountry_countryId_fkey")
-  ruler      ruler    @relation(fields: [ruler_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RulerCountry_rulerId_fkey")
+    id         Int      @id(map: "RulerCountry_pkey") @default(autoincrement())
+    created_at DateTime @default(now()) @db.Date
+    updated_at DateTime @default(now()) @db.Date
+    ruler_id   Int
+    country_id Int
+    country    country  @relation(fields: [country_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RulerCountry_countryId_fkey")
+    ruler      ruler    @relation(fields: [ruler_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "RulerCountry_rulerId_fkey")
 
-  @@index([ruler_id, country_id], map: "RulerCountry_rulerId_countryId_idx")
+    @@index([ruler_id, country_id], map: "RulerCountry_rulerId_countryId_idx")
 }
 
 model shape {
-  id         Int      @id(map: "Shapes_pkey") @default(autoincrement())
-  name       String?  @unique(map: "Shapes_name_key") @db.VarChar(20)
-  created_at DateTime @db.Timestamptz(6)
-  updated_at DateTime @db.Timestamptz(6)
-  coin       coin[]
-}
-
-model user_old {
-  id                      Int          @id(map: "Users_pkey") @default(autoincrement())
-  email                   String       @unique(map: "Users_email_key") @db.VarChar(100)
-  username                String?      @unique(map: "Users_username_key") @db.VarChar(50)
-  first_name              String?      @db.VarChar(50)
-  last_name               String?      @db.VarChar(50)
-  provider                String?      @db.VarChar(50)
-  audience                String?      @db.VarChar(50)
-  created_at              DateTime     @db.Timestamptz(6)
-  updated_at              DateTime     @db.Timestamptz(6)
-  collection              collection[]
-  role_role_role_idTouser role[]       @relation("role_role_idTouser")
-  role_role_user_idTouser role[]       @relation("role_user_idTouser")
+    id         Int      @id(map: "Shapes_pkey") @default(autoincrement())
+    name       String?  @unique(map: "Shapes_name_key") @db.VarChar(20)
+    created_at DateTime @db.Timestamptz(6)
+    updated_at DateTime @db.Timestamptz(6)
+    coin       coin[]
 }
 
 enum enumCoinEngraversSide {
-  obverse
-  reverse
+    obverse
+    reverse
 }
 
 enum enumCollectionsCollectableType {
-  coin
-  note
+    coin
+    note
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String  @map("user_id")
-  type              String
-  provider          String
-  providerAccountId String  @map("provider_account_id")
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
+    id                String  @id @default(cuid())
+    userId            String  @map("user_id")
+    type              String
+    provider          String
+    providerAccountId String  @map("provider_account_id")
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
+    @@unique([provider, providerAccountId])
+    @@map("accounts")
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id")
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id           String   @id @default(cuid())
+    sessionToken String   @unique @map("session_token")
+    userId       String   @map("user_id")
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("sessions")
+    @@map("sessions")
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  password      String
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+    id            String    @id @default(cuid())
+    name          String?
+    email         String    @unique
+    password      String
+    emailVerified DateTime? @map("email_verified")
+    image         String?
+    accounts      Account[]
+    sessions      Session[]
 
-  @@map("users")
+    @@map("users")
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+    identifier String
+    token      String   @unique
+    expires    DateTime
 
-  @@unique([identifier, token])
-  @@map("verificationtokens")
+    @@unique([identifier, token])
+    @@map("verificationtokens")
 }
