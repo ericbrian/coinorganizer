@@ -3,7 +3,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import appconfig from "@/appconfig";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
@@ -54,3 +54,5 @@ export const authOptions: NextAuthOptions = {
     // Enable debug messages in the console if you are having problems
     debug: process.env.NODE_ENV === 'development',
 }
+
+export default authOptions;
