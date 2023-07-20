@@ -9,15 +9,15 @@ import {
     shape as ShapeType,
     coin_mint as CoinMintType,
     enumCollectionsCollectableType,
-} from "@prisma/client";
+} from '@prisma/client';
 
-import { CoinInputType, CollectionInputType } from "@/global";
+import { CoinInputType, CollectionInputType } from '@/global';
 
 export function engraversSort(a: EngraverType, b: EngraverType) {
-    const aParts = a.name.split(" ");
-    const bParts = b.name.split(" ");
+    const aParts = a.name.split(' ');
+    const bParts = b.name.split(' ');
     return `${aParts.at(-1)} ${aParts.at(0)}`.localeCompare(
-        `${bParts.at(-1)} ${bParts.at(0)}`
+        `${bParts.at(-1)} ${bParts.at(0)}`,
     );
 }
 
@@ -25,18 +25,20 @@ export const convertToPrismaCoinCreateInput = (payload: CoinInputType) => {
     let allMints = null;
     if (payload.mints?.length > 0) {
         allMints = {
-            create: payload.mints.map(mint => ({
+            create: payload.mints.map((mint) => ({
                 mint_id: mint.id,
                 created_at: new Date(),
-                updated_at: new Date()
-            }))
-        }
+                updated_at: new Date(),
+            })),
+        };
     }
 
     return {
         face_value: +payload.faceValue,
         pretty_face_value: payload.prettyFaceValue.trim(),
-        series_or_theme_name: payload.seriesOrThemeName?.trim() ? payload.seriesOrThemeName?.trim() : null,
+        series_or_theme_name: payload.seriesOrThemeName?.trim()
+            ? payload.seriesOrThemeName?.trim()
+            : null,
         common_name: payload.commonName.trim(),
         obverse: payload.obverse.trim(),
         reverse: payload.reverse.trim(),
@@ -56,18 +58,24 @@ export const convertToPrismaCoinCreateInput = (payload: CoinInputType) => {
         shape_id: payload.shape?.id,
         numista_number: payload.numistaNumber?.trim(),
         is_bullion: payload.isBullion,
-        coin_mint: allMints
-    }
-}
+        coin_mint: allMints,
+    };
+};
 
-export const convertToPrismaCollectionCreateInput = (payload: CollectionInputType) => ({
+export const convertToPrismaCollectionCreateInput = (
+    payload: CollectionInputType,
+) => ({
     year: payload.year.toString(),
     condition: payload.condition,
     storage: payload.storage,
     collectable_type: enumCollectionsCollectableType.coin,
     paid_amount: +payload.paidAmount,
-    sourced_from: payload.sourcedFrom?.trim() ? payload.sourcedFrom.trim() : null,
-    sourced_when: payload.sourcedWhen?.trim() ? payload.sourcedWhen.trim() : null,
+    sourced_from: payload.sourcedFrom?.trim()
+        ? payload.sourcedFrom.trim()
+        : null,
+    sourced_when: payload.sourcedWhen?.trim()
+        ? payload.sourcedWhen.trim()
+        : null,
     is_cleaned: payload.isCleaned,
     is_proof: payload.isProof,
     coin_id: payload.coin.id,
@@ -81,4 +89,10 @@ export function range(start: number, end: number): number[] {
     return [start, ...range(start + 1, end)];
 }
 
-export const getPossibleMints = (coin: CoinType): MintType[] => coin.coin_mint?.map((coinMint: CoinMintType) => coinMint.mint) ?? [];
+export const getPossibleMints = (coin: CoinType): MintType[] =>
+    coin.coin_mint?.map((coinMint: CoinMintType) => coinMint.mint) ?? [];
+
+export const escapedNewLineToLineBreakTag = (str: string) =>
+    str
+        .split('\\n')
+        .map((item, idx) => (idx === 0 ? item : [<br key={idx} />, item]));

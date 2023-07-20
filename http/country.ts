@@ -12,7 +12,7 @@ const sortCountryByShortName = (sort_data: CountryType[]) => {
 };
 
 export const getCountryList = async () => {
-    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/countries`;
+    const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/countries`;
     try {
         const res = await fetch(endpoint);
         return res.json();
@@ -23,7 +23,7 @@ export const getCountryList = async () => {
 };
 
 export const getCountriesWithCoinsList = async () => {
-    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/countries/with-coins`;
+    const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/countries/with-coins`;
     try {
         const res = await fetch(endpoint);
         return res.json();

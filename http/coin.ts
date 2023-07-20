@@ -5,17 +5,21 @@ import { coin as CoinType } from "@prisma/client";
 //* Coin
 
 export async function getCoins(max_coins: number) {
-    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/latest?max=${max_coins}`;
-    const res = await fetch(endpoint, { next: { revalidate: 600 } });
-
-    if (!res.ok) {
-        console.log(res);
+    const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coins/latest?max=${max_coins}`;
+    try {
+        const res = await fetch(endpoint, { headers: { 'Content-Type': 'application/json' }, next: { revalidate: 600 } });
+        if (!res.ok) {
+            throw new Error(`Failed to fetch coins. Status: ${res.status}`);
+        }
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        // handle error here
     }
-    return await res.json();
 }
 
 export const saveNewCoin = async (payload: CoinInputType) => {
-    const coin = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/coin`, {
+    const coin = await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coin`, {
         method: 'POST',
         body: JSON.stringify(payload),
     });
@@ -23,7 +27,7 @@ export const saveNewCoin = async (payload: CoinInputType) => {
 };
 
 export const addImageToCoin = async (payload: ImageInputType) => {
-    const image = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/coin/add-image`, {
+    const image = await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coin/add-image`, {
         method: 'PATCH',
         body: JSON.stringify(payload),
     });
@@ -31,16 +35,16 @@ export const addImageToCoin = async (payload: ImageInputType) => {
 };
 
 export const getCoinById = async (coinId: number) => {
-    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coin/${coinId}`;
+    const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coin/${coinId}`;
     const res = await fetch(endpoint);
     if (!res.ok) {
-        console.log(res);
+        throw new Error(`Failed to fetch coin with id ${coinId}. Status: ${res.status}`);
     }
     return res.json();
 }
 
 export const getCoinsForCountry = async (countryId: number): Promise<CoinType[]> => {
-    const endpoint = `${appconfig.envs.dev.clientBaseUrl}/api/coins/country/${countryId}`;
+    const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coins/country/${countryId}`;
     console.log(endpoint)
     const res = await fetch(endpoint);
     if (!res.ok) {

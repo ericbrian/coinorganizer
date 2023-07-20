@@ -4,7 +4,7 @@ import appconfig from "@/appconfig";
 import { CollectionInputType } from "@/global";
 
 export const saveCoinInCollection = async (payload: CollectionInputType) => {
-    const coin = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/collection`, {
+    const coin = await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/collection`, {
         method: 'POST',
         body: JSON.stringify(payload),
     });
@@ -12,5 +12,5 @@ export const saveCoinInCollection = async (payload: CollectionInputType) => {
 };
 
 export const getUserCollectionItems = async () => {
-    return await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/collection`).then((res) => res.json());
+    return await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/collection`).then((res) => res.json());
 }

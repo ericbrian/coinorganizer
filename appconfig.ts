@@ -8,9 +8,15 @@ const appconfig = {
     },
     cdn: "https://coin-organizer.b-cdn.net",
     envs: {
-        dev: {
+        development: {
             clientBaseUrl: "http://localhost:3000",
         },
+        test: {
+            clientBaseUrl: "http://localhost:3000",
+        },
+        production: {
+            clientBaseUrl: "http://localhost:3000",
+        }
     },
 };
 

@@ -23,7 +23,7 @@ const authOptions: NextAuthOptions = {
                     password: credentials?.password,
                 };
 
-                const res = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/tokens`, {
+                const res = await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/tokens`, {
                     method: 'POST',
                     body: JSON.stringify(payload),
                     headers: {
