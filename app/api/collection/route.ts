@@ -1,6 +1,7 @@
-import { convertToPrismaCollectionCreateInput } from "@/lib/utils";
-import prisma from "@/prisma/client";
-import { Prisma } from "@prisma/client";
+import { convertToPrismaCollectionCreateInput } from "@/utils";
+import { Prisma, PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
 import { NextResponse } from "next/server";
 
 export async function GET() {

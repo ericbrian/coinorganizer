@@ -16,13 +16,13 @@ interface EventTarget {
   value: any;
 }
 
-type ImageInput = {
+type ImageInputType = {
   url: string;
   is_preferred: boolean;
   coin_id: number;
 }
 
-type CoinInput = {
+type CoinInputType = {
   faceValue: number;
   obverse: string;
   reverse: string;
@@ -50,7 +50,7 @@ type CoinInput = {
   reverseEngravers: engraverDb;
 };
 
-type CollectionInput = {
+type CollectionInputType = {
   coin: coinDb;
   collectableType: enumCollectionsCollectableType;
   year: string;
@@ -70,7 +70,7 @@ type SparseCountryListType = {
   short_name: string;
 };
 
-type EngraverInput = {
+type EngraverInputType = {
   name: string;
   comments: string;
 };

@@ -1,4 +1,6 @@
-import prisma from "@/prisma/client";
+import { Prisma, PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
 import { engraver as engraverDb } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 

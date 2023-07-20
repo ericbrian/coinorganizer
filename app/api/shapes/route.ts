@@ -1,4 +1,5 @@
-import prisma from "@/prisma/client";
+import { Prisma, PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 import { shape as shapeDb } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 

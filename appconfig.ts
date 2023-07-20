@@ -6,7 +6,7 @@ const appconfig = {
     mastadon: "https://mstdn.social/@EricBrian",
     bluesky: "https://bsky.app/profile/ericbrian.bsky.social",
   },
-  cdn: "https://coin-organizer.b-cdn.net/coin-images/",
+  cdn: "https://coin-organizer.b-cdn.net",
   envs: {
     dev: {
       clientBaseUrl: "http://localhost:3000",

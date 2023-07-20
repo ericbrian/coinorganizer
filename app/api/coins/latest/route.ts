@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "../../../../prisma/client";
+import { Prisma, PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
 import { coin as dbCoin, image as dbImage } from "@prisma/client";
 
 type LatestCoins = (dbCoin & { image: dbImage[] })[];

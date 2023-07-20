@@ -1,10 +1,9 @@
 //* Collection
 
 import appconfig from "@/appconfig";
-import { CollectionInput } from "@/global";
-import { collection as collectionDb } from "@prisma/client";
+import { CollectionInputType } from "@/global";
 
-export const saveCoinInCollection = async (payload: CollectionInput) => {
+export const saveCoinInCollection = async (payload: CollectionInputType) => {
     const coin = await fetch(`${appconfig.envs.dev.clientBaseUrl}/api/collection`, {
         method: 'POST',
         body: JSON.stringify(payload),

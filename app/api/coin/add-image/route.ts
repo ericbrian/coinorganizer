@@ -1,6 +1,6 @@
 import { convertToPrismaCoinCreateInput } from "@/lib/utils";
-import prisma from "@/prisma/client";
-import { Prisma } from "@prisma/client";
+import { Prisma, PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 export async function PATCH(req: Request) {
     const data = await req.json();
