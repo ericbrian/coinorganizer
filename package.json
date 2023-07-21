@@ -26,6 +26,7 @@
         "eslint-config-next": "13.4.10",
         "eslint-config-prettier": "^8.8.0",
         "limiter": "^2.1.0",
+        "moment": "^2.29.4",
         "next": "13.4.10",
         "next-auth": "^4.22.1",
         "prettier": "^3.0.0",

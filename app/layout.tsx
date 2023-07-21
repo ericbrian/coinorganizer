@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import ThemeRegistry from './ThemeRegistry';
-import ResponsiveAppBar from './context-components/Header';
 
 export const metadata: Metadata = {
     title: 'Create Next App',

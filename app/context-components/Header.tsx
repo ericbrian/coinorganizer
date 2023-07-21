@@ -110,6 +110,15 @@ function Header() {
                                     Coins
                                 </Typography>
                             </MenuItem>
+                            <MenuItem
+                                component={Link}
+                                href={'/pages/adminfunctions'}
+                                onClick={handleCloseNavMenu}
+                            >
+                                <Typography textAlign="center">
+                                    Admin Functions
+                                </Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                     <TollIcon
@@ -145,6 +154,13 @@ function Header() {
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
                             Coins
+                        </Button>
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            href={'/admin'}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Admin Functions
                         </Button>
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
