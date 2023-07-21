@@ -22,11 +22,14 @@ export default async function page() {
     return (
         <Container>
             <Box>
+                <Typography variant="body2" gutterBottom>
+                    <Link href="../">&lt;&lt;&lt; Go Back</Link>
+                </Typography>
                 <Typography variant="h4" style={{ fontWeight: 'bold' }}>
                     Country List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    <Link href="/admin/country/create">Create new country</Link>
+                    <Link href="/admin/country/create">Create new Country</Link>
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -61,7 +64,6 @@ export default async function page() {
                                         )}
                                     </TableCell>
                                     <TableCell>
-                                        {' '}
                                         {moment(country.updated_at).format(
                                             'MMM DD, YYYY, HH:mm:ss',
                                         )}
