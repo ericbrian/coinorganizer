@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
 export default async function Home() {
     const MAX_COINS: number = 5;
     const coins: CoinType[] = await getCoins(MAX_COINS);
-    console.log('coins', coins);
 
     return (
         <main>

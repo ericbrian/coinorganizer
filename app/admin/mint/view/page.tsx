@@ -29,7 +29,7 @@ export default async function page() {
                     Mint List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    <Link href="/admin/country/create">Create new Mint</Link>
+                    <Link href="/admin/mint/create">Create new Mint</Link>
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">

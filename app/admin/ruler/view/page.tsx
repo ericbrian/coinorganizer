@@ -29,7 +29,7 @@ export default async function page() {
                     Ruler List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    <Link href="/admin/country/create">Create new Ruler</Link>
+                    <Link href="/admin/ruler/create">Create new Ruler</Link>
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">

@@ -29,7 +29,7 @@ export default async function page() {
                     Period List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    <Link href="/admin/country/create">Create new Period</Link>
+                    <Link href="/admin/period/create">Create new Period</Link>
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">

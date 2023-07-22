@@ -28,7 +28,7 @@ export default async function page() {
                     Currency List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    <Link href="/admin/country/create">
+                    <Link href="/admin/currency/create">
                         Create new Currency
                     </Link>
                 </Typography>

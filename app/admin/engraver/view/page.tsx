@@ -29,7 +29,7 @@ export default async function page() {
                     Engraver/Designer List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    <Link href="/admin/country/create">
+                    <Link href="/admin/engraver/create">
                         Create new Engraver/Designer
                     </Link>
                 </Typography>
