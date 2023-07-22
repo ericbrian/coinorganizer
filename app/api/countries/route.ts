@@ -10,6 +10,9 @@ export async function GET(req: NextRequest) {
             orderBy: {
                 short_name: "asc",
             },
+            include: {
+                country: true
+            }
         });
         return NextResponse.json(countries);
     } catch (error) {

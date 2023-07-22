@@ -12,13 +12,13 @@ import {
     TableRow,
     TableHead,
 } from '@mui/material';
-import { country as CountryType } from '@prisma/client';
+import { coin as CoinType } from '@prisma/client';
 import moment from 'moment';
 import React from 'react';
 
 export default async function page() {
-    const countries: CountryType[] = await getCountryList();
-    console.log('countries', countries[0]);
+    const coins: CoinType[] = await getCountryList();
+
     return (
         <Container>
             <Box>
@@ -29,7 +29,7 @@ export default async function page() {
                     Country List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    <Link href="/admin/country/create">Create new Country</Link>
+                    <Link href="/admin/coin/create">Create new Coin</Link>
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -54,8 +54,8 @@ export default async function page() {
                                     <TableCell>{country.name}</TableCell>
                                     <TableCell>{country.short_name}</TableCell>
                                     <TableCell>
-                                        {country.country
-                                            ? `${country.country.short_name} (${country.country.id})`
+                                        {country.territory_of_country_id
+                                            ? country.territory_of_country_id
                                             : '--'}
                                     </TableCell>
                                     <TableCell>

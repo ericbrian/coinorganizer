@@ -18,6 +18,13 @@ export default function page() {
                     <Button
                         variant="contained"
                         color="primary"
+                        href="/admin/coin/view"
+                    >
+                        Coin
+                    </Button>{' '}
+                    <Button
+                        variant="contained"
+                        color="primary"
                         href="/admin/country/view"
                     >
                         Country
