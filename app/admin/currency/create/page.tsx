@@ -48,7 +48,6 @@ export default function page() {
                         value={symbol}
                         fullWidth
                         sx={{ mb: 3 }}
-                        multiline
                     />
                     <TextField
                         label="Years"
@@ -60,7 +59,6 @@ export default function page() {
                         value={years}
                         fullWidth
                         sx={{ mb: 3 }}
-                        multiline
                     />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={['DatePicker']}>

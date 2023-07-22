@@ -8,7 +8,7 @@ export default function page() {
     const [comments, setComments] = useState('');
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-        throw new Error('Function not implemented.');
+        event.preventDefault();
     }
 
     return (
@@ -35,7 +35,7 @@ export default function page() {
                         onChange={(e) => setComments(e.target.value)}
                         variant="outlined"
                         color="secondary"
-                        type="password"
+                        type="text"
                         value={comments}
                         fullWidth
                         sx={{ mb: 3 }}
