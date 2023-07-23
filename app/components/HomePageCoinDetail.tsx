@@ -70,17 +70,18 @@ export default function HomePageCoinDetail(props: { coin: dbCoin }) {
                         </Box>
                     </Grid>
                     <Grid item xs={2}>
-                        {' '}
-                        <CardMedia
-                            component="img"
-                            sx={{ width: 160, borderRadius: '15px' }}
-                            image={
-                                appconfig.cdn +
-                                '/coin-images/' +
-                                coin.image[0].url
-                            }
-                            alt="Live from space album cover"
-                        />
+                        {coin?.image?.length > 0 && (
+                            <CardMedia
+                                component="img"
+                                sx={{ width: 160, borderRadius: '15px' }}
+                                image={
+                                    appconfig.cdn +
+                                    '/coin-images/' +
+                                    coin.image[0].url
+                                }
+                                alt="Live from space album cover"
+                            />
+                        )}
                     </Grid>
                 </Grid>
             </Card>

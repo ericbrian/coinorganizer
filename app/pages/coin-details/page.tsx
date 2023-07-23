@@ -127,10 +127,32 @@ export default async function CoinDetails({ searchParams }: any) {
                                 {escapedNewLineToLineBreakTag(coin.obverse)}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
+                                {coin.engraver?.name && (
+                                    <>
+                                        {' '}
+                                        <span style={{ fontWeight: 'bold' }}>
+                                            Obverse Engraver/Designer:{' '}
+                                        </span>
+                                        {coin.engraver.name}
+                                    </>
+                                )}
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
                                 <span style={{ fontWeight: 'bold' }}>
                                     Reverse:{' '}
                                 </span>
                                 {escapedNewLineToLineBreakTag(coin.reverse)}
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                                {coin.engraver?.name && (
+                                    <>
+                                        {' '}
+                                        <span style={{ fontWeight: 'bold' }}>
+                                            Reverse Engraver/Designer:{' '}
+                                        </span>
+                                        {coin.engraver.name}
+                                    </>
+                                )}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
                                 <span style={{ fontWeight: 'bold' }}>
