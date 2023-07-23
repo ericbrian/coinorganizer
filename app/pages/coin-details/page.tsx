@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { coin as CoinType, image as ImageType } from '@prisma/client';
-import Image from 'next/image';
 import Link from 'next/link';
 import LinkIcon from '@mui/icons-material/Link';
 import { getCoinById } from '@/http/coin';
@@ -171,14 +170,8 @@ export default async function CoinDetails({ searchParams }: any) {
                                             '/coin-images/' +
                                             image.url
                                         }
-                                        alt={
-                                            `${coin.common_name} Image` ??
-                                            'Coin image'
-                                        }
-                                        title={
-                                            `${coin.common_name} Image` ??
-                                            'Coin image'
-                                        }
+                                        alt={coin.common_name ?? 'Coin image'}
+                                        title={coin.common_name ?? 'Coin image'}
                                     />
                                 ))}
                         </Grid>

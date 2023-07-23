@@ -2990,9 +2990,9 @@ INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (6, 'Elizabeth II', 'Windsor', '1952 - 2022', '2023-01-14 10:44:42.142798+00', '2023-01-14 10:44:42.142798+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (14, 'Frederick IX', 'Schleswig-Holstein-Sonderburg-Glücksburg', '1947 - 1972', '2023-05-25 18:28:07.869917+00', '2023-05-25 18:28:07.869917+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (13, 'Albert II', 'Grimaldi', '2005 - Present', '2023-04-03 22:10:04.063597+00', '2023-04-03 22:10:04.063597+00');
-INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (15, 'Shōwa', NULL, '1926 - 1989', '2023-07-03 15:35:48.489764+00', '2023-07-03 15:35:48.489764+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (16, 'Olav V', 'Glücksburg', '1957 - 1991', '2023-07-03 23:00:27.847995+00', '2023-07-03 23:00:27.847995+00');
 INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (7, 'Charles III', 'Windsor', '2022 - Present', '2023-01-14 10:44:42.142798+00', '2023-01-14 10:44:42.142798+00');
+INSERT INTO public.ruler (id, name, house, years, created_at, updated_at) VALUES (15, 'Shōwa', 'Imperial House of Japan', '1926 - 1989', '2023-07-03 15:35:48.489764+00', '2023-07-03 15:35:48.489764+00');
 
 --
 -- Data for Name: ruler_country; Type: TABLE DATA; Schema: public; Owner: postgres
