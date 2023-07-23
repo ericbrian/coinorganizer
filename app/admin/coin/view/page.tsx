@@ -24,7 +24,7 @@ export default async function page() {
                     <Link href="../">&lt;&lt;&lt; Go Back</Link>
                 </Typography>
                 <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-                    Country List
+                    Coin List
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                     <Link href="/admin/coin/create">Create new Coin</Link>
