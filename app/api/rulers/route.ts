@@ -1,14 +1,15 @@
-import { Prisma, PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
-import { ruler as rulerDb } from "@prisma/client";
+import { ruler as RulerType } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
     try {
-        const rulers: rulerDb[] = await prisma.ruler.findMany({
+        const rulers: RulerType[] = await prisma.ruler.findMany({
             include: {
                 ruler_country: true,
             },
+            orderBy: { name: 'asc' },
         });
         return NextResponse.json(rulers);
     } catch (error) {
