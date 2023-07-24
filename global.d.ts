@@ -1,13 +1,13 @@
 import {
-    coin as coinDb,
-    country as countryDb,
-    country_currency as countryCurrencyDb,
-    currency as currencyDb,
-    engraver as engraverDb,
-    mint as mintDb,
-    period as periodDb,
-    ruler as rulerDb,
-    shape as shapeDb,
+    coin as CoinType,
+    country as CountryType,
+    country_currency as CountryCurrencyType,
+    currency as CurrencyType,
+    engraver as EngraverType,
+    mint as MintType,
+    period as PeriodType,
+    ruler as RulerType,
+    shape as ShapeType,
     enumCollectionsCollectableType
 } from "@prisma/client";
 import { type } from "os";
@@ -40,22 +40,23 @@ type CoinInputType = {
     isBullion: boolean;
     numistaNumber: string;
     comments: string;
-    country: countryDb;
-    currency: currencyDb;
-    shape: shapeDb;
-    ruler: rulerDb;
-    period: periodDb;
-    mints: mintDb[];
-    obverseEngravers: engraverDb;
-    reverseEngravers: engraverDb;
+
+    country: CountryType;
+    currency: CurrencyType;
+    shape: ShapeType;
+    ruler: RulerType;
+    period: PeriodType;
+    mints: MintType[];
+    obverseEngravers: EngraverType;
+    reverseEngravers: EngraverType;
 };
 
 type CollectionInputType = {
-    coin: coinDb;
+    coin: CoinType;
     collectableType: enumCollectionsCollectableType;
     year: string;
-    mint: mintDb;
-    paidCurrency: currencyDb
+    mint: MintType;
+    paidCurrency: CurrencyType
     paidAmount: number;
     sourcedFrom: string;
     sourcedWhen: string;

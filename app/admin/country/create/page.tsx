@@ -1,6 +1,6 @@
 'use client';
 
-import { getCountryList } from '@/http/country';
+import { getCountryById, getCountryList } from '@/http/country';
 import {
     Container,
     Box,
@@ -13,21 +13,55 @@ import {
 } from '@mui/material';
 import { country as CountryType } from '@prisma/client';
 import React, { FormEvent, useEffect, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function page() {
-    const [isLoaded, setIsLoaded] = useState(false);
+const getIdFromPath = (pathname: string): number | null => {
+    const parts = pathname.split('/');
+    const id = parts[parts.length - 1];
+    if (isNaN(id as any)) {
+        return null;
+    }
+    return parseInt(id, 10);
+};
+
+export default function AddCountry() {
+    const pathname = usePathname();
+
+    const [isLoading, setIsLoading] = useState(true);
     const [name, setName] = useState('');
     const [shortName, setShortName] = useState('');
     const [parent, setParent] = useState<CountryType | null>(null);
     const [isActive, setIsActive] = useState(true);
+    const [editId, setEditId] = useState<number | null>(null);
+    const [editedCountry, setEditedCountry] = useState<CountryType | null>(
+        null,
+    );
 
     const [countryList, setCountryList] = useState<CountryType[]>([]);
 
     useEffect(() => {
         getCountryList().then((data) => {
             setCountryList(data);
+            setEditId(getIdFromPath(pathname));
+
+            if (!editId) {
+                setIsLoading(false);
+            }
         });
     }, []);
+
+    useEffect(() => {
+        if (editId) {
+            getCountryById(editId).then((data) => {
+                setEditedCountry(data);
+                setName(data.name);
+                setShortName(data.short_name);
+                setParent(data.parent);
+                setIsActive(data.is_active);
+                setIsLoading(false);
+            });
+        }
+    }, [editId]);
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
@@ -37,10 +71,10 @@ export default function page() {
         <Container>
             <Box>
                 <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-                    Country - Create
+                    Country - {editId}
                 </Typography>
-                {isLoaded && <div>Loading...</div>}
-                {!isLoaded && (
+                {isLoading && <div>Loading...</div>}
+                {!isLoading && (
                     <form autoComplete="off" onSubmit={handleSubmit}>
                         <TextField
                             label="Official Name"

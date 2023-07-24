@@ -1,7 +1,7 @@
-import React from "react";
-import { image as dbImage } from "@prisma/client";
-import Image from "next/image";
-import appconfig from "@/appconfig";
+import React from 'react';
+import { image as dbImage } from '@prisma/client';
+import Image from 'next/image';
+import appconfig from '@/appconfig';
 
 export default function CoinImage(props: { images: dbImage[] }) {
     const images = props.images;
@@ -9,7 +9,7 @@ export default function CoinImage(props: { images: dbImage[] }) {
     if (!images || images.length === 0) return <div>none</div>;
 
     let preferredImage = images.filter(
-        (image: dbImage) => image.is_preferred
+        (image: dbImage) => image.is_preferred,
     )[0];
     if (!preferredImage) {
         preferredImage = images[0];

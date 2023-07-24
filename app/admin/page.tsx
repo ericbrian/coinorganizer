@@ -73,6 +73,25 @@ export default function page() {
                     </Button>{' '}
                 </Typography>
             </Box>
+            <Box sx={{ mt: 5 }}>
+                <Typography
+                    variant="h4"
+                    style={{ fontWeight: 'bold' }}
+                    gutterBottom
+                >
+                    Other
+                </Typography>
+
+                <Typography variant="h6">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        href="/admin/coin/add-images-to-coins"
+                    >
+                        Add Images to Coins
+                    </Button>{' '}
+                </Typography>
+            </Box>
         </Container>
     );
 }

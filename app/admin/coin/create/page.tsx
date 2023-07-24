@@ -15,7 +15,6 @@ import Link from 'next/link';
 
 import {
     Prisma,
-    coin as CoinType,
     country as CountryType,
     currency as CurrencyType,
     engraver as EngraverType,

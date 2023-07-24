@@ -22,6 +22,17 @@ export const getCountryList = async () => {
     return [];
 };
 
+export const getCountryById = async (countryId: number) => {
+    const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/country/${countryId}`;
+    try {
+        const res = await fetch(endpoint);
+        return res.json();
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
+};
+
 export const getCountriesWithCoinsList = async () => {
     const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/countries/with-coins`;
     try {

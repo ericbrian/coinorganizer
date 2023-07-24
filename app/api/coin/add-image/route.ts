@@ -1,4 +1,3 @@
-import { convertToPrismaCoinCreateInput } from "@/lib/utils";
 import { Prisma, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
