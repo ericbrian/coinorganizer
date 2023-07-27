@@ -8,6 +8,11 @@ import { addImageToCoin } from '@/http/coin';
 import allImages from './images.json';
 import { Prisma } from '@prisma/client';
 
+interface EventTarget {
+    id: any;
+    appendChild: any;
+}
+
 export default function page() {
     const [coins, setCoins] = useState<any[]>([]);
     const [images, setImages] = useState<{ url: string }[]>([]);
@@ -88,13 +93,18 @@ export default function page() {
 
     const allowDrop = (e: any) => e.preventDefault();
 
-    const drag = (e: any) => e.dataTransfer.setData('text', e.target.id);
+    const drag = (e: React.DragEvent) => {
+        const eventTarget: EventTarget = e.target as unknown as EventTarget;
+        e.dataTransfer?.setData('text', eventTarget.id);
+    };
 
-    const drop = (e: any) => {
+    const drop = (e: React.DragEvent) => {
         e.preventDefault();
 
-        const coinId = e.target.id.split('-')[1];
-        const data = e.dataTransfer.getData('text');
+        const eventTarget: EventTarget = e.target as unknown as EventTarget;
+
+        const coinId = eventTarget.id.split('-')[1];
+        const data = e.dataTransfer?.getData('text');
         const payload = { coin_id: +coinId, url: data, is_preferred: false };
 
         console.log({ coinId });
@@ -102,10 +112,10 @@ export default function page() {
         console.log({ payload: JSON.stringify(payload) });
 
         if (coinId && data) {
-            e.target.appendChild(document.getElementById(data));
+            eventTarget.appendChild(document.getElementById(data));
             saveImageToCoinRecord(payload);
         } else {
-            saveImageToCoinRecord(JSON.stringify(payload));
+            throw new Error('coinId or data is null');
         }
     };
 
