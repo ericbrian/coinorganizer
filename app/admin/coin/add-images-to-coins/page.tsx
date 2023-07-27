@@ -105,15 +105,14 @@ export default function page() {
 
         const coinId = eventTarget.id.split('-')[1];
         const data = e.dataTransfer?.getData('text');
-        const payload = { coin_id: +coinId, url: data, is_preferred: false };
-
-        console.log({ coinId });
-        console.log({ data });
-        console.log({ payload: JSON.stringify(payload) });
 
         if (coinId && data) {
             eventTarget.appendChild(document.getElementById(data));
-            saveImageToCoinRecord(payload);
+            saveImageToCoinRecord({
+                coin_id: +coinId,
+                url: data,
+                is_preferred: false,
+            });
         } else {
             throw new Error('coinId or data is null');
         }
@@ -157,6 +156,7 @@ export default function page() {
                                     alt={name}
                                     draggable="true"
                                     onDragStart={(e) => drag(e)}
+                                    id={name}
                                 />
                             </div>
                         ))}
