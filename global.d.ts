@@ -51,6 +51,15 @@ type CoinInputType = {
     reverseEngravers: EngraverType;
 };
 
+type CurrencyInputType = {
+    name: string;
+    shortName: string;
+    years: string;
+    comments: string;
+    displayShortNameAtLeft: boolean;
+    demonitizedDate: string;
+}
+
 type CollectionInputType = {
     coin: CoinType;
     collectableType: enumCollectionsCollectableType;

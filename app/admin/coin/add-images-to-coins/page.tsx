@@ -103,7 +103,9 @@ export default function page() {
 
         const eventTarget: EventTarget = e.target as unknown as EventTarget;
 
-        const coinId = eventTarget.id.split('-')[1];
+        const coinId = eventTarget.id.split('-').at(-1);
+        const preferred =
+            eventTarget.id.split('-').at(-2) === 'PREFERRED' ? true : false;
         const data = e.dataTransfer?.getData('text');
 
         if (coinId && data) {
@@ -111,7 +113,7 @@ export default function page() {
             saveImageToCoinRecord({
                 coin_id: +coinId,
                 url: data,
-                is_preferred: false,
+                is_preferred: preferred,
             });
         } else {
             throw new Error('coinId or data is null');
@@ -166,24 +168,54 @@ export default function page() {
                     {coins.length > 0 &&
                         coins.map((coin) => (
                             <div
-                                key={coin.id}
-                                id={'coin-' + coin.id}
                                 style={{
                                     display: 'inline-block',
-                                    height: '180px',
-                                    width: '180px',
                                     border: '1px solid black',
                                     margin: '5px',
                                     padding: '2px',
+                                    width: '370px',
                                 }}
-                                onDrop={(e) => drop(e)}
-                                onDragOver={(e) => allowDrop(e)}
                             >
-                                {coin.country_name}
-                                <br />
-                                {coin.common_name}, {coin.year_start}-
-                                {coin.year_end} ({coin.pretty_face_value}) (#
-                                {coin.id})
+                                <div>
+                                    {coin.country_name}
+                                    <br />
+                                    {coin.common_name}, {coin.year_start}-
+                                    {coin.year_end} ({coin.pretty_face_value})
+                                    (#
+                                    {coin.id})
+                                </div>
+                                <div
+                                    key={coin.id}
+                                    id={'coin-PREFERRED-' + coin.id}
+                                    style={{
+                                        display: 'inline-block',
+                                        height: '30px',
+                                        width: '170px',
+                                        border: '1px solid black',
+                                        margin: '5px',
+                                        padding: '2px',
+                                    }}
+                                    onDrop={(e) => drop(e)}
+                                    onDragOver={(e) => allowDrop(e)}
+                                >
+                                    PREFERRED
+                                </div>
+                                <div
+                                    key={coin.id}
+                                    id={'coin-NOTPREFERRED-' + coin.id}
+                                    style={{
+                                        display: 'inline-block',
+                                        height: '30px',
+                                        width: '170px',
+                                        border: '1px solid black',
+                                        margin: '5px',
+                                        padding: '2px',
+                                    }}
+                                    onDrop={(e) => drop(e)}
+                                    onDragOver={(e) => allowDrop(e)}
+                                >
+                                    NOT PREFERRED
+                                </div>
                             </div>
                         ))}
                 </Grid>

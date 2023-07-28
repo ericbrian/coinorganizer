@@ -1,24 +1,73 @@
 'use client';
 
-import { Container, Box, Typography, Button, TextField } from '@mui/material';
+import {
+    Container,
+    Box,
+    Typography,
+    Button,
+    TextField,
+    Snackbar,
+    Alert,
+    FormControlLabel,
+    Checkbox,
+} from '@mui/material';
 import React, { FormEvent, useState } from 'react';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import { CurrencyInputType } from '@/global';
+import { Prisma } from '@prisma/client';
+import { saveNewCurrency } from '@/http/currency';
 
 export default function page() {
     const [name, setName] = useState('');
-    const [symbol, setSymbol] = useState('');
+    const [shortName, setShortName] = useState('');
+    const [comments, setComments] = useState('');
     const [years, setYears] = useState('');
+    const [displayShortNameAtLeft, setDisplayShortNameAtLeft] = useState(true);
     const [demonitizedDate, setDemonitizedDate] = useState('');
+    const [snackbarAlertOpen, setSnackbarAlertOpen] = useState(false);
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+    const getFormValues = (): CurrencyInputType => {
+        return {
+            name,
+            shortName,
+            years,
+            comments,
+            displayShortNameAtLeft,
+            demonitizedDate,
+        };
+    };
+
+    const clearForm = () => {
+        setName('');
+        setShortName('');
+        setComments('');
+        setYears('');
+        setDisplayShortNameAtLeft(true);
+        setDemonitizedDate('');
+    };
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
 
-        console.log(name, symbol, years, demonitizedDate);
-    }
+        const payload: CurrencyInputType = getFormValues();
+        saveNewCurrency(payload)
+            .then(() => {
+                setSnackbarAlertOpen(true);
+                clearForm();
+            })
+            .catch((e: any) => {
+                if (e instanceof Prisma.PrismaClientKnownRequestError) {
+                    const target = e.meta?.target;
+                    // The .code property can be accessed in a type-safe manner
+                    if (e.code === 'P2002') {
+                        console.log(
+                            `There is a unique constraint violation, a new coin cannot be created in field ${target}.`,
+                        );
+                    }
+                }
+                throw e;
+            });
+    };
 
     return (
         <Container>
@@ -41,13 +90,14 @@ export default function page() {
                     />
                     <TextField
                         label="Symbol"
-                        onChange={(e) => setSymbol(e.target.value)}
+                        onChange={(e) => setShortName(e.target.value)}
+                        required
                         variant="outlined"
                         color="secondary"
                         type="text"
-                        value={symbol}
-                        fullWidth
                         sx={{ mb: 3 }}
+                        fullWidth
+                        value={shortName}
                     />
                     <TextField
                         label="Years"
@@ -60,26 +110,58 @@ export default function page() {
                         fullWidth
                         sx={{ mb: 3 }}
                     />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={['DatePicker']}>
-                            <DatePicker
-                                label="Demonitized Date"
-                                sx={{ mb: 3 }}
-                                value={demonitizedDate}
-                                onChange={(value) =>
-                                    setDemonitizedDate(
-                                        (value as never as dayjs.Dayjs).format(
-                                            'YYYY-MM-DDTHH:mm:ssZ',
-                                        ),
-                                    )
-                                }
-                            />
-                        </DemoContainer>
-                    </LocalizationProvider>
+                    <TextField
+                        label="Comments"
+                        onChange={(e) => setComments(e.target.value)}
+                        variant="outlined"
+                        color="secondary"
+                        type="text"
+                        value={comments}
+                        fullWidth
+                        sx={{ mb: 3 }}
+                    />
+                    <FormControlLabel
+                        control={<Checkbox defaultChecked />}
+                        label="Display the Symbol at the left of the amount"
+                        onChange={() =>
+                            setDisplayShortNameAtLeft(!displayShortNameAtLeft)
+                        }
+                        checked={displayShortNameAtLeft}
+                    />
+                    <TextField
+                        id="demonitized-date"
+                        label="Demonitized Date"
+                        type="date"
+                        color="secondary"
+                        value={demonitizedDate}
+                        fullWidth
+                        sx={{ mb: 3, mt: 3 }}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                        onChange={(value) =>
+                            setDemonitizedDate(
+                                (value as never as dayjs.Dayjs).format(
+                                    'YYYY-MM-DDTHH:mm:ssZ',
+                                ),
+                            )
+                        }
+                    />
                     <Button variant="contained" color="primary" type="submit">
                         Save
                     </Button>
                 </form>
+                <Snackbar
+                    open={snackbarAlertOpen}
+                    autoHideDuration={6000}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    onClose={() => setSnackbarAlertOpen(false)}
+                >
+                    <Alert severity="success" sx={{ width: '100%' }}>
+                        Coin saved!
+                    </Alert>
+                </Snackbar>
             </Box>
         </Container>
     );

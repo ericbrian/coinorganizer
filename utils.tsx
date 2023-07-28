@@ -11,7 +11,11 @@ import {
     enumCollectionsCollectableType,
 } from '@prisma/client';
 
-import { CoinInputType, CollectionInputType } from '@/global';
+import {
+    CoinInputType,
+    CollectionInputType,
+    CurrencyInputType,
+} from '@/global';
 
 export function engraversSort(a: EngraverType, b: EngraverType) {
     const aParts = a.name.split(' ');
@@ -20,6 +24,21 @@ export function engraversSort(a: EngraverType, b: EngraverType) {
         `${bParts.at(-1)} ${bParts.at(0)}`,
     );
 }
+
+export const convertToPrismaCurrencyCreateInput = (
+    payload: CurrencyInputType,
+) => {
+    return {
+        name: payload.name.trim(),
+        short_name: payload.shortName.trim(),
+        years: payload.years.trim(),
+        comments: payload.comments?.trim() ? payload.comments.trim() : null,
+        display_short_name_at_left: payload.displayShortNameAtLeft ?? true,
+        demonitized_date: payload.demonitizedDate?.trim()
+            ? payload.demonitizedDate.trim()
+            : null,
+    };
+};
 
 export const convertToPrismaCoinCreateInput = (payload: CoinInputType) => {
     let allMints = null;
