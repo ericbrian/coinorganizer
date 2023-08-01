@@ -7,6 +7,24 @@ datasource db {
   url      = env("POSTGRES_LOCAL_COINDB")
 }
 
+model accounts {
+  id                  String  @id
+  user_id             String
+  type                String
+  provider            String
+  provider_account_id String
+  refresh_token       String?
+  access_token        String?
+  expires_at          Int?
+  token_type          String?
+  scope               String?
+  id_token            String?
+  session_state       String?
+  users               users   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([provider, provider_account_id])
+}
+
 model banknote {
   id                    Int             @id(map: "Banknotes_pkey") @default(autoincrement())
   face_value            Decimal         @db.Decimal(8, 3)
@@ -134,6 +152,7 @@ model collection {
   coinset                    coinset?                        @relation(fields: [coinset_id], references: [id], onDelete: Cascade, map: "Collections_coinsetId_fkey")
   mint                       mint?                           @relation(fields: [mint_id], references: [id], onDelete: Cascade, map: "Collections_mintId_fkey")
   currency                   currency?                       @relation(fields: [purchased_with_currency_id], references: [id], onDelete: Cascade, map: "Collections_purchasedWithCurrencyId_fkey")
+  users                      users?                          @relation(fields: [owner_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Fk_collection_user")
 }
 
 model country {
@@ -144,7 +163,7 @@ model country {
   created_at              DateTime           @default(now()) @db.Timestamptz(6)
   updated_at              DateTime           @default(now()) @db.Timestamptz(6)
   territory_of_country_id Int?
-  iso_3166_alpha_2        String?            @db.VarChar(2)
+  iso_3166_alpha_2        String             @db.VarChar(2)
   banknote                banknote[]
   coin                    coin[]
   country                 country?           @relation("countryTocountry", fields: [territory_of_country_id], references: [id], map: "Countries_territoryOfCountryId_fkey")
@@ -275,6 +294,14 @@ model ruler_country {
   @@index([ruler_id, country_id], map: "RulerCountry_rulerId_countryId_idx")
 }
 
+model sessions {
+  id            String   @id
+  session_token String   @unique
+  user_id       String
+  expires       DateTime
+  users         users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
 model shape {
   id         Int      @id(map: "Shapes_pkey") @default(autoincrement())
   name       String?  @unique(map: "Shapes_name_key") @db.VarChar(20)
@@ -283,55 +310,24 @@ model shape {
   coin       coin[]
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String  @map("user_id")
-  type              String
-  provider          String
-  providerAccountId String  @map("provider_account_id")
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
+model users {
+  id             String       @id
+  name           String?
+  email          String       @unique
+  email_verified DateTime?
+  image          String?
+  password       String
+  accounts       accounts[]
+  collection     collection[]
+  sessions       sessions[]
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id")
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("sessions")
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  password      String
-  accounts      Account[]
-  sessions      Session[]
-
-  @@map("users")
-}
-
-model VerificationToken {
+model verificationtokens {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
-  @@map("verificationtokens")
 }
 
 enum enumCoinEngraversSide {

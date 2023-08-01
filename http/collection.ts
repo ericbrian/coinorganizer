@@ -14,3 +14,8 @@ export const saveCoinInCollection = async (payload: CollectionInputType) => {
 export const getUserCollectionItems = async () => {
     return await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/collection`).then((res) => res.json());
 }
+
+export const getUserCollectionCountries = async () => {
+    return await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coins/byuserandcountry`).then((res) => res.json());
+
+}

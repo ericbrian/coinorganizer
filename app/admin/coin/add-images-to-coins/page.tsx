@@ -48,10 +48,10 @@ export default function page() {
 
     const filteredImages = filterImages(images, allImages);
 
-    const saveImageToCoinRecord = (payload: any) => {
+    const saveImageToCoinRecord = async (payload: any) => {
         addImageToCoin(payload)
             .then((res) => {
-                // Pass, nothing to do
+                document.getElementById('image-div-' + payload.url)?.remove();
             })
             .catch((e) => {
                 if (e instanceof Prisma.PrismaClientKnownRequestError) {
@@ -145,6 +145,7 @@ export default function page() {
                                     margin: '1px',
                                     padding: '2px',
                                 }}
+                                id={'image-div-' + name}
                             >
                                 <CardMedia
                                     component="img"

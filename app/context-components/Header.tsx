@@ -17,7 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TollIcon from '@mui/icons-material/Toll';
 import Link from '@mui/material/Link';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Dashboard', 'Account', 'Logout'];
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -191,6 +191,11 @@ function Header() {
                             {settings.map((setting) => (
                                 <MenuItem
                                     key={setting}
+                                    component={Link}
+                                    href={
+                                        '/user/' +
+                                        setting.toLowerCase().replace(' ', '')
+                                    }
                                     onClick={handleCloseUserMenu}
                                 >
                                     <Typography textAlign="center">

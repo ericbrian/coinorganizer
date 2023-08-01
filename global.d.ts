@@ -84,3 +84,16 @@ type EngraverInputType = {
     name: string;
     comments: string;
 };
+
+type CollapsedCollectionType = {
+    [key: string]: CollapsedCollectionDataType;
+};
+
+type CollapsedCollectionDataType = {
+    countryCode: string;
+    countryCodeCount: number;
+};
+
+type CollapsedCostsType = {
+    [key: string]: CollapsedCostsDataType;
+};

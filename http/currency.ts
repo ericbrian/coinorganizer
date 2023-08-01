@@ -1,9 +1,10 @@
 import appconfig from "@/appconfig";
 import { CurrencyInputType } from "@/global";
+import { currency as CurrencyType } from "@prisma/client";
 
 //* Currencies
 
-export const getCurrencyList = async () => {
+export const getCurrencyList = async (): Promise<CurrencyType[]> => {
     const endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/currencies`;
     try {
         const res = await fetch(endpoint);
