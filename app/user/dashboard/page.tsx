@@ -30,7 +30,6 @@ export default function MyCoins() {
             const countryName = item.coin.country.name;
             if (!countryInfos.hasOwnProperty(cc)) {
                 countryInfos[cc] = {
-                    code: cc,
                     count: 1,
                     name: countryName,
                 };
@@ -104,7 +103,6 @@ Count: {count}`,
         // Set infos from the User's collection
         const seriesInfo = Object.keys(collapsedInfo).map((code, index) => {
             const count = collapsedInfo[code].count;
-            const name = collapsedInfo[code].name;
             return {
                 id: code,
                 polygonSettings: {

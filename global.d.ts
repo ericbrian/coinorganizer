@@ -90,7 +90,6 @@ type CollapsedCollectionType = {
 };
 
 type CollapsedCollectionDataType = {
-    code: string;
     count: number;
     name: string;
 };
