@@ -90,8 +90,9 @@ type CollapsedCollectionType = {
 };
 
 type CollapsedCollectionDataType = {
-    countryCode: string;
-    countryCodeCount: number;
+    code: string;
+    count: number;
+    name: string;
 };
 
 type CollapsedCostsType = {

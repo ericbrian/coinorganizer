@@ -27,13 +27,15 @@ export default function MyCoins() {
 
         collectionItems.forEach((item) => {
             const cc = item.coin.country.iso_3166_alpha_2;
+            const countryName = item.coin.country.name;
             if (!countryInfos.hasOwnProperty(cc)) {
                 countryInfos[cc] = {
-                    countryCode: cc,
-                    countryCodeCount: 1,
+                    code: cc,
+                    count: 1,
+                    name: countryName,
                 };
             } else {
-                countryInfos[cc].countryCodeCount += 1;
+                countryInfos[cc].count += 1;
             }
 
             const currency = `${item.currency.name} (${item.currency.short_name})`;
@@ -52,7 +54,6 @@ export default function MyCoins() {
             .join(', ');
 
         setCostInfos(costInfoString);
-        console.log({ countryInfos });
         setCollapsedInfo(countryInfos);
     };
 
@@ -91,7 +92,8 @@ export default function MyCoins() {
         ); // exclude Antarctica
 
         polygonSeries.mapPolygons.template.setAll({
-            tooltipText: '{name}',
+            tooltipText: `{name}
+Count: {count}`,
             templateField: 'polygonSettings',
         });
 
@@ -100,13 +102,15 @@ export default function MyCoins() {
         });
 
         // Set infos from the User's collection
-        const cc = Object.keys(collapsedInfo);
-        const seriesInfo = cc.map((code, index) => {
+        const seriesInfo = Object.keys(collapsedInfo).map((code, index) => {
+            const count = collapsedInfo[code].count;
+            const name = collapsedInfo[code].name;
             return {
                 id: code,
                 polygonSettings: {
                     fill: am5.color(amcolors[index]),
                 },
+                count,
             };
         });
         polygonSeries.data.setAll(seriesInfo);
