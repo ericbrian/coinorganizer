@@ -28,6 +28,10 @@ export default async function page() {
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                     <Link href="/admin/coin/create">Create new Coin</Link>
+                </Typography>{' '}
+                <Typography variant="h5" gutterBottom>
+                    To view coin details, go to the{' '}
+                    <Link href="/pages/coins">Coins</Link> page.
                 </Typography>
             </Box>
         </Container>
