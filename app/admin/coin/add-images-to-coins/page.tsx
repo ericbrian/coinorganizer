@@ -14,6 +14,7 @@ interface EventTarget {
 }
 
 export default function page() {
+    const [loading, setLoading] = useState(true);
     const [coins, setCoins] = useState<any[]>([]);
     const [images, setImages] = useState<{ url: string }[]>([]);
 
@@ -21,6 +22,7 @@ export default function page() {
         getCoinsWithoutImages()
             .then((res) => {
                 setCoins(res);
+                setLoading(false);
             })
             .catch((e) => {});
         getImagesNames()
@@ -165,7 +167,10 @@ export default function page() {
                         ))}
                 </Grid>
                 <Grid xs={6}>
-                    {coins.length === 0 && <div>no coins</div>}
+                    {loading && <div>Loading...</div>}
+                    {!loading && images && coins.length === 0 && (
+                        <div>No coins</div>
+                    )}
                     {coins.length > 0 &&
                         coins.map((coin) => (
                             <div
