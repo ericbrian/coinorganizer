@@ -102,7 +102,9 @@ Count: {count}`,
 
         // Set infos from the User's collection
         const seriesInfo = Object.keys(collapsedInfo).map((code, index) => {
-            const count = collapsedInfo[code].count;
+            const count = collapsedInfo[code].count
+                ? collapsedInfo[code].count
+                : 0;
             return {
                 id: code,
                 polygonSettings: {
@@ -118,7 +120,12 @@ Count: {count}`,
         <Container>
             <Box>
                 <h1>My Coins</h1>
-                <div>Cost of coins: {costInfos}.</div>
+                {costInfos && (
+                    <div>
+                        <strong>Cost of coins</strong>: {costInfos}.
+                    </div>
+                )}
+                {(!costInfos || !collapsedInfo) && <div>Loading...</div>}
                 <div
                     id="chartdiv"
                     style={{ width: '100%', height: '500px' }}
