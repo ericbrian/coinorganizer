@@ -11,7 +11,7 @@ export default function page() {
                     style={{ fontWeight: 'bold' }}
                     gutterBottom
                 >
-                    Lists Management
+                    Data Management
                 </Typography>
 
                 <Typography variant="h6">
