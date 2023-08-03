@@ -349,7 +349,7 @@ CREATE TABLE public.country (
     created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     territory_of_country_id integer,
-    iso_3166_alpha_2 character varying(2)
+    iso_3166_alpha_2 character varying(2) NOT NULL
 );
 
 ALTER TABLE public.country OWNER TO postgres;
@@ -1287,7 +1287,6 @@ INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (317, 0.500, '50 Pence', NULL, '50 Pence', 'Second crowned portrait of HM Queen Elizabeth II right, wearing the Girls of Great Britain and Ireland tiara, legend around.', 'A figure of Britannia seated beside a lion, with a shield resting against her right side, holding a trident in her right hand and an olive branch in her left, denomination below and legend above.', 'Plain', NULL, '1982', '1984', 'Copper-nickel', false, 13.500, 30.000, NULL, '2023-05-14 19:13:01.691+00', '2023-05-14 19:13:01.691+00', NULL, 4, 6, 8, 7, 6, '4226', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (358, 25.000, '25 Schilling', NULL, '250th Anniversary of Maria Theresia''s Birth', 'The Austrian shields surrounded by the country name around the rim and the denomination in the center', 'The bust of Maria Theresia facing right dividing dates', 'Smooth', '** FUENFUNDZWANZIG SCHILLING', '1967', NULL, 'Silver (.800) (Copper .200)', false, 13.000, 30.500, NULL, '2023-05-25 17:49:27.725+00', '2023-05-25 17:49:27.725+00', NULL, 11, NULL, 6, 33, 1, '12436', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (359, 1.000, '1 Peso', NULL, '1 Peso', 'Country name (Estados Unidos Mexicanos) in a semicircle over the Mexican coat of arms: a Mexican golden eagle standing on a prickly pear cactus devouring a rattlesnake. At the base of the cactus there is a holm oak (encino) branch on one side and a laurel branch on the other. Denomination and year at the bottom.', 'Jose Morelos portrait facing right', 'Plain', 'INDEPENDENCIA Y LIBERTAD', '1957', '1967', 'Billon (.100 silver) (Copper .700, Nickel .100, Zinc .100)', false, 16.000, 34.500, NULL, '2023-05-25 18:19:51.882+00', '2023-05-25 18:19:51.882+00', NULL, 23, NULL, 121, 34, 1, '3550', false);
-INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (360, 10.000, '10 Kroner', NULL, 'Wedding of Princess Margrethe', 'The bust of King Frederik IX with the initials below', 'Heads of Prince and Princess right, value below', 'Reeded', NULL, '2023', NULL, 'Silver (.800) (Copper .200)', false, 20.500, 36.000, NULL, '2023-05-25 18:37:50.539+00', '2023-05-25 18:37:50.539+00', NULL, NULL, 14, 68, 35, 1, '14548', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (361, 10.000, '10 Francs', NULL, '10 Francs', 'Denomination and date within wreath', 'Hercules group, exergue line below', 'Design in relief', NULL, '1964', '1973', 'Silver (.900)', false, 25.000, 37.000, NULL, '2023-05-25 19:34:22.537+00', '2023-05-25 19:34:22.537+00', NULL, 8, NULL, 20, 38, 1, '674', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (374, 2.000, '€2', NULL, '450th Anniversary of the Birth of Galileo Galilei', 'The design shows the head of Galileo Galilei from the painting of Justus Sustermans, 1636 (Florence, Galleria degli Uffizi); around, upside, GALILEO GALILEI; on the right, superimposed letters R (monogram of the Mint of Rome)/astronomic telescope/C.M. (monogram of the Author Claudia Momoni); on the left, superimposed letters of the Italian Republic monogram ‘RI’; in exergue 1564-2014. The coin’s outer ring bears the 12 stars of the European Union.', 'A map, next to the face value, shows the European continent without borders.', 'Finely ribbed', '2 * 2 * 2 * 2 * 2 * 2 *', '2014', NULL, 'Bimetallic: nickel brass clad nickel centre in copper-nickel ring', false, 8.500, 25.750, NULL, '2023-05-30 19:09:21.222+00', '2023-05-30 19:09:21.222+00', NULL, 21, NULL, 19, 6, 1, '64092', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (377, 5.000, '€5', 'Wunderwelt Insektenreich', '5 Euro Swallowtail', 'Name of country, mintmark, year and German Eagle', 'Swallowtail', 'Smooth', 'WUNDERWELT INSEKTEN •', '2023', NULL, 'Copper-nickel (CuNi25, 75% Cu, 25% Ni)', true, 9.680, 27.250, NULL, '2023-07-02 18:59:51.579+00', '2023-07-02 18:59:51.579+00', NULL, 1, NULL, 1, 6, 1, '369505', false);
@@ -1321,6 +1320,11 @@ INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (335, 5.000, '5 Dollars', 'CAN:SML', 'SML Bullion Coinage', 'Bust of Queen Elizabeth II, as at 37 years of age, wearing tiara, facing right.', 'Maple leaf', 'Reeded', NULL, '1988', '1989', 'Silver (.9999)', false, 31.104, 38.000, NULL, '2023-05-21 16:42:57.978+00', '2023-05-21 16:42:57.978+00', NULL, NULL, 6, 5, 4, 1, '18655', true);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (367, 1.000, '1 Dollar', NULL, '100th Anniversary of British Columbia', 'Bust of Queen Elizabeth II, as at 27 years of age, wearing a wreath, facing right.', 'A totem pole before coastal mountains.', 'Reeded', NULL, '1958', NULL, 'Silver (.800) (.200 copper)', false, 23.330, 36.000, 'The reverse shows the design of a Northwest Coast First Nations totem pole with mountains in the background. An apocryphal but widely circulated story holds that the top element in the pole is Raven, used by some First Nations to symbolize death. As a result, it was rumored that those First Nations disliked the dollars, causing them to be called "DEATH DOLLARS." However, the figure with upright ears, a distinct nose, long claws, and what may be a tongue sticking out is not Raven, but more likely Bear, beneath her her cub. This motif appears on many totem poles. Further, neither Bear nor Raven is associated with death; the former is a common clan-owned crest, the latter is a celebrated Trickster and Creator figure central to hundreds of stories of the peoples of the Northwest Coast.', '2023-05-26 10:55:32.258+00', '2023-05-26 10:55:32.258+00', NULL, NULL, 6, 5, 4, 1, '454', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (368, 1.000, '1 Dollar', NULL, '100th Anniversary of Canada', 'Bust of Queen Elizabeth II, as at 37 years of age, wearing tiara, facing right.', 'Canada goose (Branta canadensis) in flight, with centennial dates above, face value and issuing authority below', 'Reeded', NULL, '1967', NULL, 'Silver (.800) (Copper .200)', false, 23.330, 36.000, NULL, '2023-05-26 10:59:48.776+00', '2023-05-26 10:59:48.776+00', NULL, NULL, 6, 5, 4, 1, '457', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (402, 0.500, '50 Pence', 'The Dinosauria Collection', 'Megalosaurus', 'Fifth crowned portrait of HM Queen Elizabeth II right, wearing the George IV State Diadem, legend around.', 'Image of a Megalosaurus with legend above and below.', 'Plain', '', '2020', NULL, 'Copper-nickel', true, 8.000, 27.300, 'This series was the first ever base metal Brilliant Uncirculated coin produced with a colorised reverse.', '2023-07-23 13:34:37.912+00', '2023-07-23 13:34:37.912+00', NULL, 4, 6, 8, 7, 6, '200990', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (404, 0.500, '50 Pence', 'The Dinosauria Collection', 'Iguanodon', 'Fifth crowned portrait of HM Queen Elizabeth II right, wearing the George IV State Diadem, legend around.', 'Image of an Iguanodon with legend above and below.', 'Plain', '', '2020', NULL, 'Copper-nickel', true, 8.000, 27.300, 'This series was the first ever base metal Brilliant Uncirculated coin produced with a colorised reverse.', '2023-07-23 13:59:51.025+00', '2023-07-23 13:59:51.025+00', NULL, 4, 6, 8, 7, NULL, '200984', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (403, 0.500, '50 Pence', 'The Dinosauria Collection', 'Hylaeosaurus', 'Fifth crowned portrait of HM Queen Elizabeth II right, wearing the George IV State Diadem, legend around.', 'Image of a Hylaeosaurus with legend above and below.', 'Plain', '', '2020', NULL, 'Copper-nickel', true, 8.000, 27.300, 'This series was the first ever base metal Brilliant Uncirculated coin produced with a colorised reverse.', '2023-07-23 13:57:12.794+00', '2023-07-23 13:57:12.794+00', NULL, 4, 6, 8, 7, 6, '219184', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (405, 0.025, 'Six Pence', NULL, 'Six Pence', 'Portrait of Hastings Kamuzu Banda right (Independence Leader, Prime Minister & then President of Malawi for life) (1898-1997)', 'Rooster standing right', 'Alternating reeded and smooth (4 segments each)', '', '1964', '1967', 'Nickel brass (60% Copper, 20% Nickel, 20% Zinc)', false, 2.790, 19.300, NULL, '2023-07-28 19:47:45.958+00', '2023-07-28 19:47:45.958+00', NULL, NULL, NULL, 115, 45, 1, '6679', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (360, 10.000, '10 Kroner', NULL, 'Wedding of Princess Margrethe', 'The bust of King Frederik IX with the initials below', 'Heads of Prince and Princess right, value below', 'Reeded', NULL, '1967', NULL, 'Silver (.800) (Copper .200)', false, 20.500, 36.000, NULL, '2023-05-25 18:37:50.539+00', '2023-05-25 18:37:50.539+00', NULL, NULL, 14, 68, 35, 1, '14548', false);
 
 --
 -- Data for Name: coin_engravers; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1451,6 +1455,10 @@ INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES (
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-06 20:25:11.347+00', '2023-07-06 20:25:11.347+00', 399, 25);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-09 17:39:32.582+00', '2023-07-09 17:39:32.582+00', 400, 17);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-12 20:24:52.649+00', '2023-07-12 20:24:52.649+00', 401, 17);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-23 13:34:37.889+00', '2023-07-23 13:34:37.889+00', 402, 17);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-23 13:57:12.772+00', '2023-07-23 13:57:12.772+00', 403, 17);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-23 13:59:51.023+00', '2023-07-23 13:59:51.023+00', 404, 17);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-07-28 19:47:45.935+00', '2023-07-28 19:47:45.935+00', 405, 44);
 
 --
 -- Data for Name: coinset; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2116,7 +2124,6 @@ INSERT INTO public.country (id, name, short_name, is_active, created_at, updated
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (3, 'Panama, Republic of', 'Panama', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'PA');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (21, 'Republic of the Philippines', 'Philippines', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'PH');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (17, 'Republic of El Salvador', 'El Salvador', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'SV');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (207, 'German Confederation (1815 - 1866)', 'German Confederation', false, '2023-07-16 00:53:13.458022+00', '2023-07-16 00:53:13.458022+00', 205, '-4');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (122, 'Micronesia', 'Micronesia', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'FM');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (123, 'Moldova', 'Moldova', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'MD');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (136, 'North Korea', 'North Korea', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'KP');
@@ -2126,17 +2133,18 @@ INSERT INTO public.country (id, name, short_name, is_active, created_at, updated
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (176, 'Syria', 'Syria', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'SY');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (178, 'Tanzania', 'Tanzania', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'TZ');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (185, 'Türkiye', 'Türkiye', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'TR');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (23, 'German East Africa', 'German East Africa', false, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', 205, 'DE');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (195, 'Vietnam', 'Vietnam', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'VN');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (201, 'Falkland Islands (English Territory)', 'Falkland Islands', true, '2023-05-20 21:04:16.065654+00', '2023-05-20 21:04:16.065654+00', 8, 'FK');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (194, 'Venezuela', 'Venezuela', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'VE');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (202, 'Union of Soviet Socialist Republics', 'Soviet Union', false, '2023-05-22 00:28:01.457902+00', '2023-05-22 00:28:01.457902+00', 150, '-0');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (203, 'Sasanian Empire', 'Sasanian Empire', false, '2023-05-25 21:30:11.980528+00', '2023-05-25 21:30:11.980528+00', 94, '-1');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (23, 'German East Africa', 'German East Africa', false, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', 205, NULL);
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (206, 'German Democratic Republic', 'East Germany', false, '2023-07-16 00:52:13.817824+00', '2023-07-16 00:52:13.817824+00', 205, '-2');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (208, 'German Empire (1871 - 1918)', 'German Empire', false, '2023-07-16 00:57:38.687863+00', '2023-07-16 00:57:38.687863+00', 205, '-3');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (209, 'North German Confederation (1866/67-1870/71)', 'North German Confederation', false, '2023-07-16 01:04:18.248086+00', '2023-07-16 01:04:18.248086+00', 205, '-3');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (210, 'German Reich (1918-1933)', 'German Reich', false, '2023-07-16 01:08:46.09767+00', '2023-07-16 01:08:46.09767+00', 205, 'de');
-INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (211, 'German Reich (1933-1945)', 'German Reich', false, '2023-07-16 01:09:28.0093+00', '2023-07-16 01:09:28.0093+00', 205, NULL);
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (202, 'Union of Soviet Socialist Republics', 'Soviet Union', false, '2023-05-22 00:28:01.457902+00', '2023-05-22 00:28:01.457902+00', 150, 'RU');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (203, 'Sasanian Empire', 'Sasanian Empire', false, '2023-05-25 21:30:11.980528+00', '2023-05-25 21:30:11.980528+00', 94, 'IR');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (206, 'German Democratic Republic', 'East Germany', false, '2023-07-16 00:52:13.817824+00', '2023-07-16 00:52:13.817824+00', 205, 'DE');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (207, 'German Confederation (1815 - 1866)', 'German Confederation', false, '2023-07-16 00:53:13.458022+00', '2023-07-16 00:53:13.458022+00', 205, 'DE');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (208, 'German Empire (1871 - 1918)', 'German Empire', false, '2023-07-16 00:57:38.687863+00', '2023-07-16 00:57:38.687863+00', 205, 'DE');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (209, 'North German Confederation (1866/67-1870/71)', 'North German Confederation', false, '2023-07-16 01:04:18.248086+00', '2023-07-16 01:04:18.248086+00', 205, 'DE');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (210, 'German Reich (1918-1933)', 'German Reich', false, '2023-07-16 01:08:46.09767+00', '2023-07-16 01:08:46.09767+00', 205, 'DE');
+INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (211, 'German Reich (1933-1945)', 'German Reich', false, '2023-07-16 01:09:28.0093+00', '2023-07-16 01:09:28.0093+00', 205, 'DE');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (2, 'United States of America', 'United States', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'US');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (145, 'Peru', 'Peru', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'PE');
 INSERT INTO public.country (id, name, short_name, is_active, created_at, updated_at, territory_of_country_id, iso_3166_alpha_2) VALUES (143, 'Papua New Guinea', 'Papua New Guinea', true, '2023-01-14 10:30:08.031482+00', '2023-01-14 10:30:08.031482+00', NULL, 'PG');
@@ -2231,6 +2239,8 @@ INSERT INTO public.country_currency (created_at, updated_at, country_id, currenc
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 22:50:35.549352+00', '2023-07-03 22:50:35.549352+00', 138, 41);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-03 23:16:11.585039+00', '2023-07-03 23:16:11.585039+00', 59, 42);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-05 22:34:57.279242+00', '2023-07-05 22:34:57.279242+00', 57, 43);
+INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-28 19:34:57.737577+00', '2023-07-28 19:34:57.737577+00', 115, 44);
+INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-07-28 19:41:08.060711+00', '2023-07-28 19:41:08.060711+00', 115, 45);
 
 --
 -- Data for Name: country_mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2277,6 +2287,7 @@ INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VA
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (138, 38, '2023-07-03', '2023-07-03');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (59, 42, '2023-07-03', '2023-07-03');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (57, 43, '2023-07-05', '2023-07-05');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (115, 44, '2023-07-28', '2023-07-28');
 
 --
 -- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2317,6 +2328,8 @@ INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comm
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (9, 'German Reichsmark', 'ℛℳ', '1871 - 1918', '1924-01-01', 'Hyperinflation.', false, '2023-01-14 10:31:20.129449+00', '2023-01-14 10:31:20.129449+00');
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (13, 'Indian Fanam', 'Fanam', '??? - 1815', '1815', 'Kingdom of Travancore', true, '2023-01-14 10:31:20.129449+00', '2023-01-14 10:31:20.129449+00');
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (18, 'French Old franc', 'F', '1795 - 1959', NULL, NULL, true, '2023-01-14 10:31:20.129449+00', '2023-01-14 10:31:20.129449+00');
+INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (44, 'Malawian kwacha', 'K', '1971 - Present', NULL, NULL, true, '2023-07-28 19:31:22.356+00', '2023-07-28 19:31:22.356+00');
+INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (45, 'Malawian pound', '£‎', '1964 - 1971', NULL, NULL, true, '2023-07-28 19:40:28.573+00', '2023-07-28 19:40:28.573+00');
 
 --
 -- Data for Name: engraver; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2354,9 +2367,6 @@ INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES 
 INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (30, 'Jitan V. Patel', NULL, '2023-01-14 10:30:44.175768+00', '2023-01-14 10:30:44.175768+00');
 INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (31, 'Luc Luycx', 'Luycx is a computer engineer and medallist. He was born in Aalst, Belgium and now lives in Dendermonde. Luycx worked for the Royal Belgian Mint.[4] He designed the euro coins in 1996. His signature on all euro coins is visible as two L letters connected together (LL). On the 2-euro coin, this is visible under the O of the word EURO on the common side.', '2023-01-14 10:30:44.175768+00', '2023-01-14 10:30:44.175768+00');
 INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (33, 'James Barton Longacre', 'He was an American portraitist and engraver, and from 1844 until his death the fourth Chief Engraver of the United States Mint. ', '2023-04-01 15:57:00.655268+00', '2023-04-01 15:57:00.655268+00');
-INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (56, 'eric', NULL, '2023-07-15 18:17:20.885+00', '2023-07-15 18:17:20.885+00');
-INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (58, 'eric2', NULL, '2023-07-15 18:21:24.253+00', '2023-07-15 18:21:24.253+00');
-INSERT INTO public.engraver (id, name, comments, created_at, updated_at) VALUES (59, 'eric23', NULL, '2023-07-15 18:24:27.318+00', '2023-07-15 18:24:27.318+00');
 
 --
 -- Data for Name: image; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2898,6 +2908,17 @@ INSERT INTO public.image (id, url, copyright, description, created_at, updated_a
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (723, '2023_0625_144122_008.JPG', NULL, NULL, '2023-07-09 22:53:05.759+00', '2023-07-09 22:53:05.759+00', NULL, 400, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (724, '649fe1db7e2fe4.50465190-original.jpg', NULL, NULL, '2023-07-12 20:59:44.388+00', '2023-07-12 20:59:44.388+00', NULL, 401, false, NULL, NULL);
 INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (725, '649fe14d811e02.28618270-original.jpg', NULL, NULL, '2023-07-12 20:59:51.494+00', '2023-07-12 20:59:51.494+00', NULL, 401, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (726, '2020_0330_053242_002.JPG', NULL, NULL, '2023-07-27 20:17:28.721+00', '2023-07-27 20:17:28.721+00', NULL, 358, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (727, '2023_0723_162045_003.JPG', NULL, NULL, '2023-07-27 20:19:47.164+00', '2023-07-27 20:19:47.164+00', NULL, 403, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (728, '2023_0723_162056_004.JPG', NULL, NULL, '2023-07-27 20:20:04.308+00', '2023-07-27 20:20:04.308+00', NULL, 403, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (729, '2023_0723_162007_001.JPG', NULL, NULL, '2023-07-27 20:20:45.194+00', '2023-07-27 20:20:45.194+00', NULL, 404, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (730, '2023_0723_162033_002.JPG', NULL, NULL, '2023-07-27 20:20:55.468+00', '2023-07-27 20:20:55.468+00', NULL, 404, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (731, '2023_0723_162116_005.JPG', NULL, NULL, '2023-07-27 20:21:06.016+00', '2023-07-27 20:21:06.016+00', NULL, 402, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (732, '2023_0723_162126_006.JPG', NULL, NULL, '2023-07-27 20:21:16.987+00', '2023-07-27 20:21:16.987+00', NULL, 402, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (733, '2023_0727_164856_002.JPG', NULL, NULL, '2023-07-28 19:58:43.757+00', '2023-07-28 19:58:43.757+00', NULL, 405, true, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (734, '2023_0727_164847_001.JPG', NULL, NULL, '2023-07-28 19:59:02.298+00', '2023-07-28 19:59:02.298+00', NULL, 405, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (735, 'currency-id-5', NULL, NULL, '2023-07-28 21:51:47.762+00', '2023-07-28 21:51:47.762+00', NULL, 26, false, NULL, NULL);
+INSERT INTO public.image (id, url, copyright, description, created_at, updated_at, banknote_id, coin_id, is_preferred, raw_html, collection_id) VALUES (736, 'currency-id-5', NULL, NULL, '2023-07-28 21:51:56.08+00', '2023-07-28 21:51:56.08+00', NULL, 31, false, NULL, NULL);
 
 --
 -- Data for Name: mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2941,6 +2962,7 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (29, 'Mint of Finland (Suomen Rahapaja), Vantaa', '1988 - Present', 'FI', 'Vantaa, Finland', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (34, 'South African Mint', '1992 - Present', NULL, 'Centurion, South Africa', '2023-04-30 17:37:09.436616+00', '2023-04-30 17:37:09.436616+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (17, 'Royal Mint', '1968 - Present', NULL, 'Llantrisant', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (44, 'Royal Mint (Tower Hill)', '1810 - 1975', NULL, 'London, United Kingdom', '2023-07-28 19:44:58.760917+00', '2023-07-28 19:44:58.760917+00');
 
 --
 -- Data for Name: period; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -3042,6 +3064,8 @@ INSERT INTO public.shape (id, name, created_at, updated_at) VALUES (15, 'Holed',
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO public.users (id, name, email, email_verified, image, password) VALUES ('1', 'Tester McTesty', 'asdf@asdf.zzz', NULL, NULL, 'asdfasdfasdfasdfasdf');
+
 --
 -- Data for Name: verificationtokens; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -3062,7 +3086,7 @@ SELECT pg_catalog.setval('public.coin_engravers_id_seq', 58, true);
 -- Name: coin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.coin_id_seq', 401, true);
+SELECT pg_catalog.setval('public.coin_id_seq', 405, true);
 
 --
 -- Name: coinset_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3086,7 +3110,7 @@ SELECT pg_catalog.setval('public.country_id_seq', 211, true);
 -- Name: currency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.currency_id_seq', 43, true);
+SELECT pg_catalog.setval('public.currency_id_seq', 45, true);
 
 --
 -- Name: engraver_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3098,13 +3122,13 @@ SELECT pg_catalog.setval('public.engraver_id_seq', 60, true);
 -- Name: image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.image_id_seq', 725, true);
+SELECT pg_catalog.setval('public.image_id_seq', 736, true);
 
 --
 -- Name: mint_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.mint_id_seq', 43, true);
+SELECT pg_catalog.setval('public.mint_id_seq', 44, true);
 
 --
 -- Name: period_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3510,6 +3534,13 @@ ALTER TABLE ONLY public.country_mint
 
 ALTER TABLE ONLY public.country_mint
     ADD CONSTRAINT "FK_country_mint_mint" FOREIGN KEY (mint_id) REFERENCES public.mint(id);
+
+--
+-- Name: collection Fk_collection_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.collection
+    ADD CONSTRAINT "Fk_collection_user" FOREIGN KEY (owner_id) REFERENCES public.users(id) NOT VALID;
 
 --
 -- Name: image Images_banknoteId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
