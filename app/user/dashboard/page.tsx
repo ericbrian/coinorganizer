@@ -24,14 +24,16 @@ export default function MyCoins() {
     const collapseCollectionData = (collectionItems: CollectionItemType[]) => {
         const countryInfos: CollapsedCollectionType = {};
         const paidInfos: CollapsedCostsType = {};
-
         collectionItems.forEach((item) => {
             const cc = item.coin.country.iso_3166_alpha_2;
-            const countryName = item.coin.country.name;
+            const name = item.coin.country.name;
+            const url = `/user/dashboard/country/${name}`;
             if (!countryInfos.hasOwnProperty(cc)) {
                 countryInfos[cc] = {
                     count: 1,
-                    name: countryName,
+                    name,
+                    url,
+                    id: cc,
                 };
             } else {
                 countryInfos[cc].count += 1;
@@ -51,7 +53,6 @@ export default function MyCoins() {
                 return `${key} ${financial(paidInfos[key])}`;
             })
             .join(', ');
-
         setCostInfos(costInfoString);
         setCollapsedInfo(countryInfos);
     };
@@ -91,28 +92,37 @@ export default function MyCoins() {
         ); // exclude Antarctica
 
         polygonSeries.mapPolygons.template.setAll({
-            tooltipText: `{name}
-Count: {count}`,
+            tooltipHTML: `{name}<br/>Count: 0`,
             templateField: 'polygonSettings',
         });
 
         polygonSeries.mapPolygons.template.states.create('hover', {
-            fill: am5.color(0x677935),
+            fill: am5.color(0xcdcdcd),
+            stroke: am5.color(0x000000),
         });
 
         // Set infos from the User's collection
         const seriesInfo = Object.keys(collapsedInfo).map((code, index) => {
             const count = collapsedInfo[code].count
                 ? collapsedInfo[code].count
-                : 0;
+                : '0';
             return {
                 id: code,
                 polygonSettings: {
                     fill: am5.color(amcolors[index]),
+                    tooltipHTML: `{name}<br/>Count: {count}`,
                 },
                 count,
             };
         });
+
+        polygonSeries.mapPolygons.template.events.on('click', (ev) => {
+            if (!ev.target.dataItem) return;
+            const dataItem = ev.target.dataItem;
+            const clickedCountry = dataItem.get('id');
+            window.location.href = `/user/dashboard/country/${clickedCountry}`;
+        });
+
         polygonSeries.data.setAll(seriesInfo);
     };
 

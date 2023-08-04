@@ -18,7 +18,6 @@ import React from 'react';
 
 export default async function page() {
     const countries: CountryType[] = await getCountryList();
-    console.log('countries', countries[0]);
     return (
         <Container>
             <Box>

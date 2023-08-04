@@ -58,6 +58,7 @@ type CurrencyInputType = {
     comments: string;
     displayShortNameAtLeft: boolean;
     demonitizedDate: string;
+    countryId: number | null;
 }
 
 type CollectionInputType = {
@@ -92,6 +93,8 @@ type CollapsedCollectionType = {
 type CollapsedCollectionDataType = {
     count: number;
     name: string;
+    url: string;
+    cc: string;
 };
 
 type CollapsedCostsType = {

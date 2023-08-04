@@ -11,13 +11,14 @@ import {
     FormControlLabel,
     Checkbox,
 } from '@mui/material';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { CurrencyInputType } from '@/global';
 import { Prisma } from '@prisma/client';
 import { saveNewCurrency } from '@/http/currency';
+import { useParams } from 'next/navigation';
 
-export default function page() {
+export default function currencyCreatePage() {
     const [name, setName] = useState('');
     const [shortName, setShortName] = useState('');
     const [comments, setComments] = useState('');
@@ -25,6 +26,19 @@ export default function page() {
     const [displayShortNameAtLeft, setDisplayShortNameAtLeft] = useState(true);
     const [demonitizedDate, setDemonitizedDate] = useState('');
     const [snackbarAlertOpen, setSnackbarAlertOpen] = useState(false);
+    const [countryId, setCountryId] = useState<number | null>(null);
+    const [countryName, setCountryName] = useState<string>('');
+
+    const params = useParams();
+
+    useEffect(() => {
+        try {
+            const currentCountry = (params.id as string).split('-');
+            const id = currentCountry.at(-1);
+            if (id) setCountryId(parseInt(id, 10));
+            setCountryName(currentCountry.at(0) || '');
+        } catch (e) {}
+    }, []);
 
     const getFormValues = (): CurrencyInputType => {
         return {
@@ -34,6 +48,7 @@ export default function page() {
             comments,
             displayShortNameAtLeft,
             demonitizedDate,
+            countryId,
         };
     };
 
@@ -44,6 +59,7 @@ export default function page() {
         setYears('');
         setDisplayShortNameAtLeft(true);
         setDemonitizedDate('');
+        setCountryId(null);
     };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -73,7 +89,11 @@ export default function page() {
         <Container>
             <Box>
                 <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-                    Currency - Create
+                    Currency - Create <br />
+                    <i>
+                        {countryName &&
+                            `Automatically associated with ${countryName}`}
+                    </i>
                 </Typography>
 
                 <form autoComplete="off" onSubmit={handleSubmit}>

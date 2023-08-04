@@ -334,7 +334,7 @@ export default function AddCoin() {
                                                         {country.short_name},
                                                         you must first{' '}
                                                         <Link
-                                                            href={`/add-currency/${country.id}/${country.short_name}`}
+                                                            href={`/admin/currency/country/${country.short_name}-${country.id}`}
                                                             className="text-blue-700 underline"
                                                         >
                                                             define a currency
