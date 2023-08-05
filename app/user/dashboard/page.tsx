@@ -10,6 +10,7 @@ import amcolors from './amcolors';
 import { collection as CollectionItemType } from '@prisma/client';
 import { CollapsedCollectionType, CollapsedCostsType } from '@/global';
 import { useEffect, useState } from 'react';
+import { getCircularReplacer } from '@/utils';
 
 export default function MyCoins() {
     const [costInfos, setCostInfos] = useState('');
@@ -120,7 +121,9 @@ export default function MyCoins() {
             if (!ev.target.dataItem) return;
             const dataItem = ev.target.dataItem;
             const clickedCountry = dataItem.get('id');
-            window.location.href = `/user/dashboard/country/${clickedCountry}`;
+            const count = (dataItem['dataContext'] as any).count;
+            if (count)
+                window.location.href = `/user/dashboard/country/${clickedCountry}`;
         });
 
         polygonSeries.data.setAll(seriesInfo);
