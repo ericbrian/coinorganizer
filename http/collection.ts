@@ -15,7 +15,8 @@ export const getUserCollectionItems = async () => {
     return await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/collection`).then((res) => res.json());
 }
 
-export const getUserCollectionCountries = async () => {
-    return await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coins/byuserandcountry`).then((res) => res.json());
-
+export const getUserCollectionCountries = async (cc: string | null = null) => {
+    let endpoint = `${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coins/byuserandcountry`;
+    if (cc) endpoint += `?cc=${cc}`;
+    return await fetch(endpoint).then((res) => res.json());
 }

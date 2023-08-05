@@ -4,7 +4,6 @@ const prisma = new PrismaClient()
 
 export async function GET(req: Request, { params }: any) {
 
-    console.log({ params })
     try {
         const data = await prisma.coin.findFirst({
             where: {

@@ -70,7 +70,7 @@ export default function HomePageCoinDetail(props: { coin: dbCoin }) {
                         </Box>
                     </Grid>
                     <Grid item xs={2}>
-                        {coin?.image?.length > 0 && (
+                        {coin.image?.length > 0 && (
                             <CardMedia
                                 component="img"
                                 sx={{ width: 160, borderRadius: '15px' }}
