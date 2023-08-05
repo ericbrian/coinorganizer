@@ -27,6 +27,9 @@ export default async function CoinDetails({ searchParams }: any) {
             <Container style={{ marginTop: '20px' }}>
                 {/* The <Box> component serves as a wrapper component for most of the CSS utility needs. */}
                 <Box>
+                    <Typography variant="body2" gutterBottom>
+                        <Link href="../">&lt;&lt;&lt; Go Back</Link>
+                    </Typography>
                     <Grid container spacing={3}>
                         <Grid xs={3}>
                             <Typography>
