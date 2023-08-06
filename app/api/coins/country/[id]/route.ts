@@ -29,6 +29,8 @@ export async function GET(req: Request, { params }: { params: { id: number } }) 
                 { year_start: 'asc' }
             ]
         });
+
+        console.log('data', data)
         return NextResponse.json(data);
     }
     catch (e) {
