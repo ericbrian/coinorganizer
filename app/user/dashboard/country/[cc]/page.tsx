@@ -2,8 +2,9 @@
 
 import HomePageCoinDetail from '@/app/components/HomePageCoinDetail';
 import { getUserCollectionCountries } from '@/http/collection';
-import { Container, Box, Typography, Link } from '@mui/material';
+import { Container, Box, Typography, Link, Card, Grid } from '@mui/material';
 import { collection as CollectionType } from '@prisma/client';
+import moment from 'moment';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -12,19 +13,15 @@ export default function page() {
     const countryCode = (params.cc as string) || null;
 
     const [countryName, setCountryName] = useState(params.cc as string);
-    const [collectionItems, setCollectionItems] = useState<CollectionType[]>(
-        [],
-    );
+    const [collectionItems, setCollectionItems] = useState<CollectionType[]>([]);
 
     useEffect(() => {
-        getUserCollectionCountries(countryCode).then(
-            (data: CollectionType[]) => {
-                if (data) {
-                    setCountryName(data[0].coin.country.short_name);
-                }
-                setCollectionItems(data);
-            },
-        );
+        getUserCollectionCountries(countryCode).then((data: CollectionType[]) => {
+            if (data) {
+                setCountryName(data[0].coin.country.short_name);
+            }
+            setCollectionItems(data);
+        });
     }, []);
 
     return (
@@ -39,7 +36,31 @@ export default function page() {
                 </Typography>
                 {collectionItems.map((item) => {
                     return (
-                        <HomePageCoinDetail coin={item.coin} key={item.id} />
+                        <div key={item.id}>
+                            <Card
+                                sx={{
+                                    display: 'flex',
+                                    marginBottom: '15px',
+                                    padding: '5px',
+                                    backgroundColor: '#008000',
+                                    color: '#ffffff',
+                                }}
+                            >
+                                <Grid container spacing={2}>
+                                    <Grid item xs={3}>
+                                        Paid: {item.currency.name} {item.currency.short_name}{' '}
+                                        {item.paid_amount ? (+item.paid_amount).toFixed(2) : '0.00'}
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        Purchased On: {moment(item.sourced_when).format('MMM D, yyyy')}
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        Purchased From: {item.sourced_from}
+                                    </Grid>
+                                </Grid>
+                            </Card>
+                            <HomePageCoinDetail coin={item.coin} />
+                        </div>
                     );
                 })}
             </Box>

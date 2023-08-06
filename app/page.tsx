@@ -8,6 +8,7 @@ import appconfig from '@/appconfig';
 import { coin as CoinType } from '@prisma/client';
 import { getCoins } from '@/http/coin';
 import HomePageCoinDetail from './components/HomePageCoinDetail';
+import { Card } from '@mui/material';
 
 export const metadata: Metadata = {
     title: appconfig.siteName,
@@ -30,13 +31,15 @@ export default async function Home() {
                             boxShadow: 'none',
                         }}
                     >
-                        Latest Coins Added to Database
+                        Latest Coins Added
                     </Typography>
 
                     {Array.isArray(coins) &&
                         coins.length > 0 &&
                         coins.map((coin: CoinType) => (
-                            <HomePageCoinDetail key={coin.id} coin={coin} />
+                            <>
+                                <HomePageCoinDetail key={coin.id} coin={coin} />
+                            </>
                         ))}
                 </Box>
             </Container>

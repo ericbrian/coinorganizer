@@ -14,9 +14,7 @@ import { getCircularReplacer } from '@/utils';
 
 export default function MyCoins() {
     const [costInfos, setCostInfos] = useState('');
-    const [collapsedInfo, setCollapsedInfo] = useState<CollapsedCollectionType>(
-        {},
-    );
+    const [collapsedInfo, setCollapsedInfo] = useState<CollapsedCollectionType>({});
 
     function financial(x: string) {
         return Number.parseFloat(x).toFixed(2);
@@ -104,9 +102,7 @@ export default function MyCoins() {
 
         // Set infos from the User's collection
         const seriesInfo = Object.keys(collapsedInfo).map((code, index) => {
-            const count = collapsedInfo[code].count
-                ? collapsedInfo[code].count
-                : '0';
+            const count = collapsedInfo[code].count ? collapsedInfo[code].count : '0';
             return {
                 id: code,
                 polygonSettings: {
@@ -122,8 +118,7 @@ export default function MyCoins() {
             const dataItem = ev.target.dataItem;
             const clickedCountry = dataItem.get('id');
             const count = (dataItem['dataContext'] as any).count;
-            if (count)
-                window.location.href = `/user/dashboard/country/${clickedCountry}`;
+            if (count) window.location.href = `/user/dashboard/country/${clickedCountry}`;
         });
 
         polygonSeries.data.setAll(seriesInfo);
@@ -139,10 +134,7 @@ export default function MyCoins() {
                     </div>
                 )}
                 {(!costInfos || !collapsedInfo) && <div>Loading...</div>}
-                <div
-                    id="chartdiv"
-                    style={{ width: '100%', height: '500px' }}
-                ></div>
+                <div id="chartdiv" style={{ width: '100%', height: '500px' }}></div>
             </Box>
         </Container>
     );

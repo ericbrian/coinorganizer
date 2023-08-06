@@ -1,5 +1,4 @@
 import { Container, Box, Typography, Button } from '@mui/material';
-import Link from 'next/link';
 import React from 'react';
 
 export default function page() {
@@ -81,8 +80,14 @@ export default function page() {
                 >
                     Other
                 </Typography>
-
                 <Typography variant="h6">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        href="/user/dashboard/add-coin"
+                    >
+                        Add Coin to your Collection
+                    </Button>{' '}
                     <Button
                         variant="contained"
                         color="primary"
@@ -90,7 +95,7 @@ export default function page() {
                     >
                         Add Images to Coins
                     </Button>{' '}
-                </Typography>
+                </Typography>{' '}
             </Box>
         </Container>
     );
