@@ -46,8 +46,6 @@ export async function GET(req: Request) {
             return NextResponse.json({ message: "No items found." });
         }
 
-        console.log(items.map((item: any) => item.coin));
-
         return NextResponse.json(items);
     } catch (error) {
         return NextResponse.json({ error });

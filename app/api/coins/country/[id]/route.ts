@@ -29,8 +29,6 @@ export async function GET(req: Request, { params }: { params: { id: number } }) 
                 { year_start: 'asc' }
             ]
         });
-
-        console.log('data', data)
         return NextResponse.json(data);
     }
     catch (e) {
@@ -40,8 +38,8 @@ export async function GET(req: Request, { params }: { params: { id: number } }) 
                 console.log(
                     'There is a unique constraint violation, a new user cannot be created with this email'
                 )
-            }
-            console.log('e.code', e.code)
+            } else
+                console.log('e.code', e.code)
         }
         throw e
     }

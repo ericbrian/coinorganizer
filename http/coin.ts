@@ -1,5 +1,5 @@
 import appconfig from "@/appconfig";
-import { CoinInputType, ImageInputType } from "@/global";
+import { CoinInputType, CoinMintRelationType, ImageInputType } from "@/global";
 import { coin as CoinType } from "@prisma/client";
 
 //* Coin
@@ -27,11 +27,19 @@ export const saveNewCoin = async (payload: CoinInputType) => {
 };
 
 export const addImageToCoin = async (payload: ImageInputType) => {
-    const image = await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coin/add-image`, {
+    const res = await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coin/add-image`, {
         method: 'PATCH',
         body: JSON.stringify(payload),
     });
-    return image;
+    return res;
+};
+
+export const relateMintAndCoin = async (coin_id: number, mint_id: number) => {
+    const res = await fetch(`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/api/coin/relate-mint`, {
+        method: 'POST',
+        body: JSON.stringify({ coin_id, mint_id }),
+    });
+    return res;
 };
 
 export const getCoinById = async (coinId: number) => {

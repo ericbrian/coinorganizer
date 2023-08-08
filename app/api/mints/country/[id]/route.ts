@@ -1,15 +1,19 @@
-import { convertToPrismaCurrencyCreateInput } from '@/utils';
+import { NextRequest, NextResponse } from "next/server";
 import { Prisma, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-import { NextRequest } from "next/server";
-
-export async function POST(req: NextRequest) {
-    const payload = await req.json();
-    const data = convertToPrismaCurrencyCreateInput(payload);
+export async function GET(req: Request, { params }: { params: { id: number } }) {
+    const country_id = params.id;
 
     try {
-        return await prisma.currency.create({ data });
+        const data = await prisma.mint.findMany({
+            where: {
+                country_mint: {
+                    every: { country_id: Number(country_id) }
+                }
+            },
+        });
+        return NextResponse.json(data);
     }
     catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
@@ -19,6 +23,7 @@ export async function POST(req: NextRequest) {
                     'There is a unique constraint violation, a new user cannot be created with this email'
                 )
             }
+            console.log('e.code', e.code)
         }
         throw e
     }

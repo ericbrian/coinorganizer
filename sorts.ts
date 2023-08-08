@@ -9,3 +9,8 @@ export const CurrencyShortNameSort = (a: CurrencyType, b: CurrencyType) =>
     a.short_name
         .toLocaleLowerCase()
         .localeCompare(b.short_name.toLocaleLowerCase());
+
+export const CurrencyNameSort = (a: CurrencyType, b: CurrencyType) =>
+    a.name
+        .toLocaleLowerCase()
+        .localeCompare(b.name.toLocaleLowerCase());

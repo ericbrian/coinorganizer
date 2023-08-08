@@ -16,10 +16,20 @@ import {
   TextField,
   Grid,
 } from '@mui/material';
-import { country as CountryType, coin as CoinType, mint as MintType, coin_mint } from '@prisma/client';
+import {
+  country as CountryType,
+  coin as CoinType,
+  mint as MintType,
+  coin_mint as CoinMintType,
+  currency as CurrencyType,
+} from '@prisma/client';
 import { useState, useEffect } from 'react';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { getCurrencyList } from '@/http/currency';
+import { CurrencyNameSort } from '@/sorts';
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -37,6 +47,8 @@ export default function AddCoin() {
   const [coinList, setCoinList] = useState<CoinType[]>([]);
   const [coin, setCoin] = useState<CoinType | null>(null);
 
+  const [currencyList, setCurrencyList] = useState<CurrencyType[]>([]);
+
   const [yearRange, setYearRange] = useState<number[]>([]);
   const [year, setYear] = useState<number | null>(null);
 
@@ -44,6 +56,12 @@ export default function AddCoin() {
   const [mint, setMint] = useState<MintType | null>(null);
 
   const [isProof, setIsProof] = useState<boolean>(false);
+  const [isCleaned, setIsCleaned] = useState<boolean>(false);
+  const [paidAmount, setPaidAmount] = useState<string>('');
+  const [paidCurrency, setPaidCurrency] = useState<CurrencyType | null>(null);
+  const [sourcedFrom, setSourcedFrom] = useState<string>('');
+  const [condition, setCondition] = useState<string>('');
+  const [storage, setStorage] = useState<string>('');
 
   useEffect(() => {
     getCountriesWithCoinsList().then((data) => {
@@ -56,6 +74,9 @@ export default function AddCoin() {
     if (country) {
       getCoinsForCountry(country.id).then((data) => {
         setCoinList(data);
+      });
+      getCurrencyList().then((data) => {
+        setCurrencyList(data.sort(CurrencyNameSort));
       });
     }
   }, [country]);
@@ -87,10 +108,8 @@ export default function AddCoin() {
         );
         return;
       }
-      const mints = coin.coin_mint.map((cm: coin_mint) => cm.mint);
-      console.log(mints);
+      const mints = coin.coin_mint.map((cm: CoinMintType) => cm.mint);
       setMintList(mints);
-
       setAllListsPopulated(true);
     }
   }, [coin]);
@@ -100,7 +119,7 @@ export default function AddCoin() {
       <Box>
         <Typography variant="h4" style={{ fontWeight: 'bold' }} gutterBottom>
           Add Coin to your Collection
-        </Typography>{' '}
+        </Typography>
         {error && (
           <Typography variant="h6" style={{ fontWeight: 'bold', color: 'red' }} gutterBottom>
             {error}
@@ -271,49 +290,125 @@ export default function AddCoin() {
                         Was Cleaned:
                       </Typography>
                     </Grid>
-                    <Grid item xs={9}></Grid>
+                    <Grid item xs={9}>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{
+                          marginRight: 8,
+                        }}
+                        checked={isCleaned}
+                        onClick={(e) => setIsCleaned(!isCleaned)}
+                      />
+                    </Grid>
                     <Grid item xs={3}>
                       <Typography variant="subtitle1" style={{ fontWeight: 'bold', textAlign: 'right' }}>
                         Paid Amount:
                       </Typography>
                     </Grid>
-                    <Grid item xs={9}></Grid>
+                    <Grid item xs={9}>
+                      <TextField
+                        type="number"
+                        value={paidAmount}
+                        variant="outlined"
+                        inputProps={{
+                          maxLength: 8,
+                          step: '1',
+                        }}
+                        onChange={({ target: { value } }) => {
+                          if (/^\d+(\.\d{0,2})?$/.test(value)) {
+                            setPaidAmount(value);
+                          }
+                        }}
+                      />
+                    </Grid>
                     <Grid item xs={3}>
                       <Typography variant="subtitle1" style={{ fontWeight: 'bold', textAlign: 'right' }}>
                         Paid Amount Currency:
                       </Typography>
                     </Grid>
-                    <Grid item xs={9}></Grid>
+                    <Grid item xs={9}>
+                      <Autocomplete
+                        disablePortal
+                        id="currency-select"
+                        options={currencyList}
+                        value={paidCurrency}
+                        defaultValue={paidCurrency}
+                        onChange={(_e, value) => {
+                          if (value) {
+                            setPaidCurrency(value);
+                          } else {
+                            setPaidCurrency(null);
+                          }
+                        }}
+                        sx={{ width: 700 }}
+                        renderInput={(params) => <TextField {...params} label="Currency" />}
+                        getOptionLabel={(option) => option.name}
+                        renderOption={(props: object, option: CurrencyType, state: object) => (
+                          <div {...props} key={option.id}>
+                            {option.name} ({option.years})
+                          </div>
+                        )}
+                      />
+                    </Grid>
                     <Grid item xs={3}>
                       <Typography variant="subtitle1" style={{ fontWeight: 'bold', textAlign: 'right' }}>
                         Sourced From:
                       </Typography>
                     </Grid>
-                    <Grid item xs={9}></Grid>
+                    <Grid item xs={9}>
+                      <TextField
+                        type="text"
+                        value={sourcedFrom}
+                        variant="outlined"
+                        onChange={(e) => {
+                          setSourcedFrom(e.target.value);
+                        }}
+                        sx={{ width: 700 }}
+                      />
+                    </Grid>
                     <Grid item xs={3}>
                       <Typography variant="subtitle1" style={{ fontWeight: 'bold', textAlign: 'right' }}>
                         Sourced When:
                       </Typography>
                     </Grid>
-                    <Grid item xs={9}></Grid>
+                    <Grid item xs={9}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker />
+                      </LocalizationProvider>
+                    </Grid>
                     <Grid item xs={3}>
                       <Typography variant="subtitle1" style={{ fontWeight: 'bold', textAlign: 'right' }}>
                         Condition:
                       </Typography>
                     </Grid>
-                    <Grid item xs={9}></Grid>
+                    <Grid item xs={9}>
+                      <TextField
+                        type="text"
+                        value={condition}
+                        variant="outlined"
+                        onChange={(e) => {
+                          setCondition(e.target.value);
+                        }}
+                        sx={{ width: 700 }}
+                      />
+                    </Grid>
                     <Grid item xs={3}>
                       <Typography variant="subtitle1" style={{ fontWeight: 'bold', textAlign: 'right' }}>
                         Storage:
                       </Typography>
                     </Grid>
-                    <Grid item xs={9}></Grid>
-                    <Grid item xs={3}>
-                      <Typography variant="subtitle1" style={{ fontWeight: 'bold', textAlign: 'right' }}>
-                        Comments:
-                      </Typography>
+                    <Grid item xs={9}>
+                      <TextField
+                        type="text"
+                        value={storage}
+                        variant="outlined"
+                        onChange={(e) => {
+                          setStorage(e.target.value);
+                        }}
+                        sx={{ width: 700 }}
+                      />
                     </Grid>
-                    <Grid item xs={9}></Grid>
                   </>
                 )}
               </Grid>

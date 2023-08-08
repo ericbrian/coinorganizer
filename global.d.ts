@@ -22,6 +22,11 @@ type ImageInputType = {
     coin_id: number;
 }
 
+type CoinMintRelationType = {
+    coin_id: number;
+    mint_id: number;
+}
+
 type CoinInputType = {
     faceValue: number;
     obverse: string;

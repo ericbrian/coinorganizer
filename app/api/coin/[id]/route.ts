@@ -25,8 +25,9 @@ export async function GET(req: Request, { params }: any) {
                 console.log(
                     'There is a unique constraint violation, a new user cannot be created with this email'
                 )
+            } else {
+                console.log('e.code', e.code)
             }
-            console.log('e.code', e.code)
         }
         throw e
     }
