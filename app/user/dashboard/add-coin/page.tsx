@@ -22,6 +22,7 @@ import {
   mint as MintType,
   coin_mint as CoinMintType,
   currency as CurrencyType,
+  enumCollectionsCollectableType,
 } from '@prisma/client';
 import { useState, useEffect } from 'react';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
@@ -30,6 +31,12 @@ import { getCurrencyList } from '@/http/currency';
 import { CurrencyNameSort } from '@/sorts';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import SaveIcon from '@mui/icons-material/Save';
+import { saveCoinInCollection } from '@/http/collection';
+import dayjs, { Dayjs } from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -60,8 +67,26 @@ export default function AddCoin() {
   const [paidAmount, setPaidAmount] = useState<string>('');
   const [paidCurrency, setPaidCurrency] = useState<CurrencyType | null>(null);
   const [sourcedFrom, setSourcedFrom] = useState<string>('');
+  const [sourcedWhen, setSourcedWhen] = useState<Dayjs | null>(dayjs());
   const [condition, setCondition] = useState<string>('');
   const [storage, setStorage] = useState<string>('');
+
+  const getPayload = () => {
+    return {
+      coin,
+      collectableType: enumCollectionsCollectableType.coin,
+      year,
+      mint,
+      paidCurrency,
+      paidAmount,
+      sourcedFrom,
+      sourcedWhen,
+      condition,
+      storage,
+      isCleaned,
+      isProof,
+    };
+  };
 
   useEffect(() => {
     getCountriesWithCoinsList().then((data) => {
@@ -113,6 +138,32 @@ export default function AddCoin() {
       setAllListsPopulated(true);
     }
   }, [coin]);
+
+  const resetForm = () => {
+    setCountry(null);
+    setCoin(null);
+    setYear(null);
+    setMint(null);
+    setIsProof(false);
+    setIsCleaned(false);
+    setPaidAmount('');
+    setPaidCurrency(null);
+    setSourcedFrom('');
+    setSourcedWhen(dayjs());
+    setCondition('');
+    setStorage('');
+  };
+
+  const saveForm = () => {
+    saveCoinInCollection(getPayload()).then((data) => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setSnackbarAlertOpen(true);
+        resetForm();
+      }
+    });
+  };
 
   return (
     <Container>
@@ -320,6 +371,7 @@ export default function AddCoin() {
                             setPaidAmount(value);
                           }
                         }}
+                        required
                       />
                     </Grid>
                     <Grid item xs={3}>
@@ -365,6 +417,7 @@ export default function AddCoin() {
                           setSourcedFrom(e.target.value);
                         }}
                         sx={{ width: 700 }}
+                        required
                       />
                     </Grid>
                     <Grid item xs={3}>
@@ -374,7 +427,7 @@ export default function AddCoin() {
                     </Grid>
                     <Grid item xs={9}>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker />
+                        <DatePicker onChange={setSourcedWhen} />
                       </LocalizationProvider>
                     </Grid>
                     <Grid item xs={3}>
@@ -403,6 +456,7 @@ export default function AddCoin() {
                         type="text"
                         value={storage}
                         variant="outlined"
+                        required
                         onChange={(e) => {
                           setStorage(e.target.value);
                         }}
@@ -413,6 +467,29 @@ export default function AddCoin() {
                 )}
               </Grid>
             )}
+            {country?.id && !isNaN(country?.id) && coin?.id && !isNaN(coin?.id) && (
+              <div className="">
+                <br />
+                <Button
+                  variant="contained"
+                  sx={{ width: 700 }}
+                  onClick={saveForm}
+                  disabled={
+                    country === null ||
+                    coin === null ||
+                    year === null ||
+                    mint === null ||
+                    paidAmount === '' ||
+                    paidCurrency === null ||
+                    sourcedFrom === '' ||
+                    storage == ''
+                  }
+                >
+                  <SaveIcon className="pr-2" />
+                  Save
+                </Button>
+              </div>
+            )}
           </FormControl>
         )}
         <Snackbar
@@ -422,7 +499,7 @@ export default function AddCoin() {
           onClose={() => setSnackbarAlertOpen(false)}
         >
           <Alert severity="success" sx={{ width: '100%' }}>
-            Coin saved!
+            Coin saved to your Collection!
           </Alert>
         </Snackbar>
       </Box>
