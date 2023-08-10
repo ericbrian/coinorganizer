@@ -7,7 +7,7 @@ import { coin as dbCoin, image as dbImage } from "@prisma/client";
 
 type LatestCoins = (dbCoin & { image: dbImage[] })[];
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
     const cc = req.nextUrl.searchParams.get('cc')
 
     const userEmail = '"asdf@asdf.zzz"';
@@ -15,7 +15,17 @@ export async function GET(req: Request) {
     const findOptions: Prisma.collectionFindManyArgs = {
         orderBy: [
             {
-                coin_id: "desc",
+                coin: {
+                    face_value: 'asc'
+                }
+            },
+            {
+                year: 'asc'
+            },
+            {
+                coin: {
+                    common_name: 'asc'
+                }
             },
         ],
         include: {
