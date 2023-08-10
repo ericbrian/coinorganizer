@@ -1869,7 +1869,6 @@ INSERT INTO public.collection (id, collectable_type, year, serial_number, condit
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (415, 'coin', '1973', NULL, '', 3.75, 'eBay, karmaswindfarm', '2022-12-31 00:00:00+00', false, '50 Pence Album', false, '2023-05-10 12:28:45.954+00', '2023-05-10 12:28:45.954+00', NULL, 152, NULL, 17, 1, NULL, '1');
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (416, 'coin', '1998', NULL, '', 14.95, 'eBay, 917importantinfo', '2023-01-15 00:00:00+00', false, '50 Pence Album', false, '2023-05-10 12:34:00.809+00', '2023-05-10 12:34:00.809+00', NULL, 195, NULL, 17, 1, NULL, '1');
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (417, 'coin', '2005', NULL, '', 8.50, 'eBay, puffin-0', '2023-01-15 00:00:00+00', false, '50 Pence Album', false, '2023-05-10 12:36:10.11+00', '2023-05-10 12:36:10.11+00', NULL, 198, NULL, 17, 4, NULL, '1');
-INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (418, 'coin', '2004', NULL, '', 7.95, 'eBay, brittcoins', '2022-01-12 00:00:00+00', false, '50 Pence Album', false, '2023-05-10 12:39:11.145+00', '2023-05-10 12:39:11.145+00', NULL, 179, NULL, 17, 1, NULL, '1');
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (419, 'coin', '2003', NULL, '', 5.70, 'eBay, commonwealthcurrency', '2023-01-15 00:00:00+00', false, '50 Pence Album', false, '2023-05-10 12:41:21.846+00', '2023-05-10 12:41:21.846+00', NULL, 197, NULL, 17, 1, NULL, '1');
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (420, 'coin', '2007', NULL, '', 11.46, 'eBay, discountcdrom', '2023-01-15 00:00:00+00', false, '50 Pence Album', false, '2023-05-10 12:43:54.247+00', '2023-05-10 12:43:54.247+00', NULL, 200, NULL, 17, 1, NULL, '1');
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (421, 'coin', '2006', NULL, '', 6.45, 'eBay, brittcoins', '2023-01-15 00:00:00+00', false, '50 Pence Album', false, '2023-05-10 12:45:46.507+00', '2023-05-10 12:45:46.507+00', NULL, 199, NULL, 17, 1, NULL, '1');
@@ -1982,6 +1981,10 @@ INSERT INTO public.collection (id, collectable_type, year, serial_number, condit
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (532, 'coin', '2016', NULL, '', 19.94, 'eBay, westendbazaar11', '2023-05-27 17:41:19+00', false, '50 Pence Coin Album', false, '2023-07-09 17:53:18.33+00', '2023-07-09 17:53:18.33+00', NULL, 400, NULL, 17, 7, NULL, '1');
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (524, 'coin', '1971', NULL, '', 0.00, 'eBay, collectorscouch', '2023-06-19 17:20:53+00', false, '', false, '2023-07-09 17:21:45.359+00', '2023-07-09 17:21:45.359+00', NULL, 396, NULL, 38, 1, NULL, '1');
 INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (523, 'coin', '1967', NULL, '', 2.15, 'eBay, collectorscouch', '2023-07-09 17:17:45.864+00', false, '1967 collection', false, '2023-07-09 17:20:53.928+00', '2023-07-09 17:20:53.928+00', NULL, 396, NULL, 38, 1, NULL, '1');
+INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (534, 'coin', '1967', NULL, '', 4.85, 'eBay, alnat1980', '2023-06-29 04:00:00+00', false, '1967 RedBox', false, '2023-08-09 22:24:15.027+00', '2023-08-09 22:24:15.027+00', NULL, 393, NULL, 37, 1, NULL, '1');
+INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (535, 'coin', '2020', NULL, 'BU', 14.50, 'eBay, ragsdda', '2023-07-17 04:00:00+00', false, '"Tales of the Earth" Collection Box', false, '2023-08-10 23:06:17.634+00', '2023-08-10 23:06:17.634+00', NULL, 403, NULL, 17, 1, NULL, '1');
+INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (537, 'coin', '2020', NULL, 'BU', 14.49, 'eBay, ragsdda', '2023-08-10 23:07:13.807+00', false, '"Tales of the Earth" Collection Box', false, '2023-08-10 23:08:19.883+00', '2023-08-10 23:08:19.883+00', NULL, 404, NULL, 17, 1, NULL, '1');
+INSERT INTO public.collection (id, collectable_type, year, serial_number, condition, paid_amount, sourced_from, sourced_when, is_cleaned, storage, is_proof, created_at, updated_at, banknote_id, coin_id, coinset_id, mint_id, purchased_with_currency_id, comments, owner_id) VALUES (536, 'coin', '2020', NULL, 'BU', 14.50, 'eBay ragsdda', '2023-08-10 23:06:17.665+00', false, '"Tales of the Earth" Collection Box', false, '2023-08-10 23:07:13.788+00', '2023-08-10 23:07:13.788+00', NULL, 402, NULL, 17, 1, NULL, '1');
 
 --
 -- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2288,6 +2291,12 @@ INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VA
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (59, 42, '2023-07-03', '2023-07-03');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (57, 43, '2023-07-05', '2023-07-05');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (115, 44, '2023-07-28', '2023-07-28');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (16, 45, '2023-08-08', '2023-08-08');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (5, 44, '2023-08-08', '2023-08-08');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (68, 47, '2023-08-08', '2023-08-08');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (68, 48, '2023-08-08', '2023-08-08');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (68, 49, '2023-08-08', '2023-08-08');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (68, 50, '2023-08-08', '2023-08-08');
 
 --
 -- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2930,7 +2939,6 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (19, 'Royal Canadian Mint', '1908 - Present', NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (20, 'Perth Mint', '1899 - Present', 'P', 'Perth', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (21, 'Travencore', NULL, NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
-INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (23, 'Sherritt Mint', NULL, NULL, NULL, '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (35, 'United States Mint', '1793 - Present', NULL, 'Philadelphia, PA', '2023-05-03 22:31:26.900569+00', '2023-05-03 22:31:26.900569+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (42, 'Unknown', '????', NULL, 'Unknown', '2023-07-03 23:20:36.649543+00', '2023-07-03 23:20:36.649543+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (43, 'Casa de Moneda de Chile', '1743 - Present', 'So', 'Santiago, Chile', '2023-07-05 22:44:03.799313+00', '2023-07-05 22:44:03.799313+00');
@@ -2963,6 +2971,13 @@ INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, up
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (34, 'South African Mint', '1992 - Present', NULL, 'Centurion, South Africa', '2023-04-30 17:37:09.436616+00', '2023-04-30 17:37:09.436616+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (17, 'Royal Mint', '1968 - Present', NULL, 'Llantrisant', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
 INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (44, 'Royal Mint (Tower Hill)', '1810 - 1975', NULL, 'London, United Kingdom', '2023-07-28 19:44:58.760917+00', '2023-07-28 19:44:58.760917+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (45, 'Mint of Poland (Mennica Polska)', '1766 - Present', NULL, 'Warsaw, Poland', '2023-08-08 17:35:34.733333+00', '2023-08-08 17:35:34.733333+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (23, 'Sherritt Mint', '1927 - Present', NULL, 'Fort Saskatchewan, Canada', '2023-01-14 10:31:09.130309+00', '2023-01-14 10:31:09.130309+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (46, 'Simon Timpf, Mint Master, Glückstadt', '1640 - 1643', 'ST', 'Glückstadt, Schleswig-Holstein, Germany', '2023-08-08 17:41:38.394064+00', '2023-08-08 17:41:38.394064+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (47, 'Jacob Schwiegelt, Mint Master, Glückstadt', '1657 - 1660', 'IS', 'Glückstadt, Schleswig-Holstein, Germany', '2023-08-08 17:43:37.637433+00', '2023-08-08 17:43:37.637433+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (48, 'Christopher Woltereck, Mint Master, Glückstadt', '1680 - 1702', 'CW', 'Glückstadt, Schleswig-Holstein, Germany', '2023-08-08 17:43:37.637433+00', '2023-08-08 17:43:37.637433+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (49, 'Andreas Woltereck, Mint Master, Eutin', '1702 - 1724', 'AW', 'Glückstadt, Schleswig-Holstein, Germany', '2023-08-08 17:43:37.637433+00', '2023-08-08 17:43:37.637433+00');
+INSERT INTO public.mint (id, mint, years, mark, mark_description, created_at, updated_at) VALUES (50, 'Royal Danish Mint', '1739 - Present', '❤', 'Copenhagen, Denmark', '2023-08-08 17:46:35.26225+00', '2023-08-08 17:46:35.26225+00');
 
 --
 -- Data for Name: period; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -3098,7 +3113,7 @@ SELECT pg_catalog.setval('public.coinset_id_seq', 7, true);
 -- Name: collection_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.collection_id_seq', 533, true);
+SELECT pg_catalog.setval('public.collection_id_seq', 537, true);
 
 --
 -- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3128,7 +3143,7 @@ SELECT pg_catalog.setval('public.image_id_seq', 736, true);
 -- Name: mint_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.mint_id_seq', 44, true);
+SELECT pg_catalog.setval('public.mint_id_seq', 50, true);
 
 --
 -- Name: period_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
