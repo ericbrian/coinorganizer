@@ -123,7 +123,7 @@ export default async function CoinDetails({ searchParams }: any) {
               <Typography variant="body1" gutterBottom>
                 <span style={{ fontWeight: 'bold' }}>Edge: </span>
                 {coin.edge}
-                {coin.edge_inscription && <span>with inscription: {coin.edge_inscription}</span>}
+                {coin.edge_inscription && <span> with inscription: {coin.edge_inscription}</span>}
               </Typography>
               <br />
               <Typography variant="body1" gutterBottom>
