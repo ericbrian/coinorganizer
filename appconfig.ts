@@ -25,5 +25,4 @@ const appconfig = {
   }
 };
 
-console.log("appconfig", appconfig);
 export default appconfig;
