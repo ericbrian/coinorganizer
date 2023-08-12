@@ -19,9 +19,9 @@ const appconfig = {
     }
   },
   algolia: {
-    appId: `${process.env.ALGOLIA_APP_ID}` ?? 'SIRA9OZKBG',
-    apiKey: `${process.env.ALGOLIA_API_KEY}` ?? '1053693dc33c00b7806258aa9ef8d7cb',
-    indexName: `${process.env.ALGOLIA_INDEX_NAME}` ?? 'prod_coins'
+    appId: `${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}`,
+    apiKey: `${process.env.NEXT_PUBLIC_ALGOLIA_API_KEY}`,
+    indexName: `${process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}`
   }
 };
 
