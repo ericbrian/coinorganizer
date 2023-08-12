@@ -19,7 +19,6 @@ export function middleware(request: Request) {
     })
   }
   return NextResponse.next();
-
 }
 
 export const config = {

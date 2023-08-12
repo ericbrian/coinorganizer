@@ -11,38 +11,38 @@ import HomePageCoinDetail from './components/HomePageCoinDetail';
 import { Card } from '@mui/material';
 
 export const metadata: Metadata = {
-    title: appconfig.siteName,
-    description: 'Welcome to Coin Organizer site.',
+  title: appconfig.siteName,
+  description: 'Welcome to Coin Organizer site.',
 };
 
 export default async function Home() {
-    const MAX_COINS: number = 5;
-    const coins: CoinType[] = await getCoins(MAX_COINS);
+  const MAX_COINS: number = 5;
+  const coins: CoinType[] = await getCoins(MAX_COINS);
 
-    return (
-        <main>
-            <Container>
-                <Box>
-                    <Typography
-                        variant="h4"
-                        component="h1"
-                        style={{
-                            marginTop: '20px',
-                            boxShadow: 'none',
-                        }}
-                    >
-                        Latest Coins Added
-                    </Typography>
+  return (
+    <main>
+      <Container>
+        <Box>
+          <Typography
+            variant="h4"
+            component="h1"
+            style={{
+              marginTop: '20px',
+              boxShadow: 'none',
+            }}
+          >
+            Latest Coins Added
+          </Typography>
 
-                    {Array.isArray(coins) &&
-                        coins.length > 0 &&
-                        coins.map((coin: CoinType) => (
-                            <>
-                                <HomePageCoinDetail key={coin.id} coin={coin} />
-                            </>
-                        ))}
-                </Box>
-            </Container>
-        </main>
-    );
+          {Array.isArray(coins) &&
+            coins.length > 0 &&
+            coins.map((coin: CoinType) => (
+              <>
+                <HomePageCoinDetail key={coin.id} coin={coin} />
+              </>
+            ))}
+        </Box>
+      </Container>
+    </main>
+  );
 }

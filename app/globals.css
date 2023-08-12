@@ -1,94 +1,206 @@
-:root {
-    --max-width: 1100px;
-    --border-radius: 12px;
-    --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-        'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-        'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+/* Algolia Styles */
 
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
-
-    --primary-glow: conic-gradient(from 180deg at 50% 50%,
-            #16abff33 0deg,
-            #0885ff33 55deg,
-            #54d6ff33 120deg,
-            #0071ff33 160deg,
-            transparent 360deg);
-    --secondary-glow: radial-gradient(rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0));
-
-    --tile-start-rgb: 239, 245, 249;
-    --tile-end-rgb: 228, 232, 233;
-    --tile-border: conic-gradient(#00000080,
-            #00000040,
-            #00000030,
-            #00000020,
-            #00000010,
-            #00000010,
-            #00000080);
-
-    --callout-rgb: 238, 240, 241;
-    --callout-border-rgb: 172, 175, 176;
-    --card-rgb: 180, 185, 188;
-    --card-border-rgb: 131, 134, 135;
+.ais-Breadcrumb-list, .ais-CurrentRefinements-list, .ais-HierarchicalMenu-list, .ais-Hits-list, .ais-Results-list, .ais-InfiniteHits-list, .ais-InfiniteResults-list, .ais-Menu-list, .ais-NumericMenu-list, .ais-Pagination-list, .ais-RatingMenu-list, .ais-RefinementList-list, .ais-ToggleRefinement-list {
+  margin: 0;
+  padding: 0;
+  list-style: none
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
-
-        --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-        --secondary-glow: linear-gradient(to bottom right,
-                rgba(1, 65, 255, 0),
-                rgba(1, 65, 255, 0),
-                rgba(1, 65, 255, 0.3));
-
-        --tile-start-rgb: 2, 13, 46;
-        --tile-end-rgb: 2, 5, 19;
-        --tile-border: conic-gradient(#ffffff80,
-                #ffffff40,
-                #ffffff30,
-                #ffffff20,
-                #ffffff10,
-                #ffffff10,
-                #ffffff80);
-
-        --callout-rgb: 20, 20, 20;
-        --callout-border-rgb: 108, 108, 108;
-        --card-rgb: 100, 100, 100;
-        --card-border-rgb: 200, 200, 200;
-    }
+.ais-ClearRefinements-button, .ais-CurrentRefinements-delete, .ais-CurrentRefinements-reset, .ais-GeoSearch-redo, .ais-GeoSearch-reset, .ais-HierarchicalMenu-showMore, .ais-InfiniteHits-loadPrevious, .ais-InfiniteHits-loadMore, .ais-InfiniteResults-loadMore, .ais-Menu-showMore, .ais-RangeInput-submit, .ais-RefinementList-showMore, .ais-SearchBox-submit, .ais-SearchBox-reset, .ais-VoiceSearch-button {
+  padding: 0;
+  overflow: visible;
+  font: inherit;
+  line-height: normal;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
 }
 
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+.ais-ClearRefinements-button::-moz-focus-inner, .ais-CurrentRefinements-delete::-moz-focus-inner, .ais-CurrentRefinements-reset::-moz-focus-inner, .ais-GeoSearch-redo::-moz-focus-inner, .ais-GeoSearch-reset::-moz-focus-inner, .ais-HierarchicalMenu-showMore::-moz-focus-inner, .ais-InfiniteHits-loadPrevious::-moz-focus-inner, .ais-InfiniteHits-loadMore::-moz-focus-inner, .ais-InfiniteResults-loadMore::-moz-focus-inner, .ais-Menu-showMore::-moz-focus-inner, .ais-RangeInput-submit::-moz-focus-inner, .ais-RefinementList-showMore::-moz-focus-inner, .ais-SearchBox-submit::-moz-focus-inner, .ais-SearchBox-reset::-moz-focus-inner, .ais-VoiceSearch-button::-moz-focus-inner {
+  padding: 0;
+  border: 0
 }
 
-html,
-body {
-    max-width: 100vw;
-    overflow-x: hidden;
+.ais-ClearRefinements-button[disabled], .ais-CurrentRefinements-delete[disabled], .ais-CurrentRefinements-reset[disabled], .ais-GeoSearch-redo[disabled], .ais-GeoSearch-reset[disabled], .ais-HierarchicalMenu-showMore[disabled], .ais-InfiniteHits-loadPrevious[disabled], .ais-InfiniteHits-loadMore[disabled], .ais-InfiniteResults-loadMore[disabled], .ais-Menu-showMore[disabled], .ais-RangeInput-submit[disabled], .ais-RefinementList-showMore[disabled], .ais-SearchBox-submit[disabled], .ais-SearchBox-reset[disabled], .ais-VoiceSearch-button[disabled] {
+  cursor: default
 }
 
-body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom,
-            transparent,
-            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+.ais-InfiniteHits-loadPrevious, .ais-InfiniteHits-loadMore, .ais-HierarchicalMenu-showMore, .ais-Menu-showMore, .ais-RefinementList-showMore {
+  overflow-anchor: none
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
+.ais-Pagination {
+  margin-bottom: 10px;
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
+.ais-Breadcrumb-list, .ais-Breadcrumb-item, .ais-Pagination-list, .ais-RangeInput-form, .ais-RatingMenu-link, .ais-PoweredBy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
+
+.ais-Pagination-list>li {
+  margin-right: 2em;
+  border-radius: 10px;
+  border: 1px solid #000;
+  width: 36px;
+  background-color: lightgray;
+  text-align: center;
+}
+
+.ais-Pagination-list>li.ais-Pagination-item--selected {
+  background-color: #000;
+  color: #fff;
+}
+
+a.ais-Pagination-link:active, a.ais-Pagination-link:hover, a.ais-Pagination-link:visited, a.ais-Pagination-link:link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ais-GeoSearch, .ais-GeoSearch-map {
+  height: 100%
+}
+
+.ais-HierarchicalMenu-list .ais-HierarchicalMenu-list {
+  margin-left: 1em
+}
+
+.ais-PoweredBy-logo {
+  display: block;
+  height: 1.2em;
+  width: auto
+}
+
+.ais-PoweredBy-text {
+  margin-right: .3rem
+}
+
+.ais-RatingMenu-starIcon {
+  display: block;
+  width: 20px;
+  height: 20px
+}
+
+.ais-SearchBox {
+  width: 100%;
+  padding: 10px 10px 10px 30px;
+  border-radius: 25px;
+  border: 1px solid #000;
+  margin-bottom: 5px;
+}
+
+.ais-SearchBox-input::-ms-clear, .ais-SearchBox-input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0
+}
+
+.ais-SearchBox-input::-webkit-search-decoration, .ais-SearchBox-input::-webkit-search-cancel-button, .ais-SearchBox-input::-webkit-search-results-button, .ais-SearchBox-input::-webkit-search-results-decoration {
+  display: none
+}
+
+.ais-SearchBox-input {
+  width: 94%;
+  font-size: 18px;
+  border: 0;
+  outline: none;
+}
+
+.ais-SearchBox-submitIcon {
+  width: 20px;
+  height: 20px;
+  margin: 4px 6px 0 6px;
+}
+
+.ais-SearchBox-resetIcon {
+  width: 20px;
+  height: 20px;
+  margin: 4px 6px 0 6px;
+  fill: red;
+}
+
+.ais-RangeSlider .rheostat {
+  overflow: visible;
+  margin-top: 40px;
+  margin-bottom: 40px
+}
+
+.ais-RangeSlider .rheostat-background {
+  height: 6px;
+  top: 0px;
+  width: 100%
+}
+
+.ais-RangeSlider .rheostat-handle {
+  margin-left: -12px;
+  top: -7px
+}
+
+.ais-RangeSlider .rheostat-background {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #aaa
+}
+
+.ais-RangeSlider .rheostat-progress {
+  position: absolute;
+  top: 1px;
+  height: 4px;
+  background-color: #333
+}
+
+.rheostat-handle {
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 50%;
+  cursor: grab
+}
+
+.rheostat-marker {
+  margin-left: -1px;
+  position: absolute;
+  width: 1px;
+  height: 5px;
+  background-color: #aaa
+}
+
+.rheostat-marker--large {
+  height: 9px
+}
+
+.rheostat-value {
+  margin-left: 50%;
+  padding-top: 15px;
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%)
+}
+
+.rheostat-tooltip {
+  margin-left: 50%;
+  position: absolute;
+  top: -22px;
+  text-align: center;
+  transform: translateX(-50%)
+}
+
+div.sr_card {
+  box-shadow: 1px 1px 2px black;
+  margin-bottom: 12px;
+}
+
+span.ais-RefinementList-count {
+  float: right;
+}
+
+/* End of Algolia Styles */
