@@ -1,3 +1,8 @@
+body {
+  overflow: scroll;
+  /* Show scrollbars */
+}
+
 /* Algolia Styles */
 
 .ais-Breadcrumb-list, .ais-CurrentRefinements-list, .ais-HierarchicalMenu-list, .ais-Hits-list, .ais-Results-list, .ais-InfiniteHits-list, .ais-InfiniteResults-list, .ais-Menu-list, .ais-NumericMenu-list, .ais-Pagination-list, .ais-RatingMenu-list, .ais-RefinementList-list, .ais-ToggleRefinement-list {
