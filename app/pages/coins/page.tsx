@@ -3,7 +3,7 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import algoliasearch from 'algoliasearch/lite';
 import React from 'react';
-import { Hits, InstantSearch, PoweredBy, RefinementList, Pagination } from 'react-instantsearch';
+import { Hits, InstantSearch, PoweredBy, RefinementList, Pagination, Stats } from 'react-instantsearch';
 import { SearchBox } from 'react-instantsearch';
 import appconfig from '@/appconfig';
 import SearchResult from './SearchResult';
@@ -21,6 +21,7 @@ export default function page() {
       <Box>
         <InstantSearch searchClient={searchClient} indexName={indexName} routing={true}>
           <SearchBox autoFocus />
+          <Stats />
           <Pagination />
           <div></div>
           <Grid container spacing={2}>

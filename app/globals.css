@@ -228,4 +228,11 @@ span.ais-RefinementList-count {
   width: 10%
 }
 
+span.ais-Stats-text {
+  font-size: small;
+  top: -10px;
+  position: relative;
+  padding-left: 40px;
+}
+
 /* End of Algolia Styles */
