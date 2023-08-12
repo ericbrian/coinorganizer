@@ -47,9 +47,9 @@
 .ais-Pagination-list>li {
   margin-right: 2em;
   border-radius: 10px;
-  border: 1px solid #000;
+  border: 1px solid #ccc;
   width: 36px;
-  background-color: lightgray;
+  background-color: #eee;
   text-align: center;
 }
 
@@ -199,8 +199,28 @@ div.sr_card {
   margin-bottom: 12px;
 }
 
+label.ais-RefinementList-label {
+  list-style-type: none;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+
+label.ais-RefinementList-label>span {
+  display: table-cell;
+}
+
+span.ais-RefinementList-checkbox {
+  width: 10%
+}
+
+span.ais-RefinementList-labelText {
+  width: 80%
+}
+
 span.ais-RefinementList-count {
-  float: right;
+  text-align: right;
+  width: 10%
 }
 
 /* End of Algolia Styles */
