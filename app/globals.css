@@ -50,17 +50,16 @@ body {
 }
 
 .ais-Pagination-list>li {
-  margin-right: 2em;
+  margin-right: 0.2em;
   border-radius: 10px;
-  border: 1px solid #ccc;
   width: 36px;
   background-color: #eee;
   text-align: center;
+  filter: drop-shadow(2px 2px 1px #000)
 }
 
 .ais-Pagination-list>li.ais-Pagination-item--selected {
-  background-color: #000;
-  color: #fff;
+  background-color: #bbb;
 }
 
 a.ais-Pagination-link:active, a.ais-Pagination-link:hover, a.ais-Pagination-link:visited, a.ais-Pagination-link:link {
