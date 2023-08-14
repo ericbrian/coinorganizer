@@ -24,6 +24,7 @@ export async function GET(req: NextRequest) {
         country: {
           select: {
             name: true,
+            iso_3166_alpha_2: true,
           }
         },
         currency: {
@@ -63,6 +64,7 @@ function rewriteForAlgolia(coins: any) {
       year_end: coin.year_end ?? coin.year_start,
       images: coin.image,
       country: coin.country?.name,
+      cc: coin.country?.iso_3166_alpha_2,
       currency: coin.currency?.name,
       shape: coin.shape?.name,
     };

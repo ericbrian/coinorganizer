@@ -23,7 +23,6 @@ export default function page() {
           <SearchBox autoFocus />
           <Stats />
           <Pagination />
-          <div></div>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography variant="h5" color="text.secondary" component="div">
@@ -45,6 +44,7 @@ export default function page() {
               <Hits hitComponent={({ hit }) => <SearchResult props={hit} />} />
             </Grid>
           </Grid>
+          <Pagination />
           <hr />
           <PoweredBy />
         </InstantSearch>

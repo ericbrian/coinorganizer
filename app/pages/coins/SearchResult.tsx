@@ -5,16 +5,28 @@ import React from 'react';
 
 export default function SearchResult({ props }: any) {
   return (
-    <Card sx={{ display: 'flex' }} className="sr_card">
+    <Card sx={{ display: 'flex', backgroundColor: '#fff' }} className="sr_card">
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             <Link
               href={`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/pages/coin-details?id=${props.objectID}`}
             >
+              <CardMedia
+                component="img"
+                sx={{
+                  width: 28,
+                  display: 'inline-block',
+                  marginRight: theme.spacing(1),
+                }}
+                image={appconfig.cdn + '/flag-icons/' + props.cc + '.svg'}
+                alt={props.country}
+                title={props.country}
+                id={props.cc}
+              />
               {props.common_name} ({props.year_start}
+              {props.year_end !== props.year_start ? ` - ${props.year_end}` : ''})
             </Link>
-            {props.year_end !== props.year_start ? ` - ${props.year_end}` : ''})
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {props.series_or_theme_name}
