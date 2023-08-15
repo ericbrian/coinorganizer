@@ -39,6 +39,16 @@ export default function page() {
                 Face Values
               </Typography>
               <RefinementList attribute="pretty_face_value" title="Face Values" showMore={true} showMoreLimit={250} />
+
+              <Typography variant="h5" color="text.secondary" component="div" mt={2}>
+                Series
+              </Typography>
+              <RefinementList attribute="series_or_theme_name" title="Series" showMore={true} showMoreLimit={250} />
+
+              <Typography variant="h5" color="text.secondary" component="div" mt={2}>
+                Shapes
+              </Typography>
+              <RefinementList attribute="shape" title="Shapes" showMore={true} showMoreLimit={250} />
             </Grid>
             <Grid item xs={12} sm={6} md={8} lg={9}>
               <Hits hitComponent={({ hit }) => <SearchResult props={hit} />} />

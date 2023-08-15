@@ -28,11 +28,16 @@ export default function SearchResult({ props }: any) {
               {props.year_end !== props.year_start ? ` - ${props.year_end}` : ''})
             </Link>
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+            sx={{ textTransform: 'uppercase', fontSize: 'small' }}
+          >
             {props.series_or_theme_name}
           </Typography>
           <Typography variant="body1" color="text.secondary" component="div" gutterBottom>
-            {props.pretty_face_value} ({props.currency})
+            <strong>Nominal Value & Currency</strong>: {props.pretty_face_value} ({props.currency})
           </Typography>
           <Typography variant="body1" color="text.secondary" component="div">
             <strong>Obverse</strong>: {props.obverse}
