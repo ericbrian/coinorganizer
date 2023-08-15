@@ -50,6 +50,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error });
   }
 }
+
 function rewriteForAlgolia(coins: any) {
   const managed = coins.map((coin: any) => {
     const managedCoin = {

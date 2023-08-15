@@ -95,3 +95,11 @@ export const getPossibleMints = (coin: CoinType): MintType[] =>
 
 export const escapedNewLineToLineBreakTag = (str: string) =>
   str.split('\\n').map((item, idx) => (idx === 0 ? item : [<br key={idx} />, item]));
+
+export const getIdFromPath = (pathname: string): number | null => {
+  const parts = pathname.split('/');
+  const id = parts.at(-1);
+  if (id && isNaN(id as any)) {
+    return null;
+  } else return +(id as string);
+};
