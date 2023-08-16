@@ -10,39 +10,45 @@ import { getIdFromPath } from '@/utils';
 export default function AddCountry() {
   const pathname = usePathname();
 
-  const [isLoading, setIsLoading] = useState(true);
+  // LOVs
+  const [countryList, setCountryList] = useState<CountryType[]>([]);
+
+  // Form Data
   const [name, setName] = useState('');
   const [shortName, setShortName] = useState('');
   const [parent, setParent] = useState<CountryType | null>(null);
   const [isActive, setIsActive] = useState(true);
-  const [editId, setEditId] = useState<number | null>(null);
-  const [editedCountry, setEditedCountry] = useState<CountryType | null>(null);
+  const [countryCode, setCountryCode] = useState('');
 
-  const [countryList, setCountryList] = useState<CountryType[]>([]);
+  // Page State
+  const [isLoading, setIsLoading] = useState(true);
+  const [editId, setEditId] = useState<number | null>(null);
 
   useEffect(() => {
     getCountryList().then((data) => {
       setCountryList(data);
-      setEditId(getIdFromPath(pathname));
 
-      if (!editId) {
-        setIsLoading(false);
+      const id = getIdFromPath(pathname);
+      if (id) {
+        setEditId(id);
+        setIsLoading(true);
+        getCountryById(id)
+          .then((data: CountryType) => {
+            setName(data.name);
+            setShortName(data.short_name);
+            setIsActive(data.is_active);
+            setParent(data.country);
+            setCountryCode(data.iso_3166_alpha_2);
+          })
+          .catch((error: any) => {
+            console.error(error);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
       }
     });
   }, []);
-
-  useEffect(() => {
-    if (editId) {
-      getCountryById(editId).then((data) => {
-        setEditedCountry(data);
-        setName(data.name);
-        setShortName(data.short_name);
-        setParent(data.parent);
-        setIsActive(data.is_active);
-        setIsLoading(false);
-      });
-    }
-  }, [editId]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -52,7 +58,7 @@ export default function AddCountry() {
     <Container>
       <Box>
         <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-          Country - {editId}
+          Country - {pathname.includes('/edit') ? 'Edit' : 'Create'}
         </Typography>
         {isLoading && <div>Loading...</div>}
         {!isLoading && (
@@ -79,6 +85,17 @@ export default function AddCountry() {
               fullWidth
               sx={{ mb: 3 }}
             />
+            <TextField
+              label="Country Code (ISO 3166-1 alpha-2)"
+              onChange={(e) => setCountryCode(e.target.value)}
+              value={countryCode}
+              variant="outlined"
+              color="secondary"
+              type="text"
+              fullWidth
+              sx={{ mb: 3 }}
+              inputProps={{ maxLength: 2 }}
+            />
             <Autocomplete
               disablePortal
               id="country-select"
@@ -103,10 +120,9 @@ export default function AddCountry() {
             />
             <div>
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={<Checkbox checked={isActive} />}
                 label="Is Active"
                 onChange={() => setIsActive(!isActive)}
-                checked={isActive}
               />
             </div>
             <Button variant="contained" color="primary" type="submit">
