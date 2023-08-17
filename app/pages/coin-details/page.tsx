@@ -47,7 +47,7 @@ export default async function CoinDetails({ searchParams }: any) {
                 <Typography style={{ marginTop: '10px' }}>
                   <span style={{ fontWeight: 'bold' }}>Ruler:</span>
                   <br />
-                  {coin.ruler.years}
+                  {coin.ruler.name} ({coin.ruler.years})
                 </Typography>
               )}
               {coin.period && (
