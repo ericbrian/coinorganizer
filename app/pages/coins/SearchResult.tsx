@@ -37,7 +37,7 @@ export default function SearchResult({ props }: any) {
             {props.series_or_theme_name}
           </Typography>
           <Typography variant="body1" color="text.secondary" component="div" gutterBottom>
-            <strong>Nominal Value & Currency</strong>: {props.pretty_face_value} ({props.currency})
+            <strong>Nominal Value (Currency)</strong>: {props.pretty_face_value} ({props.currency})
           </Typography>
           <Typography variant="body1" color="text.secondary" component="div">
             <strong>Obverse</strong>: {props.obverse}

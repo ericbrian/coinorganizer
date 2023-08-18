@@ -9,7 +9,6 @@ import appconfig from '@/appconfig';
 import SearchResult from './SearchResult';
 
 export default function page() {
-  console.log('appconfig....', appconfig);
   const appId = appconfig.algolia.appId;
   const apiKey = appconfig.algolia.apiKey;
   const indexName = appconfig.algolia.indexName;
