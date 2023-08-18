@@ -40,3 +40,4 @@ next-env.d.ts
 /db/users.sql
 
 /public/images2
+test.json
