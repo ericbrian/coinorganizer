@@ -46,6 +46,8 @@ export default function AddCountry() {
           .finally(() => {
             setIsLoading(false);
           });
+      } else {
+        setIsLoading(false);
       }
     });
   }, []);
