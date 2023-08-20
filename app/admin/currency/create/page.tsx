@@ -15,10 +15,16 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { CurrencyInputType } from '@/global';
 import { Prisma } from '@prisma/client';
-import { saveNewCurrency } from '@/http/currency';
-import { useParams } from 'next/navigation';
+import { getCurrencyById, persistCurrency } from '@/http/currency';
+import { useParams, usePathname } from 'next/navigation';
+import { currency as CurrencyType } from '@prisma/client';
+import { getIdFromPath } from '@/utils';
 
-export default function currencyCreatePage() {
+export default function AddCurrency() {
+  const pathname = usePathname();
+  const [isEdit, setIsEdit] = useState(false);
+
+  const [currency, setCurrency] = useState<CurrencyType | null>(null);
   const [name, setName] = useState('');
   const [shortName, setShortName] = useState('');
   const [comments, setComments] = useState('');
@@ -38,10 +44,30 @@ export default function currencyCreatePage() {
       if (id) setCountryId(parseInt(id, 10));
       setCountryName(currentCountry.at(0) || '');
     } catch (e) {}
+
+    setIsEdit(pathname.includes('/edit'));
   }, []);
 
+  useEffect(() => {
+    if (isEdit) {
+      const id = getIdFromPath(pathname);
+      if (id) {
+        getCurrencyById(id).then((data: CurrencyType | null) => {
+          if (!data) return;
+          setCurrency(data);
+          setName(data.name);
+          setShortName(data.short_name);
+          setComments(data.comments?.toString() || '');
+          setYears(data.years?.toString() || '');
+          setDisplayShortNameAtLeft(data.display_short_name_at_left);
+          setDemonitizedDate(data.demonitized_date?.toString() || '');
+        });
+      }
+    }
+  }, [isEdit]);
+
   const getFormValues = (): CurrencyInputType => {
-    return {
+    const formData: CurrencyInputType = {
       name,
       shortName,
       years,
@@ -50,6 +76,12 @@ export default function currencyCreatePage() {
       demonitizedDate,
       countryId,
     };
+
+    if (isEdit) {
+      formData['id'] = currency?.id as number;
+    }
+
+    return formData;
   };
 
   const clearForm = () => {
@@ -67,7 +99,7 @@ export default function currencyCreatePage() {
     event.preventDefault();
 
     const payload: CurrencyInputType = getFormValues();
-    saveNewCurrency(payload)
+    persistCurrency(payload)
       .then(() => {
         setSnackbarAlertOpen(true);
         clearForm();
@@ -88,7 +120,7 @@ export default function currencyCreatePage() {
     <Container>
       <Box>
         <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-          Currency - Create {countryName && ` for ${countryName}`}
+          Currency - {isEdit ? 'Edit' : 'Create'} {!isEdit && countryName && ` for ${countryName}`}
         </Typography>
 
         <form autoComplete="off" onSubmit={handleSubmit}>
@@ -136,13 +168,13 @@ export default function currencyCreatePage() {
             sx={{ mb: 3 }}
           />
           <FormControlLabel
+            label="Display the Symbol at the left of the amount"
             control={
               <Checkbox
                 checked={displayShortNameAtLeft}
                 onChange={() => setDisplayShortNameAtLeft(!displayShortNameAtLeft)}
               />
             }
-            label="Display the Symbol at the left of the amount"
           />
           <TextField
             id="demonitized-date"
