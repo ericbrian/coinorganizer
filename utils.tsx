@@ -11,7 +11,7 @@ import {
   enumCollectionsCollectableType,
 } from '@prisma/client';
 
-import { CoinInputType, CollectionInputType, CurrencyInputType } from '@/global';
+import { CoinInputType, CollectionInputType, CurrencyInputType, MintInputType, RulerInputType } from '@/global';
 
 export function engraversSort(a: EngraverType, b: EngraverType) {
   const aParts = a.name.split(' ');
@@ -83,6 +83,19 @@ export const convertToPrismaCollectionCreateInput = (payload: CollectionInputTyp
   mint_id: payload.mint?.id,
   purchased_with_currency_id: payload.paidCurrency?.id,
   owner_id: '1',
+});
+
+export const convertToPrismaMintCreateInput = (payload: MintInputType) => ({
+  years: payload.years.trim(),
+  mint: payload.mint.trim(),
+  mark: payload.mark ? payload.mark.trim() : null,
+  mark_description: payload.location,
+});
+
+export const convertToPrismaRulerCreateInput = (payload: RulerInputType) => ({
+  years: payload.years.trim(),
+  house: payload.house.trim(),
+  name: payload.ruler.trim(),
 });
 
 export function range(start: number, end: number): number[] {

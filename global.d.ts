@@ -106,3 +106,18 @@ type CollapsedCollectionDataType = {
 type CollapsedCostsType = {
   [key: string]: CollapsedCostsDataType;
 };
+
+type MintInputType = {
+  mint: string;
+  location: string;
+  mark: string;
+  years: string;
+  country: CountryType | null;
+}
+
+type RulerInputType = {
+  ruler: string;
+  house: string;
+  years: string;
+  country: CountryType | null;
+}
