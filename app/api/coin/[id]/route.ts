@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { Prisma, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
@@ -13,6 +13,11 @@ export async function GET(req: Request, { params }: any) {
         country: true,
         ruler: true,
         period: true,
+        coin_mint: {
+          include: {
+            mint: true,
+          }
+        },
       },
     });
     return NextResponse.json(data);
