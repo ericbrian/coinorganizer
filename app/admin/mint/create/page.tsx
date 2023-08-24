@@ -5,7 +5,7 @@ import { getCountryList } from '@/http/country';
 import { persistMint } from '@/http/mint';
 import { Container, Box, Typography, Button, TextField, Autocomplete } from '@mui/material';
 import { country as CountryType } from '@prisma/client';
-import React, { FormEvent, use, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 export default function page() {
   const [isLoading, setIsLoading] = useState(true);
