@@ -47,6 +47,9 @@ export default function page() {
           <Button variant="contained" color="primary" href="/admin/coin/add-images">
             Add Images to Coins
           </Button>{' '}
+          <Button variant="contained" color="primary" href="/admin/coin/add-mints">
+            Add Mints to Coins
+          </Button>{' '}
         </Typography>{' '}
       </Box>
     </Container>

@@ -30,6 +30,7 @@ export default async function Home() {
               marginTop: '20px',
               boxShadow: 'none',
             }}
+            gutterBottom
           >
             Latest Coins Added
           </Typography>
