@@ -7,6 +7,10 @@ import { collection as CollectionType } from '@prisma/client';
 import moment from 'moment';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import SellIcon from '@mui/icons-material/Sell';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 export default function page() {
   const params = useParams();
@@ -54,18 +58,54 @@ export default function page() {
                   }}
                 >
                   <Grid container spacing={2}>
-                    <Grid item xs={1}>
-                      Y: {item.year}
+                    <Grid
+                      item
+                      xs={1}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexWrap: 'wrap',
+                      }}
+                    >
+                      <CalendarTodayIcon sx={{ mr: 1 }} />
+                      {item.year}
                     </Grid>
-                    <Grid item xs={2}>
-                      Paid: {item.currency.name} {item.currency.short_name}{' '}
+                    <Grid
+                      item
+                      xs={2}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexWrap: 'wrap',
+                      }}
+                    >
+                      <SellIcon sx={{ mr: 1 }} />
+                      {item.currency.name} {item.currency.short_name}{' '}
                       {item.paid_amount ? (+item.paid_amount).toFixed(2) : '0.00'}
                     </Grid>
-                    <Grid item xs={3}>
-                      Purchased: {moment(item.sourced_when).format('MMM D, yyyy')}
+                    <Grid
+                      item
+                      xs={4}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexWrap: 'wrap',
+                      }}
+                    >
+                      <LocationOnIcon sx={{ mr: 1 }} />
+                      {item.sourced_from}, {moment(item.sourced_when).format('MMM D, yyyy')}
                     </Grid>
-                    <Grid item xs={4}>
-                      Purchased From: {item.sourced_from}
+                    <Grid
+                      item
+                      xs={3}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexWrap: 'wrap',
+                      }}
+                    >
+                      <InventoryIcon sx={{ mr: 1 }} />
+                      {item.storage ? item.storage : 'Unknown'}
                     </Grid>
                     <Grid item xs={2}>
                       <small>

@@ -20,6 +20,7 @@ export async function GET(req: Request, { params }: any) {
         },
       },
     });
+
     return NextResponse.json(data);
   }
   catch (e) {

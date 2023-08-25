@@ -81,7 +81,7 @@ export default async function CoinDetails({ searchParams }: any) {
               )}
             </Grid>
             <Grid xs={7}>
-              <Typography variant="h4" component="h1" gutterBottom>
+              <Typography variant="h5" component="h2" gutterBottom>
                 {display_name}
                 {coin.series_or_theme_name && (
                   <Typography
@@ -127,7 +127,11 @@ export default async function CoinDetails({ searchParams }: any) {
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <span style={{ fontWeight: 'bold' }}>Mint(s): </span>
-                {coin.coin_mint?.map((cm: CoinMintType) => `${cm.mint.mint}, ${cm.mint.mark_description}`)}
+                {coin.coin_mint?.map((cm: CoinMintType) => {
+                  const mint = cm.mint;
+                  const mark = mint.mark ? '(' + mint.mark + ')' : '';
+                  return `${mint.mint}, ${mint.mark_description} ${mark}`;
+                })}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <span style={{ fontWeight: 'bold' }}>Composition: </span>
