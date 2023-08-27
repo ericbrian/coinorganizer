@@ -235,3 +235,11 @@ span.ais-Stats-text {
 }
 
 /* End of Algolia Styles */
+
+thead.MuiTableHead-root {
+  background-color: lightgreen;
+}
+
+tbody>tr:nth-child(even) {
+  background-color: #E8E8E8;
+}

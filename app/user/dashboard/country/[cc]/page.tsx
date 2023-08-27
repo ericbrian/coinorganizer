@@ -60,54 +60,66 @@ export default function page() {
                   <Grid container spacing={2}>
                     <Grid
                       item
-                      xs={1}
+                      xs={2}
+                      container={true}
                       style={{
-                        display: 'flex',
                         alignItems: 'center',
-                        flexWrap: 'wrap',
                       }}
                     >
-                      <CalendarTodayIcon sx={{ mr: 1 }} />
+                      <span title="Mint Year">
+                        <CalendarTodayIcon sx={{ mr: 1 }} />
+                      </span>
                       {item.year}
                     </Grid>
                     <Grid
                       item
                       xs={2}
+                      container={true}
                       style={{
-                        display: 'flex',
                         alignItems: 'center',
-                        flexWrap: 'wrap',
                       }}
                     >
-                      <SellIcon sx={{ mr: 1 }} />
-                      {item.currency.name} {item.currency.short_name}{' '}
-                      {item.paid_amount ? (+item.paid_amount).toFixed(2) : '0.00'}
+                      <span title="Price">
+                        <SellIcon sx={{ mr: 1 }} />
+                      </span>
+                      <span title={item.currency.name}>
+                        {item.currency.short_name} {item.paid_amount ? (+item.paid_amount).toFixed(2) : '0.00'}
+                      </span>
                     </Grid>
                     <Grid
                       item
-                      xs={4}
+                      xs={3}
+                      container={true}
                       style={{
-                        display: 'flex',
                         alignItems: 'center',
-                        flexWrap: 'wrap',
                       }}
                     >
-                      <LocationOnIcon sx={{ mr: 1 }} />
+                      <span title="Sourced From">
+                        <LocationOnIcon sx={{ mr: 1 }} />
+                      </span>
                       {item.sourced_from}, {moment(item.sourced_when).format('MMM D, yyyy')}
                     </Grid>
                     <Grid
                       item
                       xs={3}
+                      container={true}
                       style={{
-                        display: 'flex',
                         alignItems: 'center',
-                        flexWrap: 'wrap',
                       }}
                     >
-                      <InventoryIcon sx={{ mr: 1 }} />
+                      <span title="Storage Location">
+                        <InventoryIcon sx={{ mr: 1 }} />
+                      </span>
                       {item.storage ? item.storage : 'Unknown'}
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid
+                      item
+                      xs={2}
+                      container={true}
+                      style={{
+                        alignItems: 'center',
+                      }}
+                    >
                       <small>
                         Coin# {item.coin.id} / Col# {item.id}
                       </small>

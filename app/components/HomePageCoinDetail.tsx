@@ -67,6 +67,7 @@ export default function HomePageCoinDetail(props: { coin: CoinType }) {
                 sx={{ width: 160, borderRadius: '15px' }}
                 image={appconfig.cdn + '/coin-images/' + coin.image[0].url}
                 alt="Live from space album cover"
+                style={{ marginTop: '20px' }}
               />
             )}
           </Grid>
