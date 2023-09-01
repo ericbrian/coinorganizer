@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, coin as CoinType } from '@prisma/client'
+import { AlgoliaCoinType } from "@/global";
+import { rewriteForAlgolia } from "@/utils";
 const prisma = new PrismaClient()
 
 export async function GET(req: NextRequest) {
   try {
-    const coins: any = await prisma.coin.findMany({
+    const coins: AlgoliaCoinType[] = await prisma.coin.findMany({
       select: {
         id: true,
         common_name: true,
@@ -50,27 +52,3 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error });
   }
 }
-
-function rewriteForAlgolia(coins: any) {
-  const managed = coins.map((coin: any) => {
-    const managedCoin = {
-      objectID: coin.id,
-      common_name: coin.common_name,
-      pretty_face_value: coin.pretty_face_value,
-      obverse: coin.obverse,
-      reverse: coin.reverse,
-      composition: coin.composition,
-      series_or_theme_name: coin.series_or_theme_name,
-      year_start: coin.year_start,
-      year_end: coin.year_end ?? coin.year_start,
-      images: coin.image,
-      country: coin.country?.name,
-      cc: coin.country?.iso_3166_alpha_2,
-      currency: coin.currency?.name,
-      shape: coin.shape?.name,
-    };
-    return managedCoin;
-  });
-  return managed;
-}
-

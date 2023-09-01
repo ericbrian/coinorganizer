@@ -121,3 +121,19 @@ type RulerInputType = {
   years: string;
   country: CountryType | null;
 }
+
+type AlgoliaCoinType = {
+  id: number;
+  common_name: string | null;
+  pretty_face_value: string | null;
+  obverse: string;
+  reverse: string;
+  composition: string | null;
+  series_or_theme_name: string | null;
+  year_start: string | null;
+  year_end: string | null;
+  image: { url: string | null; is_preferred: boolean | null; };
+  country: { name: string, iso_3166_alpha_2: string } | null;
+  currency: { name: string | null; } | null;
+  shape: { name: string | null; } | null;
+}

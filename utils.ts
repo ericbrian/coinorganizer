@@ -1,34 +1,28 @@
 import {
-  coin as CoinType,
-  country as CountryType,
-  currency as CurrencyType,
   engraver as EngraverType,
-  mint as MintType,
-  period as PeriodType,
-  ruler as RulerType,
-  shape as ShapeType,
-  coin_mint as CoinMintType,
   enumCollectionsCollectableType,
 } from '@prisma/client';
 
-import { CoinInputType, CollectionInputType, CurrencyInputType, MintInputType, RulerInputType } from '@/global';
+import {
+  AlgoliaCoinType,
+  CoinInputType,
+  CollectionInputType,
+  CurrencyInputType,
+  MintInputType,
+  RulerInputType,
+} from '@/global';
+
+export const range = (start: number, end: number): number[] => {
+  if (!start || !end) throw new Error('Start and end must be defined');
+  if (start === end) return [start];
+  return [start, ...range(start + 1, end)];
+};
 
 export function engraversSort(a: EngraverType, b: EngraverType) {
   const aParts = a.name.split(' ');
   const bParts = b.name.split(' ');
   return `${aParts.at(-1)} ${aParts.at(0)}`.localeCompare(`${bParts.at(-1)} ${bParts.at(0)}`);
 }
-
-export const convertToPrismaCurrencyCreateInput = (payload: CurrencyInputType) => {
-  return {
-    name: payload.name.trim(),
-    short_name: payload.shortName.trim(),
-    years: payload.years.trim(),
-    comments: payload.comments?.trim() ? payload.comments.trim() : null,
-    display_short_name_at_left: payload.displayShortNameAtLeft ?? true,
-    demonitized_date: payload.demonitizedDate?.trim() ? payload.demonitizedDate.trim() : null,
-  };
-};
 
 export const convertToPrismaCoinCreateInput = (payload: CoinInputType) => {
   let allMints = null;
@@ -85,29 +79,68 @@ export const convertToPrismaCollectionCreateInput = (payload: CollectionInputTyp
   owner_id: '1',
 });
 
-export const convertToPrismaMintCreateInput = (payload: MintInputType) => ({
-  years: payload.years.trim(),
-  mint: payload.mint.trim(),
-  mark: payload.mark ? payload.mark.trim() : null,
-  mark_description: payload.location,
-});
+export const convertToPrismaCurrencyCreateInput = (payload: CurrencyInputType) => {
+  const resp = {
+    name: payload.name.trim(),
+    short_name: payload.shortName.trim(),
+    years: payload.years.trim(),
+    comments: payload.comments?.trim() ? payload.comments.trim() : null,
+    display_short_name_at_left: payload.displayShortNameAtLeft ?? true,
+    demonitized_date: payload.demonitizedDate?.trim() ? payload.demonitizedDate.trim() : null,
+  };
+  return resp;
+};
 
-export const convertToPrismaRulerCreateInput = (payload: RulerInputType) => ({
-  years: payload.years.trim(),
-  house: payload.house.trim(),
-  name: payload.ruler.trim(),
-});
+export const convertToPrismaMintCreateInput = (payload: MintInputType) => {
+  return {
+    years: payload.years.trim(),
+    mint: payload.mint.trim(),
+    mark: payload.mark ? payload.mark.trim() : null,
+    mark_description: payload.location,
+  };
+};
 
-export function range(start: number, end: number): number[] {
-  if (start === end) return [start];
-  return [start, ...range(start + 1, end)];
-}
+export const convertToPrismaRulerCreateInput = (payload: RulerInputType) => {
+  return {
+    years: payload.years.trim(),
+    house: payload.house.trim(),
+    name: payload.ruler.trim(),
+  };
+};
 
-export const getPossibleMints = (coin: CoinType): MintType[] =>
-  coin.coin_mint?.map((coinMint: CoinMintType) => coinMint.mint) ?? [];
-
-export const escapedNewLineToLineBreakTag = (str: string) =>
-  str.split('\\n').map((item, idx) => (idx === 0 ? item : [<br key={idx} />, item]));
+export const rewriteForAlgolia = (coins: AlgoliaCoinType[]) => {
+  const managed = coins.map((coin: AlgoliaCoinType) => {
+    const {
+      id,
+      common_name,
+      pretty_face_value,
+      obverse,
+      reverse,
+      composition,
+      series_or_theme_name,
+      year_start,
+      year_end,
+      image,
+    } = coin;
+    return {
+      objectID: id,
+      common_name,
+      pretty_face_value,
+      obverse,
+      reverse,
+      composition,
+      series_or_theme_name,
+      year_start,
+      year_end: year_end ?? year_start,
+      images: image,
+      country: coin.country?.name,
+      cc: coin.country?.iso_3166_alpha_2,
+      currency: coin.currency?.name,
+      shape: coin.shape?.name,
+    };
+  });
+  return managed;
+};
 
 export const getIdFromPath = (pathname: string): number | null => {
   const parts = pathname.split('/');
