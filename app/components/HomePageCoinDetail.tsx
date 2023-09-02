@@ -24,7 +24,7 @@ export default function HomePageCoinDetail(props: { coin: CoinType }) {
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <CardContent sx={{ flex: '1 0 auto' }}>
                 <Typography component="div" variant="h5">
-                  <Link href={`/pages/coin-details?id=${coin.id}`}>
+                  <Link href={`/coin-details?id=${coin.id}`}>
                     {coin.common_name}
                     {coin.pretty_face_value &&
                       coin.pretty_face_value != coin.common_name &&

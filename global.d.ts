@@ -115,6 +115,11 @@ type MintInputType = {
   country: CountryType | null;
 }
 
+type PeriodInputType = {
+  period: string;
+  years: string;
+}
+
 type RulerInputType = {
   ruler: string;
   house: string;

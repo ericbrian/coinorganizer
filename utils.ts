@@ -1,5 +1,6 @@
 import {
   engraver as EngraverType,
+  period as PeriodType,
   enumCollectionsCollectableType,
 } from '@prisma/client';
 
@@ -97,6 +98,13 @@ export const convertToPrismaMintCreateInput = (payload: MintInputType) => {
     mint: payload.mint.trim(),
     mark: payload.mark ? payload.mark.trim() : null,
     mark_description: payload.location,
+  };
+};
+
+export const convertToPrismaPeriodCreateInput = (payload: PeriodType) => {
+  return {
+    years: payload.years.trim(),
+    name: payload.period.trim(),
   };
 };
 

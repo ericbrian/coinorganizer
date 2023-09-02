@@ -6,7 +6,7 @@ import { getCoinById } from '@/http/coin';
 import appconfig from '@/appconfig';
 import { Container, Box, Typography, CardMedia } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import { escapedNewLineToLineBreakTag } from '@/utils';
+import { escapedNewLineToLineBreakTag } from '@/tsx-utils';
 
 export const metadata: Metadata = {
   title: 'Coin Details',
