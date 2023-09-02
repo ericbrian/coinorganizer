@@ -1361,6 +1361,8 @@ INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (409, 2.000, '€2', NULL, 'Sunflower for Ukraine', 'Ukrainian sunflowers.', 'A geographical map of Western Europe spans the outer ring and inner core on the right side of the coin. The inscription 2 EURO is superimposed over the map of Europe, with the numeral “2” located in an open field representing the eastern Atlantic Ocean. 12 stars are located on the right side of the outer ring, with six stars atop the map of Europe and six stars below it; six vertical stripes cut across the inner core of the coin, visually connecting the upper and lower star segments.', 'Reeded', 'DIEVS ☆ SVĒTĪ ☆ LATVIJU ☆', '2023', NULL, 'Bimetallic: nickel brass clad nickel center in copper-nickel ring (Core: 75% Cu, 20% Zn, 5% Ni Ring: 75% Cu, 25% Ni)', false, 8.500, 25.750, NULL, '2023-08-19 00:12:45.084+00', '2023-08-19 00:12:45.084+00', NULL, NULL, NULL, 107, 6, 1, '366879', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (410, 2.000, '€2', NULL, 'Spanish Presidency of the Council of the EU', 'The design shows two images. The first one is the logo of the Spanish Presidency of the Council of the EU. Surrounding the logo are the captions. The second image, in the lower part, represents the mint mark of the Fabrica Nacional de Moneda y Timbre Real Casa de la Moneda with the crowned ‘M’.', 'A geographical map of Western Europe spans the outer ring and inner core on the right side of the coin. The inscription 2 EURO is superimposed over the map of Europe, with the numeral “2” located in an open field representing the eastern Atlantic Ocean. 12 stars are located on the right side of the outer ring, with six stars atop the map of Europe and six stars below it; six vertical stripes cut across the inner core of the coin, visually connecting the upper and lower star segments.', 'Reeded', '"2 ★ ★" repeated six times alternately upright and inverted', '2023', NULL, 'Bimetallic: nickel brass clad nickel center in copper-nickel ring (Core: 75% Cu, 20% Zn, 5% Ni Ring: 75% Cu, 25% Ni)', false, 8.500, 25.750, NULL, '2023-08-22 21:57:54.897+00', '2023-08-22 21:57:54.897+00', NULL, NULL, NULL, 170, 6, 1, '368770', false);
 INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (411, 2.000, '€2', NULL, 'Portuguese Olympic Team for Rio 2016', 'The design shows an image based on the well-known artwork ‘Heart of Viana’, signed by the author Joana Vasconcelos, which was inspired by traditional jewelry from the north of Portugal (the area around the city of Viana do Castelo). It symbolizes the Portuguese people’s support for the national team on the occasion of the Olympics. At the left and the right, in a semi-circle, are the inscriptions ‘JOANA VASCONCELOS’ and ‘EQUIPA OLÍMPICA DE PORTUGAL 2016’, respectively. At the bottom is the mintmark ‘INCM’. The coin’s outer ring bears the 12 stars of the European Union.', 'A map, next to the face value, shows the European continent without borders.', 'Reeded', 'Seven castles and five coats of arms', '2016', NULL, 'Bimetallic: nickel brass clad nickel center in copper-nickel ring', false, 8.500, 25.750, NULL, '2023-08-22 22:13:36.468+00', '2023-08-22 22:13:36.468+00', NULL, NULL, NULL, 147, 6, 1, '84061', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (412, 10.000, '10 Złotych', NULL, '10 Złotych', 'The White Eagle, national coat of arms of Poland, engraver''s initials at the bottom.', 'Portrait of general Karol Świerczewski, left , engraver''s initials at the bottom.', 'Reeded', '', '1967', NULL, 'Copper-nickel', false, 9.500, 28.000, NULL, '2023-09-01 23:40:15.6+00', '2023-09-01 23:40:15.6+00', NULL, 27, NULL, 146, 56, 1, '9813', false);
+INSERT INTO public.coin (id, face_value, pretty_face_value, series_or_theme_name, common_name, obverse, reverse, edge, edge_inscription, year_start, year_end, composition, is_non_circulating, weight_grams, diameter_milimeters, comments, created_at, updated_at, deleted_at, period_id, ruler_id, country_id, currency_id, shape_id, numista_number, is_bullion) VALUES (413, 10.000, '10 Złotych', NULL, '10 Złotych', 'The White Eagle, national coat of arms of Poland.', 'Face of Marie Sklodowska Curie', 'Smooth or reeded', '', '1967', NULL, 'Copper-nickel', false, 9.700, 28.000, NULL, '2023-09-01 23:44:48.746+00', '2023-09-01 23:44:48.746+00', NULL, 27, NULL, 146, 56, 1, '155822', false);
 
 --
 -- Data for Name: coin_engravers; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1503,6 +1505,8 @@ INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES (
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-08-19 00:12:45.054+00', '2023-08-19 00:12:45.054+00', 409, 28);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-08-22 21:57:54.876+00', '2023-08-22 21:57:54.876+00', 410, 53);
 INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-08-22 22:13:36.449+00', '2023-08-22 22:13:36.449+00', 411, 54);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-09-01 23:40:15.582+00', '2023-09-01 23:40:15.582+00', 412, 42);
+INSERT INTO public.coin_mint (created_at, updated_at, coin_id, mint_id) VALUES ('2023-09-01 23:44:48.745+00', '2023-09-01 23:44:48.745+00', 413, 42);
 
 --
 -- Data for Name: coinset; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2300,6 +2304,7 @@ INSERT INTO public.country_currency (created_at, updated_at, country_id, currenc
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-08-19 00:01:35.309701+00', '2023-08-19 00:01:35.309701+00', 107, 6);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-08-22 20:30:08.025695+00', '2023-08-22 20:30:08.025695+00', 170, 6);
 INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-08-22 20:30:08.025695+00', '2023-08-22 20:30:08.025695+00', 147, 6);
+INSERT INTO public.country_currency (created_at, updated_at, country_id, currency_id) VALUES ('2023-09-01 23:31:57.186+00', '2023-09-01 23:31:57.186+00', 146, 56);
 
 --
 -- Data for Name: country_mint; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2358,6 +2363,7 @@ INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VA
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (170, 53, '2023-08-22', '2023-08-22');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (170, 18, '2023-08-22', '2023-08-22');
 INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (147, 54, '2023-08-22', '2023-08-22');
+INSERT INTO public.country_mint (country_id, mint_id, created_at, udpated_at) VALUES (146, 42, '2023-09-01', '2023-09-01');
 
 --
 -- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -2402,6 +2408,7 @@ INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comm
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (41, 'Krone', 'kr', '1875 - Present', NULL, NULL, true, '2023-07-03 22:49:06.609838+00', '2023-07-03 22:49:06.609838+00');
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (45, 'Malawian pound', '£', '1964 - 1971', NULL, NULL, true, '2023-07-28 19:40:28.573+00', '2023-07-28 19:40:28.573+00');
 INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (46, 'Swedish krona', 'kr', '1873 - Present', NULL, NULL, true, '2023-08-17 21:38:46.645+00', '2023-08-17 21:38:46.645+00');
+INSERT INTO public.currency (id, name, short_name, years, demonitized_date, comments, display_short_name_at_left, created_at, updated_at) VALUES (56, 'Third złoty', 'zł', '1949 - 1994', '1978-01-01', NULL, true, '2023-09-01 23:31:57.176+00', '2023-09-01 23:31:57.176+00');
 
 --
 -- Data for Name: engraver; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -3084,6 +3091,7 @@ INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) 
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (24, 'Shōwa', '1926 - 1989', '2023-07-03 15:37:50.398839+00', '2023-07-03 15:37:50.398839+00', 99);
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (25, 'Republic', '1903 - Present', '2023-07-03 15:57:23.098319+00', '2023-07-03 15:57:23.098319+00', 3);
 INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (26, 'Republic', '1886 - Present', '2023-07-03 23:14:43.259118+00', '2023-07-03 23:14:43.259118+00', 59);
+INSERT INTO public.period (id, name, years, created_at, updated_at, country_id) VALUES (27, 'People''s Republic', '1952 - 1989', '2023-09-02 18:13:56.253+00', '2023-09-02 18:13:56.253+00', 146);
 
 --
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -3181,7 +3189,7 @@ SELECT pg_catalog.setval('public.coin_engravers_id_seq', 58, true);
 -- Name: coin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.coin_id_seq', 411, true);
+SELECT pg_catalog.setval('public.coin_id_seq', 413, true);
 
 --
 -- Name: coinset_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3205,7 +3213,7 @@ SELECT pg_catalog.setval('public.country_id_seq', 211, true);
 -- Name: currency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.currency_id_seq', 55, true);
+SELECT pg_catalog.setval('public.currency_id_seq', 56, true);
 
 --
 -- Name: engraver_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -3229,7 +3237,7 @@ SELECT pg_catalog.setval('public.mint_id_seq', 54, true);
 -- Name: period_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.period_id_seq', 26, true);
+SELECT pg_catalog.setval('public.period_id_seq', 27, true);
 
 --
 -- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
