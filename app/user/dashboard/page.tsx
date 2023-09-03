@@ -7,9 +7,16 @@ import { Box, Container } from '@mui/material';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
 import { getUserCollectionCountries } from '@/http/collection';
 import amcolors from './amcolors';
-import { collection as CollectionItemType } from '@prisma/client';
 import { CollapsedCollectionType, CollapsedCostsType } from '@/global';
 import { useEffect, useState } from 'react';
+
+import { Prisma } from '@prisma/client';
+type CollectionItemType = Prisma.collectionGetPayload<{
+  include: {
+    coin: { include: { country: true } };
+    currency: true;
+  };
+}>;
 
 export default function MyCoins() {
   const [costInfos, setCostInfos] = useState('');
@@ -20,24 +27,24 @@ export default function MyCoins() {
   }
 
   const collapseCollectionData = (collectionItems: CollectionItemType[]) => {
-    const countryInfos: CollapsedCollectionType = {};
+    const countryInfos: CollapsedCollectionType = {}; // dictionary with country code as key
     const paidInfos: CollapsedCostsType = {};
     collectionItems.forEach((item) => {
-      const cc = item.coin.country.iso_3166_alpha_2;
-      const name = item.coin.country.name;
+      const cc = item.coin?.country?.iso_3166_alpha_2 || '';
+      const name = item.coin?.country?.name || '';
       const url = `/user/dashboard/country/${name}`;
       if (!countryInfos.hasOwnProperty(cc)) {
         countryInfos[cc] = {
           count: 1,
           name,
           url,
-          id: cc,
+          cc,
         };
       } else {
         countryInfos[cc].count += 1;
       }
 
-      const currency = `${item.currency.name} (${item.currency.short_name})`;
+      const currency = `${item.currency?.name} (${item.currency?.short_name})`;
       const cost = item.paid_amount;
       if (!paidInfos.hasOwnProperty(currency)) {
         paidInfos[currency] = cost ? +cost : 0;

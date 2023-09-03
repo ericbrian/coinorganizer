@@ -5,10 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-import { coin as CoinType } from '@prisma/client';
 import Link from 'next/link';
 import appconfig from '@/appconfig';
 import { Grid } from '@mui/material';
+
+import { Prisma } from '@prisma/client';
+type CoinType = Prisma.coinGetPayload<{
+  include: {
+    image: true;
+  };
+}>;
 
 export default function HomePageCoinDetail(props: { coin: CoinType }) {
   const coin = props.coin;

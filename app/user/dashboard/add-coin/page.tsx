@@ -16,14 +16,7 @@ import {
   TextField,
   Grid,
 } from '@mui/material';
-import {
-  country as CountryType,
-  coin as CoinType,
-  mint as MintType,
-  coin_mint as CoinMintType,
-  currency as CurrencyType,
-  enumCollectionsCollectableType,
-} from '@prisma/client';
+
 import { useState, useEffect } from 'react';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -35,8 +28,27 @@ import SaveIcon from '@mui/icons-material/Save';
 import { saveCoinInCollection } from '@/http/collection';
 import dayjs, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-
 dayjs.extend(utc);
+
+import {
+  country as CountryType,
+  mint as MintType,
+  coin_mint as CoinMintType,
+  currency as CurrencyType,
+  enumCollectionsCollectableType,
+} from '@prisma/client';
+
+import { Prisma } from '@prisma/client';
+type CoinType = Prisma.coinGetPayload<{
+  include: {
+    country: true;
+    ruler: true;
+    period: true;
+    coin_mint: { include: { mint: true } };
+    coin_engraver: { include: { engraver: true } };
+    image: true;
+  };
+}>;
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -302,15 +314,15 @@ export default function AddCoin() {
                         renderInput={(params) => <TextField {...params} label="Mint" />}
                         getOptionLabel={(option) => {
                           let value = option.mint;
-                          if (option.mint_mark) {
-                            value = `${value} (${option.mint_mark})`;
+                          if (option.mark) {
+                            value = `${value} (${option.mark})`;
                           }
                           return value;
                         }}
                         renderOption={(props: object, option: MintType, state: object) => {
                           let value = option.mint;
-                          if (option.mint_mark) {
-                            value = `${value} (${option.mint_mark})`;
+                          if (option.mark) {
+                            value = `${value} (${option.mark})`;
                           }
                           return (
                             <div {...props} key={option.id}>

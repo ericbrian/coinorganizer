@@ -3,7 +3,6 @@
 import HomePageCoinDetail from '@/app/components/HomePageCoinDetail';
 import { getUserCollectionCountries } from '@/http/collection';
 import { Container, Box, Typography, Link, Card, Grid } from '@mui/material';
-import { collection as CollectionType } from '@prisma/client';
 import moment from 'moment';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -11,6 +10,14 @@ import SellIcon from '@mui/icons-material/Sell';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InventoryIcon from '@mui/icons-material/Inventory';
+
+import { Prisma } from '@prisma/client';
+type CollectionType = Prisma.collectionGetPayload<{
+  include: {
+    coin: { include: { country: true } };
+    currency: true;
+  };
+}>;
 
 export default function page() {
   const params = useParams();
@@ -25,7 +32,8 @@ export default function page() {
     getUserCollectionCountries(countryCode).then((data: CollectionType[]) => {
       setIsLoading(false);
       if (data?.length > 0) {
-        setCountryName(data[0].coin.country.short_name);
+        const item = data[0];
+        setCountryName(item.coin?.country?.short_name ?? '');
         setCollectionItems(data);
       } else if ('message' in data) setMessage(data.message as string);
     });
@@ -82,8 +90,8 @@ export default function page() {
                       <span title="Price">
                         <SellIcon sx={{ mr: 1 }} />
                       </span>
-                      <span title={item.currency.name}>
-                        {item.currency.short_name} {item.paid_amount ? (+item.paid_amount).toFixed(2) : '0.00'}
+                      <span title={item.currency?.name}>
+                        {item.currency?.short_name} {item.paid_amount ? (+item.paid_amount).toFixed(2) : '0.00'}
                       </span>
                     </Grid>
                     <Grid
@@ -121,12 +129,12 @@ export default function page() {
                       }}
                     >
                       <small>
-                        Coin# {item.coin.id} / Col# {item.id}
+                        Coin# {item.coin?.id} / Col# {item.id}
                       </small>
                     </Grid>
                   </Grid>
                 </Card>
-                <HomePageCoinDetail coin={item.coin} />
+                {item.coin && <HomePageCoinDetail coin={item.coin} />}
               </div>
             );
           })}
