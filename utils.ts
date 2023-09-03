@@ -1,6 +1,5 @@
 import {
   engraver as EngraverType,
-  period as PeriodType,
   enumCollectionsCollectableType,
 } from '@prisma/client';
 
@@ -10,6 +9,7 @@ import {
   CollectionInputType,
   CurrencyInputType,
   MintInputType,
+  PeriodInputType,
   RulerInputType,
 } from '@/global';
 
@@ -101,7 +101,7 @@ export const convertToPrismaMintCreateInput = (payload: MintInputType) => {
   };
 };
 
-export const convertToPrismaPeriodCreateInput = (payload: PeriodType) => {
+export const convertToPrismaPeriodCreateInput = (payload: PeriodInputType) => {
   return {
     years: payload.years.trim(),
     name: payload.period.trim(),
