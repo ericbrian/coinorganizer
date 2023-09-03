@@ -2,10 +2,16 @@
 
 import { getCountryById, getCountryList } from '@/http/country';
 import { Container, Box, Typography, Autocomplete, Button, TextField, Checkbox, FormControlLabel } from '@mui/material';
-import { country as CountryType } from '@prisma/client';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { getIdFromPath } from '@/utils';
+
+import { Prisma } from '@prisma/client';
+type CountryType = Prisma.countryGetPayload<{
+  include: {
+    country: true;
+  };
+}>;
 
 export default function AddCountry() {
   const pathname = usePathname();

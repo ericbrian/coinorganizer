@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { coin as CoinType, image as ImageType, coin_mint as CoinMintType } from '@prisma/client';
 import Link from 'next/link';
 import LinkIcon from '@mui/icons-material/Link';
 import { getCoinById } from '@/http/coin';
@@ -7,6 +6,18 @@ import appconfig from '@/appconfig';
 import { Container, Box, Typography, CardMedia } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import { escapedNewLineToLineBreakTag } from '@/tsx-utils';
+
+import { Prisma } from '@prisma/client';
+type CoinType = Prisma.coinGetPayload<{
+  include: {
+    country: true;
+    ruler: true;
+    period: true;
+    coin_mint: { include: { mint: true } };
+    coin_engraver: { include: { engraver: true } };
+    image: true;
+  };
+}>;
 
 export const metadata: Metadata = {
   title: 'Coin Details',
@@ -100,24 +111,34 @@ export default async function CoinDetails({ searchParams }: any) {
                 {escapedNewLineToLineBreakTag(coin.obverse)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {coin.engraver?.name && (
-                  <>
-                    <span style={{ fontWeight: 'bold' }}>Obverse Engraver/Designer: </span>
-                    {coin.engraver.name}
-                  </>
-                )}
+                {coin.coin_engraver
+                  ?.filter((ce) => ce.side == 'obverse')
+                  .map(
+                    (ce) =>
+                      ce.engraver?.name && (
+                        <>
+                          <span style={{ fontWeight: 'bold' }}>Obverse Engraver/Designer: </span>
+                          {ce.engraver.name}
+                        </>
+                      ),
+                  )}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <span style={{ fontWeight: 'bold' }}>Reverse: </span>
                 {escapedNewLineToLineBreakTag(coin.reverse)}
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {coin.engraver?.name && (
-                  <>
-                    <span style={{ fontWeight: 'bold' }}>Reverse Engraver/Designer: </span>
-                    {coin.engraver.name}
-                  </>
-                )}
+                {coin.coin_engraver
+                  ?.filter((ce) => ce.side == 'reverse')
+                  .map(
+                    (ce) =>
+                      ce.engraver?.name && (
+                        <>
+                          <span style={{ fontWeight: 'bold' }}>Reverse Engraver/Designer: </span>
+                          {ce.engraver.name}
+                        </>
+                      ),
+                  )}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <span style={{ fontWeight: 'bold' }}>Edge: </span>
@@ -127,7 +148,7 @@ export default async function CoinDetails({ searchParams }: any) {
               </Typography>
               <Typography variant="body1" gutterBottom>
                 <span style={{ fontWeight: 'bold' }}>Mint(s): </span>
-                {coin.coin_mint?.map((cm: CoinMintType) => {
+                {coin.coin_mint?.map((cm) => {
                   const mint = cm.mint;
                   const mark = mint.mark ? '(' + mint.mark + ')' : '';
                   return `${mint.mint}, ${mint.mark_description} ${mark}`;
@@ -146,7 +167,7 @@ export default async function CoinDetails({ searchParams }: any) {
             <Grid xs={2}>
               {Array.isArray(coin.image) &&
                 coin.image.length > 0 &&
-                coin.image.map((image: ImageType) => (
+                coin.image.map((image) => (
                   <CardMedia
                     component="img"
                     sx={{

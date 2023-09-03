@@ -63,47 +63,53 @@ model banknote_mint {
 }
 
 model coin {
-  id                   Int          @id(map: "Coins_pkey") @default(autoincrement())
-  face_value           Decimal      @db.Decimal(8, 3)
-  pretty_face_value    String?      @db.VarChar(30)
-  series_or_theme_name String?      @db.VarChar(200)
-  common_name          String?      @db.VarChar(200)
+  id                   Int             @id(map: "Coins_pkey") @default(autoincrement())
+  face_value           Decimal         @db.Decimal(8, 3)
+  pretty_face_value    String?         @db.VarChar(30)
+  series_or_theme_name String?         @db.VarChar(200)
+  common_name          String?         @db.VarChar(200)
   obverse              String
   reverse              String
-  edge                 String       @db.VarChar(255)
-  edge_inscription     String?      @db.VarChar(255)
-  year_start           String?      @db.VarChar(255)
-  year_end             String?      @db.VarChar(255)
-  composition          String?      @db.VarChar(255)
-  is_non_circulating   Boolean?     @default(false)
-  weight_grams         Decimal?     @db.Decimal(7, 3)
-  diameter_milimeters  Decimal?     @db.Decimal(7, 3)
+  edge                 String          @db.VarChar(255)
+  edge_inscription     String?         @db.VarChar(255)
+  year_start           String?         @db.VarChar(255)
+  year_end             String?         @db.VarChar(255)
+  composition          String?         @db.VarChar(255)
+  is_non_circulating   Boolean?        @default(false)
+  weight_grams         Decimal?        @db.Decimal(7, 3)
+  diameter_milimeters  Decimal?        @db.Decimal(7, 3)
   comments             String?
-  created_at           DateTime     @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime     @default(now()) @db.Timestamptz(6)
-  deleted_at           DateTime?    @db.Timestamptz(6)
+  created_at           DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime        @default(now()) @db.Timestamptz(6)
+  deleted_at           DateTime?       @db.Timestamptz(6)
   period_id            Int?
   ruler_id             Int?
   country_id           Int?
   currency_id          Int?
   shape_id             Int?
-  numista_number       String?      @unique(map: "unq_coin_numistaNumber") @db.VarChar(8)
-  is_bullion           Boolean?     @default(false)
-  country              country?     @relation(fields: [country_id], references: [id], map: "Coins_countryId_fkey")
-  currency             currency?    @relation(fields: [currency_id], references: [id], map: "Coins_currencyId_fkey")
-  period               period?      @relation(fields: [period_id], references: [id], map: "Coins_periodId_fkey")
-  ruler                ruler?       @relation(fields: [ruler_id], references: [id], map: "Coins_rulerId_fkey")
-  shape                shape?       @relation(fields: [shape_id], references: [id], map: "Coins_shapeId_fkey")
+  numista_number       String?         @unique(map: "unq_coin_numistaNumber") @db.VarChar(8)
+  is_bullion           Boolean?        @default(false)
+  country              country?        @relation(fields: [country_id], references: [id], map: "Coins_countryId_fkey")
+  currency             currency?       @relation(fields: [currency_id], references: [id], map: "Coins_currencyId_fkey")
+  period               period?         @relation(fields: [period_id], references: [id], map: "Coins_periodId_fkey")
+  ruler                ruler?          @relation(fields: [ruler_id], references: [id], map: "Coins_rulerId_fkey")
+  shape                shape?          @relation(fields: [shape_id], references: [id], map: "Coins_shapeId_fkey")
+  coin_engraver        coin_engraver[]
   coin_mint            coin_mint[]
   collection           collection[]
   image                image[]
 }
 
-model coin_engravers {
-  id          Int                    @id(map: "CoinEngravers_pkey") @default(autoincrement())
-  side        enumCoinEngraversSide? @default(obverse)
-  coin_id     Int?
-  engraver_id Int?
+model coin_engraver {
+  coin_id     Int
+  engraver_id Int
+  created_at  DateTime              @default(now()) @db.Date
+  udpated_at  DateTime              @default(now()) @db.Date
+  side        enumCoinEngraversSide @default(obverse)
+  coin        coin                  @relation(fields: [coin_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_coin_engraver_coin")
+  engraver    engraver              @relation(fields: [engraver_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_coin_engraver_engraver")
+
+  @@id([coin_id, engraver_id, side], map: "PK_coin_engraver")
 }
 
 model coin_mint {
@@ -213,11 +219,12 @@ model currency {
 }
 
 model engraver {
-  id         Int      @id(map: "Engravers_pkey") @default(autoincrement())
-  name       String   @unique(map: "Engravers_name_key") @db.VarChar(100)
-  comments   String?
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  updated_at DateTime @default(now()) @db.Timestamptz(6)
+  id            Int             @id(map: "Engravers_pkey") @default(autoincrement())
+  name          String          @unique(map: "Engravers_name_key") @db.VarChar(100)
+  comments      String?
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime        @default(now()) @db.Timestamptz(6)
+  coin_engraver coin_engraver[]
 }
 
 model image {

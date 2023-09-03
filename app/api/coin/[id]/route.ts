@@ -13,6 +13,11 @@ export async function GET(req: Request, { params }: any) {
         country: true,
         ruler: true,
         period: true,
+        coin_engraver: {
+          include: {
+            engraver: true,
+          }
+        },
         coin_mint: {
           include: {
             mint: true,

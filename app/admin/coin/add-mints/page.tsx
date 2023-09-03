@@ -3,10 +3,15 @@
 import { Container, Box, Typography, Link, CardMedia, Autocomplete, TextField, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { getCoinsForCountry, relateMintAndCoin } from '@/http/coin';
-import { coin as CoinType, mint as MintType, country as CountryType } from '@prisma/client';
 import { getCountriesWithCoinsList } from '@/http/country';
 import { getMintsForCountry } from '@/http/mint';
-import appconfig from '@/appconfig';
+
+import { Prisma, country as CountryType, mint as MintType } from '@prisma/client';
+type CoinType = Prisma.coinGetPayload<{
+  include: {
+    coin_mint: { include: { mint: true } };
+  };
+}>;
 
 interface EventTarget {
   id: any;

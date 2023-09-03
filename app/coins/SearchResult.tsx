@@ -18,6 +18,7 @@ export default function SearchResult({ props }: any) {
                   width: 28,
                   display: 'inline-block',
                   marginRight: theme.spacing(1),
+                  boxShadow: '0 0 0 1px rgba(0,0,0,.2)',
                 }}
                 image={appconfig.cdn + '/flag-icons/' + props.cc + '.svg'}
                 alt={props.country}
