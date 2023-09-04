@@ -21,6 +21,7 @@ const appconfig = {
   algolia: {
     appId: `${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}`,
     apiKey: `${process.env.NEXT_PUBLIC_ALGOLIA_API_KEY}`,
+    writeApiKey: `${process.env.NEXT_PUBLIC_ALGOLIA_WRITE_API_KEY}`,
     indexName: `${process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME}`
   }
 };

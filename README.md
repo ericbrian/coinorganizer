@@ -17,6 +17,8 @@ When you want relations in your Prisma types, you have to build it yourself like
 
 ```js
 import { Prisma } from '@prisma/client';
+
+// GET type
 type CoinType = Prisma.coinGetPayload<{
   include: {
     country: true;
@@ -27,4 +29,7 @@ type CoinType = Prisma.coinGetPayload<{
     image: true;
   };
 }>;
+
+// POST type
+coinst coin: Prisma.coinCreateInput = ...
 ```

@@ -3,6 +3,18 @@ import {
   enumCollectionsCollectableType,
 } from '@prisma/client';
 
+import { Prisma, } from '@prisma/client'
+type CoinType = Prisma.coinGetPayload<{
+  include: {
+    country: true;
+    ruler: true;
+    period: true;
+    coin_mint: { include: { mint: true } };
+    coin_engraver: { include: { engraver: true } };
+    image: true;
+  };
+}>;
+
 import {
   AlgoliaCoinType,
   CoinInputType,
@@ -25,33 +37,22 @@ export function engraversSort(a: EngraverType, b: EngraverType) {
   return `${aParts.at(-1)} ${aParts.at(0)}`.localeCompare(`${bParts.at(-1)} ${bParts.at(0)}`);
 }
 
-export const convertToPrismaCoinCreateInput = (payload: CoinInputType) => {
-  let allMints = null;
-  if (payload.mints?.length > 0) {
-    allMints = {
-      create: payload.mints.map((mint) => ({
-        mint_id: mint.id,
-        created_at: new Date(),
-        updated_at: new Date(),
-      })),
-    };
-  }
-
+export const convertToPrismaCoinCreateInput = (payload: CoinInputType): Prisma.coinCreateInput => {
   return {
-    face_value: +payload.faceValue,
+    face_value: new Prisma.Decimal(+payload.faceValue),
     pretty_face_value: payload.prettyFaceValue.trim(),
     series_or_theme_name: payload.seriesOrThemeName?.trim() ? payload.seriesOrThemeName?.trim() : null,
     common_name: payload.commonName.trim(),
     obverse: payload.obverse.trim(),
     reverse: payload.reverse.trim(),
     edge: payload.edge.trim(),
-    edge_inscription: payload.edgeInscription?.trim(),
+    edge_inscription: payload.edgeInscription?.trim() ?? null,
     year_start: payload.yearStart.trim(),
     year_end: payload.yearEnd?.trim() ? payload.yearEnd.trim() : null,
     composition: payload.composition.trim(),
     is_non_circulating: payload.isNifc,
-    weight_grams: +payload.weightG,
-    diameter_milimeters: +payload.diameterMm,
+    weight_grams: new Prisma.Decimal(+payload.weightG),
+    diameter_milimeters: new Prisma.Decimal(+payload.diameterMm),
     comments: payload.comments?.trim() ? payload.comments.trim() : null,
     period_id: payload.period?.id,
     ruler_id: payload.ruler ? payload.ruler.id : null,
@@ -60,7 +61,9 @@ export const convertToPrismaCoinCreateInput = (payload: CoinInputType) => {
     shape_id: payload.shape?.id,
     numista_number: payload.numistaNumber?.trim(),
     is_bullion: payload.isBullion,
-    coin_mint: allMints,
+    coin_mint: {
+      connect: payload.mints.map((mint) => ({ mint_id: mint.id })),
+    },
   };
 };
 
