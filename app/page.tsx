@@ -4,11 +4,17 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import appconfig from '@/appconfig';
-import { coin as CoinType } from '@prisma/client';
+import { Prisma } from '@prisma/client';
+type CoinType = Prisma.coinGetPayload<{
+  include: {
+    image: true;
+  };
+}>;
+
 import { getCoins } from '@/http/coin';
 import HomePageCoinDetail from './components/HomePageCoinDetail';
-import { Card } from '@mui/material';
+
+import appconfig from '@/appconfig';
 
 export const metadata: Metadata = {
   title: appconfig.siteName,
@@ -16,8 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const MAX_COINS: number = 5;
-  const coins: CoinType[] = await getCoins(MAX_COINS);
+  const coins: CoinType[] = await getCoins(appconfig.numberOfCoinsOnHomepage);
 
   return (
     <main>

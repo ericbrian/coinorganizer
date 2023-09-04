@@ -12,7 +12,14 @@ import {
   TableRow,
   TableHead,
 } from '@mui/material';
-import { country as CountryType } from '@prisma/client';
+
+import { Prisma } from '@prisma/client';
+type CountryType = Prisma.countryGetPayload<{
+  include: {
+    country: true;
+  };
+}>;
+
 import moment from 'moment';
 import React from 'react';
 

@@ -1,6 +1,7 @@
 const appconfig = {
   siteName: "Eric's Coins",
   siteDescription: "Eric's Coins Site.",
+  numberOfCoinsOnHomepage: 10,
   links: {
     github: "https://github.com/ericbrian/coinorganizer",
     mastadon: "https://mstdn.social/@EricBrian",
