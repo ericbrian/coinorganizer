@@ -1,10 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient, coin as CoinType } from '@prisma/client'
-import { AlgoliaCoinType } from "@/global";
+import { NextResponse } from "next/server";
+import { PrismaClient } from '@prisma/client';
 import { rewriteForAlgolia } from "@/utils";
-const prisma = new PrismaClient()
+import { AlgoliaCoinType } from "@/global";
 
-export async function GET(req: NextRequest) {
+const prisma = new PrismaClient();
+
+export async function GET() {
   try {
     const coins: AlgoliaCoinType[] = await prisma.coin.findMany({
       select: {
@@ -46,9 +47,9 @@ export async function GET(req: NextRequest) {
     }
 
     const managed = rewriteForAlgolia(coins);
-
     return NextResponse.json(managed);
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error });
   }
 }

@@ -127,6 +127,11 @@ type RulerInputType = {
   country: CountryType | null;
 }
 
+type AlgoliaImageType = {
+  url: string | null;
+  is_preferred: boolean | null;
+};
+
 type AlgoliaCoinType = {
   id: number;
   common_name: string | null;
@@ -137,8 +142,8 @@ type AlgoliaCoinType = {
   series_or_theme_name: string | null;
   year_start: string | null;
   year_end: string | null;
-  image: { url: string | null; is_preferred: boolean | null; };
   country: { name: string, iso_3166_alpha_2: string } | null;
   currency: { name: string | null; } | null;
   shape: { name: string | null; } | null;
+  image: AlgoliaImageType[];
 }
