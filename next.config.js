@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-        appDir: true
-    },
-    images: {
-        domains: ['github.com', 'lh3.googleusercontent.com', 'localhost', 'coin-organizer.b-cdn.net']
-    }
+  experimental: {
+  },
+  images: {
+    domains: ['github.com', 'lh3.googleusercontent.com', 'localhost', 'coin-organizer.b-cdn.net']
+  }
 }
 
 module.exports = nextConfig
