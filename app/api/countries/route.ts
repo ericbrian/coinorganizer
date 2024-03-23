@@ -5,17 +5,17 @@ import { country as countryDb } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-    try {
-        const countries: countryDb[] = await prisma.country.findMany({
-            orderBy: {
-                short_name: "asc",
-            },
-            include: {
-                country: true
-            }
-        });
-        return NextResponse.json(countries);
-    } catch (error) {
-        return NextResponse.json({ error });
-    }
+  try {
+    const countries: countryDb[] = await prisma.country.findMany({
+      orderBy: {
+        short_name: "asc",
+      },
+      include: {
+        country: true
+      }
+    });
+    return NextResponse.json(countries);
+  } catch (error) {
+    return NextResponse.json({ error });
+  }
 }

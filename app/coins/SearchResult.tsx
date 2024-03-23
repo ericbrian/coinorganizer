@@ -9,9 +9,7 @@ export default function SearchResult({ props }: any) {
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
-            <Link
-              href={`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/pages/coin-details?id=${props.objectID}`}
-            >
+            <Link href={`${appconfig.envs[process.env.NODE_ENV].clientBaseUrl}/coin-details?id=${props.objectID}`}>
               <CardMedia
                 component="img"
                 sx={{

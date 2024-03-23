@@ -63,7 +63,9 @@ export default function MyCoins() {
   };
 
   useEffect(() => {
-    if (Object.keys(collapsedInfo).length > 0) setMap();
+    if (Object.keys(collapsedInfo).length > 0) {
+      setMap();
+    }
   }, [collapsedInfo]);
 
   useEffect(() => {
@@ -76,7 +78,12 @@ export default function MyCoins() {
 
   const setMap = () => {
     // Create root and chart
-    var root = am5.Root.new('chartdiv');
+    let root;
+    try {
+      root = am5.Root.new('chartdiv');
+    } catch (e) {
+      return;
+    }
 
     // Set themes
     root.setThemes([am5themes_Animated.new(root)]);

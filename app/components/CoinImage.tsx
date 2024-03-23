@@ -4,35 +4,21 @@ import Image from 'next/image';
 import appconfig from '@/appconfig';
 
 export default function CoinImage(props: { images: dbImage[] }) {
-    const images = props.images;
+  const images = props.images;
 
-    if (!images || images.length === 0) return <div>none</div>;
+  if (!images || images.length === 0) return <div>none</div>;
 
-    let preferredImage = images.filter(
-        (image: dbImage) => image.is_preferred,
-    )[0];
-    if (!preferredImage) {
-        preferredImage = images[0];
-    }
+  let preferredImage = images.filter((image: dbImage) => image.is_preferred)[0];
+  if (!preferredImage) {
+    preferredImage = images[0];
+  }
 
-    let imageToUse = (
-        <Image
-            width={120}
-            height={120}
-            src={`${appconfig.cdn}${preferredImage.url}`}
-            alt="coin image"
-        />
+  let imageToUse = <Image width={120} height={120} src={`${appconfig.cdn}${preferredImage.url}`} alt="coin image" />;
+
+  if (!preferredImage.url) {
+    imageToUse = (
+      <Image width={120} height={120} src={`/images/No-Image-Placeholder.svg.png`} alt="coin image placeholder" />
     );
-
-    if (!preferredImage.url) {
-        imageToUse = (
-            <Image
-                width={120}
-                height={120}
-                src={`/images/No-Image-Placeholder.svg.png`}
-                alt="coin image placeholder"
-            />
-        );
-    }
-    return imageToUse;
+  }
+  return imageToUse;
 }
